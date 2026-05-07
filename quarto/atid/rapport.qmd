@@ -1,5 +1,5 @@
 ---
-title: "Arbeidsindikator: arbeidstid"
+title: "Arbeidstidsindikator"
 subtitle: "Sammenheng mellom arbeidsmarkedsstramhet og ukentlig arbeidstid"
 execute:
   echo: false
@@ -10,47 +10,9 @@ execute:
 import pandas as pd
 ```
 
-# Bakgrunn
-
-NAV produserer to komplementære informasjonskilder om det norske arbeidsmarkedet:
-
-**Bedriftsundersøkelsen** er en årlig spørreundersøkelse der et representativt
-utvalg norske virksomheter rapporterer om sin rekrutteringssituasjon, forventede
-sysselsettingsutvikling og mangel på arbeidskraft. Undersøkelsen gjennomføres
-hvert vår og gir et bilde av *etterspørselssiden* av arbeidsmarkedet.
-
-**Navs arbeidsindikator** er månedlige statistikker som måler *resultater for
-registrerte arbeidssøkere* – herunder gjennomsnittlig ukentlig arbeidstid
-(antall timer/uke) de første 3 og 12 månedene etter registrering. Indikatoren
-beregnes som faktisk utfall minus et forventet utfall basert på søkernes
-sammensetning (alder, yrkesbakgrunn m.m.), og publiseres på Nav-regionsnivå.
-
-Målet med denne analysen er å undersøke om regionale forskjeller i
-arbeidsmarkedsstramhet – slik bedriftsundersøkelsen måler det – samvarierer
-med arbeidstidsutfall for arbeidssøkere slik indikatorene måler det.
-
 # Data
 
-## Bedriftsundersøkelsen 2021–2025
-
-Dataene er hentet fra NAVs nettside og dekker årene 2021–2025. Fra
-undersøkelsen bruker vi følgende regionale variable:
-
-| Variabel | Beskrivelse |
-|---|---|
-| **Stramhetsindikator** | Forholdet mellom estimert mangel på arbeidskraft og antall ledige + arbeidssøkere på tiltak; høy verdi = stramt marked |
-| **Andel rekrutteringsproblemer** | Andel virksomheter som rapporterer *alvorlige* rekrutteringsproblemer (prosent) |
-| **Estimert mangel** | Antall stillinger arbeidsgivere ikke klarer å besette |
-| **Sysselsettingsbarometer** | Nettoandelvirksomheter som venter økt minus redusert sysselsetting (nasjonal tidsserie fra 2003) |
-
-: Variabler fra bedriftsundersøkelsen brukt i analysen {#tbl-bedriftsvar}
-
-**Geografisk endring:** Undersøkelsen brukte store Nav-regioner (Øst-Viken,
-Vest-Viken osv.) i 2021–2023, og gikk over til individuelle fylker fra 2024.
-Dataene for 2024–2025 er aggregert tilbake til Nav-regionsnivå: summable
-størrelser er summert, mens rater er vektet med estimert mangel.
-
-## NAVs arbeidsindikator – arbeidstid 2021–2025
+## NAVs arbeidstidsindikator 2021–2025
 
 Indikatordata er hentet fra NAVs BigQuery-tjeneste og inneholder månedlige
 observasjoner per Nav-region. Vi bruker fire utfallsmål for arbeidstid:
@@ -62,52 +24,17 @@ observasjoner per Nav-region. Vi bruker fire utfallsmål for arbeidstid:
 | `indikator_atid3` | Avvik fra *forventet* atid3 – kontrollerer for sammensetning (t/uke) |
 | `indikator_atid12` | Avvik fra *forventet* atid12 (timer/uke) |
 
-: Variabler fra arbeidsindikatorene brukt i analysen {#tbl-indvar}
+: Variabler fra arbeidstidsindikatoren brukt i analysen {#tbl-indvar}
 
 Et positivt `indikator`-tall betyr at regionen gjør det *bedre enn forventet*
 gitt sammensetningen av registrerte arbeidssøkere. Dette er det reneste
 utfallsmålet for sammenligning mellom regioner, fordi det kontrollerer for
 at noen regioner strukturelt sett har en mer krevende søkerpopulasjon.
 
-## Datasett etter standardisering
-
-```{python}
-#| label: tbl-oversikt
-#| tbl-cap: "Antall Nav-regioner og komplette observasjoner per år"
-(
-    pd.read_csv("tabeller/tbl_oversikt.csv")
-    .set_index("År")
-    .style
-)
-```
-
 *Merknad:* `faktisk_atid12` mangler for 2025 fordi 12-månedersutfallet for
 arbeidssøkere registrert i mars 2025 ikke vil foreligge før mars 2026.
 
-## Geografisk mapping
-
-```{python}
-#| label: tbl-geomap
-#| tbl-cap: "Mapping fra undersøkelsens enheter til Nav-regioner"
-pd.read_csv("tabeller/tbl_geomap.csv").style.hide(axis="index")
-```
-
 # Metode
-
-## Temporal standardisering
-
-For å sammenstille de to datakildene er indikatordata filtrert til den
-referansemåneden bedriftsundersøkelsen bruker for hvert år:
-
-| År | Referansemåned | Begrunnelse |
-|---|---|---|
-| 2021 | Februar | Oppgitt i tabelltittel i Excel-filen |
-| 2022 | April | Oppgitt i tabelltittel |
-| 2023 | April | Oppgitt i tabelltittel |
-| 2024 | Mars | Oppgitt i tabelltittel |
-| 2025 | Mars | Oppgitt i tabelltittel |
-
-: Valgte referansemåneder for indikatordata per undersøkelsesår {#tbl-refmnd}
 
 ## Korrelasjonsanalyse
 
@@ -125,14 +52,7 @@ sammenstilling på tvers av alle år og regioner.
 
 # Resultater
 
-## Nasjonal utvikling 2021–2025
-
-![Nasjonal stramhetsindikator, andel rekrutteringsproblemer og sysselsettingsbarometer](figurer/fig_nasjonal.png){#fig-nasjonal}
-
-@fig-nasjonal viser at arbeidsmarkedet var klart strammest i 2022, med en
-gjennomsnittlig stramhetsindikator på 2,6 og nær 23 % av virksomhetene med
-alvorlige rekrutteringsproblemer. Deretter har stramheten falt gradvis til
-1,5 i 2025. Sysselsettingsbarometeret bekrefter dette bildet.
+## Nasjonal utvikling i arbeidstidsindikator
 
 ![Nasjonal gjennomsnittlig faktisk arbeidstid og indikatoravvik over tid](figurer/fig_ind_tid.png){#fig-ind-tid}
 
@@ -141,24 +61,6 @@ etter registrering, og avviket fra forventet arbeidstid. Mønsteret ligner
 jobbindikatoren: sammensetningseffekter gjør at faktisk arbeidstid kan bevege
 seg mot strømmens av stramheten, mens indikatorvariabelen (avvik fra forventet)
 gir et renere bilde av om regionene leverer mer eller mindre enn ventet.
-
-## Mangel på arbeidskraft etter yrkesgruppe
-
-![Estimert mangel på arbeidskraft etter yrkesgruppe, 2021–2025](figurer/fig_yrke.png){#fig-yrke}
-
-@fig-yrke illustrerer at mangelen er klart størst innen **helse, pleie og
-omsorg** hvert eneste år. Mangelen nådde toppen i 2022 (≈15 750 personer)
-og er fremdeles betydelig i 2025 (≈10 900). Industriarbeid og bygg og
-anlegg utgjør de nest største kategoriene.
-
-## Regional variasjon i stramhet
-
-![Stramhetsindikator per Nav-region og år](figurer/fig_regional.png){#fig-regional}
-
-Troms og Finnmark, Nordland og Møre og Romsdal har konsistent de høyeste
-stramhetsindikatorene. Det gjenspeiler en kombinasjon av høy etterspørsel
-etter spesialisert arbeidskraft og et tynnere lokalt tilbudsmarked.
-Oslo og Vest-Viken har relativt lavere indikatorer.
 
 ## Sammenheng mellom stramhet og arbeidstidsutfall
 

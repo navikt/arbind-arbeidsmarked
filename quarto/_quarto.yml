@@ -11,6 +11,9 @@ book:
   author: Jacob Sjødin
   chapters:
   - index.qmd
+  - part: bedrift/intro.qmd
+    chapters:
+    - bedrift/rapport.qmd
   - part: jobb/intro.qmd
     chapters:
     - jobb/rapport.qmd

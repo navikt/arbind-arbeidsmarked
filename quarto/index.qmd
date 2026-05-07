@@ -5,7 +5,12 @@ title: "Oversikt"
 Denne boken samler analyser av sammenhengen mellom **Navs bedriftsundersøkelse**
 og **Navs arbeidsindikator** på Nav-regionsnivå, 2021–2025.
 
-## Analysene
+## Struktur
+
+**[Bedriftsundersøkelsen](bedrift/rapport.qmd)** presenterer
+arbeidsmarkedsstramhet, mangel på arbeidskraft og regional variasjon fra
+NAVs bedriftsundersøkelse 2021–2025. Denne delen er felles for begge
+indikatoranalysene.
 
 **[Jobbindikator](jobb/rapport.qmd)** undersøker om regioner med høyere
 arbeidsmarkedsstramhet plasserer en større andel av registrerte arbeidssøkere
@@ -13,7 +18,7 @@ i jobb (3 og 12 måneder etter registrering).
 
 **[Arbeidstidsindikator](atid/rapport.qmd)** undersøker om stramhet i
 arbeidsmarkedet fører til at registrerte arbeidssøkere arbeider flere
-gjennomsnittlige timer per uke de første 3 og 12 månedene etter registrering.
+gjennomsnittlige timer per uke de 3 og 12 månedene etter at de er registert.
 
 ## Data
 
@@ -24,9 +29,3 @@ gjennomsnittlige timer per uke de første 3 og 12 månedene etter registrering.
 
 Begge datakildene er sammenstilt til samme geografiske enhet (Nav-region) og
 samme tidspunkt (undersøkelsens referansemåned per år).
-
-## Metode
-
-Sammenhengen analyseres krysseksjonelt innen hvert år (for å isolere regional
-variasjon) og pooled med år-faste effekter (for å fjerne nasjonale
-konjunkturbevegelser). Se metodedelen i hver delrapport for detaljer.

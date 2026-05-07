@@ -1,10 +1,12 @@
-"""Genererer alle figurer og tabeller til rapportene (jobb og atid).
+"""Genererer alle figurer og tabeller til rapportene (bedrift, jobb og atid).
 
 Lagrer filer til:
-  quarto/jobb/figurer/   – PNG-figurer (jobbindikator)
-  quarto/jobb/tabeller/  – CSV-tabeller (jobbindikator)
-  quarto/atid/figurer/   – PNG-figurer (atid-indikator)
-  quarto/atid/tabeller/  – CSV-tabeller (atid-indikator)
+  quarto/bedrift/figurer/  – PNG-figurer felles (stramhet, yrke, region)
+  quarto/bedrift/tabeller/ – CSV-tabeller felles (oversikt, geomap)
+  quarto/jobb/figurer/     – PNG-figurer (jobbindikator)
+  quarto/jobb/tabeller/    – CSV-tabeller (jobbindikator)
+  quarto/atid/figurer/     – PNG-figurer (atid-indikator)
+  quarto/atid/tabeller/    – CSV-tabeller (atid-indikator)
 
 Kjøres før quarto render:
   uv run python src/lag_rapport_data.py
@@ -24,6 +26,8 @@ from scipy import stats
 # ── Stier ─────────────────────────────────────────────────────────────────────
 _RESULTS = Path("data/results")
 _PROCESSED = Path("data/processed")
+_BEDRIFT_FIG = Path("quarto/bedrift/figurer")
+_BEDRIFT_TBL = Path("quarto/bedrift/tabeller")
 
 # ── NAV-farger og stil ─────────────────────────────────────────────────────────
 NAV_BLÅ = "#0067C5"
@@ -123,6 +127,14 @@ def _save(fig: plt.Figure, name: str, cfg: ModeConfig) -> None:
     print(f"  Lagret {path}")
 
 
+def _save_shared(fig: plt.Figure, name: str) -> None:
+    """Lagre figur til delt bedrift-katalog."""
+    path = _BEDRIFT_FIG / f"{name}.png"
+    fig.savefig(path, dpi=FIG_DPI, bbox_inches="tight")
+    plt.close(fig)
+    print(f"  Lagret {path}")
+
+
 def _last_data() -> tuple[pd.DataFrame, ...]:
     """Last inn alle resultat- og prosesserte datafiler."""
     df = pd.read_csv(_RESULTS / "analyse_ar_faste_effekter.csv")
@@ -138,7 +150,7 @@ def _last_data() -> tuple[pd.DataFrame, ...]:
 # ══════════════════════════════════════════════════════════════════════════════
 
 
-def fig_nasjonal(ts: pd.DataFrame, baro: pd.DataFrame, cfg: ModeConfig) -> None:
+def fig_nasjonal(ts: pd.DataFrame, baro: pd.DataFrame) -> None:
     """Nasjonal stramhet og sysselsettingsbarometer (felles for alle modi)."""
     fig, axes = plt.subplots(1, 2, figsize=(11, 4.5))
     ax1, ax2 = axes
@@ -200,7 +212,7 @@ def fig_nasjonal(ts: pd.DataFrame, baro: pd.DataFrame, cfg: ModeConfig) -> None:
     ax2.legend(fontsize=8)
 
     plt.tight_layout()
-    _save(fig, "fig_nasjonal", cfg)
+    _save_shared(fig, "fig_nasjonal")
 
 
 def fig_ind_tid(ts: pd.DataFrame, cfg: ModeConfig) -> None:
@@ -250,7 +262,7 @@ def fig_ind_tid(ts: pd.DataFrame, cfg: ModeConfig) -> None:
     _save(fig, "fig_ind_tid", cfg)
 
 
-def fig_yrke(yrke: pd.DataFrame, years: list[int], cfg: ModeConfig) -> None:
+def fig_yrke(yrke: pd.DataFrame, years: list[int]) -> None:
     """Mangel per yrkesgruppe 2021–2025 (felles for alle modi)."""
     yrke_v = yrke[yrke["yrkesgruppe"] != "Ingen yrkesbakgrunn eller uoppgitt"].copy()
     order = (
@@ -289,10 +301,10 @@ def fig_yrke(yrke: pd.DataFrame, years: list[int], cfg: ModeConfig) -> None:
     ax.legend(title="År", ncol=5, fontsize=9)
     ax.yaxis.set_major_formatter(mticker.FuncFormatter(lambda v, _: f"{v:.0f}k"))
     plt.tight_layout()
-    _save(fig, "fig_yrke", cfg)
+    _save_shared(fig, "fig_yrke")
 
 
-def fig_regional(df: pd.DataFrame, years: list[int], cfg: ModeConfig) -> None:
+def fig_regional(df: pd.DataFrame, years: list[int]) -> None:
     """Stramhetsindikator per Nav-region og år (felles for alle modi)."""
     pivot = df.pivot_table(
         index="nav_region", columns="aar", values="stramhetsindikator"
@@ -325,7 +337,7 @@ def fig_regional(df: pd.DataFrame, years: list[int], cfg: ModeConfig) -> None:
     )
     ax.legend(title="År", ncol=5, fontsize=9)
     plt.tight_layout()
-    _save(fig, "fig_regional", cfg)
+    _save_shared(fig, "fig_regional")
 
 
 def fig_scatter_all(df: pd.DataFrame, years: list[int], cfg: ModeConfig) -> None:
@@ -553,24 +565,18 @@ def fig_demeaned(df: pd.DataFrame, years: list[int], cfg: ModeConfig) -> None:
 # ══════════════════════════════════════════════════════════════════════════════
 
 
-def tbl_oversikt(df: pd.DataFrame, years: list[int], cfg: ModeConfig) -> None:
-    """Antall regioner og komplette observasjoner per år."""
-    rows = []
-    for y in years:
-        sub = df[df["aar"] == y]
-        rows.append(
-            {
-                "År": y,
-                "Regioner": sub["nav_region"].nunique(),
-                f"{cfg.faktisk3} (n)": int(sub[cfg.faktisk3].notna().sum()),
-                f"{cfg.faktisk12} (n)": int(sub[cfg.faktisk12].notna().sum()),
-            }
-        )
-    pd.DataFrame(rows).to_csv(cfg.tbl_dir / "tbl_oversikt.csv", index=False)
-    print(f"  Lagret {cfg.tbl_dir / 'tbl_oversikt.csv'}")
+def tbl_oversikt(df: pd.DataFrame, years: list[int]) -> None:
+    """Antall regioner per år (felles oversikt for bedrift-seksjonen)."""
+    rows = [
+        {"År": y, "Regioner": int(df[df["aar"] == y]["nav_region"].nunique())}
+        for y in years
+    ]
+    out = _BEDRIFT_TBL / "tbl_oversikt.csv"
+    pd.DataFrame(rows).to_csv(out, index=False)
+    print(f"  Lagret {out}")
 
 
-def tbl_geomap(cfg: ModeConfig) -> None:
+def tbl_geomap() -> None:
     """Geografisk mapping fra undersøkelsesenheter til Nav-regioner."""
     geo = pd.DataFrame(
         {
@@ -618,8 +624,8 @@ def tbl_geomap(cfg: ModeConfig) -> None:
             ],
         }
     )
-    geo.to_csv(cfg.tbl_dir / "tbl_geomap.csv", index=False)
-    print(f"  Lagret {cfg.tbl_dir / 'tbl_geomap.csv'}")
+    geo.to_csv(_BEDRIFT_TBL / "tbl_geomap.csv", index=False)
+    print(f"  Lagret {_BEDRIFT_TBL / 'tbl_geomap.csv'}")
 
 
 def tbl_kor_per_aar(kor: pd.DataFrame, cfg: ModeConfig) -> None:
@@ -690,45 +696,59 @@ def tbl_kor_pooled(df: pd.DataFrame, cfg: ModeConfig) -> None:
 # ══════════════════════════════════════════════════════════════════════════════
 
 
+def _generer_bedrift(
+    df: pd.DataFrame,
+    ts: pd.DataFrame,
+    baro: pd.DataFrame,
+    yrke: pd.DataFrame,
+    years: list[int],
+) -> None:
+    """Generer delte figurer og tabeller for bedrift-seksjonen."""
+    _BEDRIFT_FIG.mkdir(parents=True, exist_ok=True)
+    _BEDRIFT_TBL.mkdir(parents=True, exist_ok=True)
+    print("\n=== Bedrift (delt) ===")
+    print("  Figurer...")
+    fig_nasjonal(ts, baro)
+    fig_yrke(yrke, years)
+    fig_regional(df, years)
+    print("  Tabeller...")
+    tbl_oversikt(df, years)
+    tbl_geomap()
+
+
 def _generer_for_modus(
     df: pd.DataFrame,
     ts: pd.DataFrame,
     kor: pd.DataFrame,
-    baro: pd.DataFrame,
-    yrke: pd.DataFrame,
     years: list[int],
     cfg: ModeConfig,
 ) -> None:
-    """Generer alle figurer og tabeller for én rapport-modus."""
+    """Generer mode-spesifikke figurer og tabeller for jobb eller atid."""
     cfg.setup_dirs()
     print(f"\n=== Modus: {cfg.mode.upper()} ===")
 
     print("  Figurer...")
-    fig_nasjonal(ts, baro, cfg)
     fig_ind_tid(ts, cfg)
-    fig_yrke(yrke, years, cfg)
-    fig_regional(df, years, cfg)
     fig_scatter_all(df, years, cfg)
     fig_scatter_years(df, cfg)
     fig_kor_heat(kor, cfg)
     fig_demeaned(df, years, cfg)
 
     print("  Tabeller...")
-    tbl_oversikt(df, years, cfg)
-    tbl_geomap(cfg)
     tbl_kor_per_aar(kor, cfg)
     tbl_kor_pooled(df, cfg)
 
 
 def main() -> None:
-    """Generer alle figurer og tabeller for begge rapporter (jobb og atid)."""
+    """Generer alle figurer og tabeller for bedrift, jobb og atid."""
     print("Leser data...")
     df, ts, kor, baro, yrke = _last_data()
     years = sorted(df["aar"].unique())
     print(f"  {len(df)} rader, år {min(years)}–{max(years)}")
 
-    _generer_for_modus(df, ts, kor, baro, yrke, years, JOBB)
-    _generer_for_modus(df, ts, kor, baro, yrke, years, ATID)
+    _generer_bedrift(df, ts, baro, yrke, years)
+    _generer_for_modus(df, ts, kor, years, JOBB)
+    _generer_for_modus(df, ts, kor, years, ATID)
 
     print("\nFerdig. Kjør nå:")
     print("  uv run --group quarto quarto render quarto/")
