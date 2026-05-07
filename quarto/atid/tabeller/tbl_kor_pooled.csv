@@ -1,0 +1,9 @@
+Forklaringsvariabel,Utfallsvariabel,r,p-verdi,Sig.,n
+Stramhetsindikator,Faktisk atid 3 mnd (t/uke),0.664,0.0,***,60
+Stramhetsindikator,Faktisk atid 12 mnd (t/uke),0.605,0.0,***,48
+Stramhetsindikator,"Indikator atid 3 mnd (avvik fra forventet, t/uke)",0.46,0.0002,***,60
+Stramhetsindikator,"Indikator atid 12 mnd (avvik fra forventet, t/uke)",0.508,0.0002,***,48
+Andel rekrutteringsproblemer (%),Faktisk atid 3 mnd (t/uke),0.58,0.0,***,60
+Andel rekrutteringsproblemer (%),Faktisk atid 12 mnd (t/uke),0.57,0.0,***,48
+Andel rekrutteringsproblemer (%),"Indikator atid 3 mnd (avvik fra forventet, t/uke)",0.284,0.0279,*,60
+Andel rekrutteringsproblemer (%),"Indikator atid 12 mnd (avvik fra forventet, t/uke)",0.344,0.0168,*,48

@@ -1,0 +1,7 @@
+---
+title: "Jobbindikator"
+---
+
+Denne delen analyserer sammenhengen mellom arbeidsmarkedsstramhet
+(fra bedriftsundersøkelsen) og **jobbindikatorene** – andelen registrerte
+arbeidssøkere som kommer i jobb innen 3 og 12 måneder.

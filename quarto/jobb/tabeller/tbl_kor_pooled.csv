@@ -1,0 +1,9 @@
+Forklaringsvariabel,Utfallsvariabel,r,p-verdi,Sig.,n
+Stramhetsindikator,Faktisk jobb 3 mnd (%),0.627,0.0,***,60
+Stramhetsindikator,Faktisk jobb 12 mnd (%),0.461,0.001,***,48
+Stramhetsindikator,"Indikator jobb 3 mnd (avvik fra forventet, pp)",0.374,0.0032,**,60
+Stramhetsindikator,"Indikator jobb 12 mnd (avvik fra forventet, pp)",0.322,0.0258,*,48
+Andel rekrutteringsproblemer (%),Faktisk jobb 3 mnd (%),0.566,0.0,***,60
+Andel rekrutteringsproblemer (%),Faktisk jobb 12 mnd (%),0.491,0.0004,***,48
+Andel rekrutteringsproblemer (%),"Indikator jobb 3 mnd (avvik fra forventet, pp)",0.248,0.0561,,60
+Andel rekrutteringsproblemer (%),"Indikator jobb 12 mnd (avvik fra forventet, pp)",0.272,0.0619,,48

@@ -1,0 +1,8 @@
+---
+title: "Arbeidstidsindikator"
+---
+
+Denne delen analyserer sammenhengen mellom arbeidsmarkedsstramhet
+(fra bedriftsundersøkelsen) og **arbeidstidsindikatorene** – gjennomsnittlig
+ukentlig arbeidstid (timer/uke) for registrerte arbeidssøkere i løpet av
+3 og 12 måneder etter registrering.
