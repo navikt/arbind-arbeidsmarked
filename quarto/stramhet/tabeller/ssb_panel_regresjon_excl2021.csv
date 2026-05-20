@@ -1,0 +1,5 @@
+utfall,utfall_label,beta,se,t,p,r2_within,r2_within_adj,r2_full_adj,n,n_naeringer
+indikator_atid12,Indikatoravvik atid 12 mnd,-4.0274,1.2202,-3.3,0.001,0.036,-0.045,-0.045,195,15
+indikator_atid3,Indikatoravvik atid 3 mnd,-0.5271,0.938,-0.56,0.5741,0.001,-0.066,-0.066,240,15
+indikator_jobb12,Indikatoravvik jobb 12 mnd,-40.1419,9.2437,-4.34,0.0,0.141,0.069,0.069,195,15
+indikator_jobb3,Indikatoravvik jobb 3 mnd,4.5681,3.106,1.47,0.1414,0.007,-0.06,-0.06,240,15

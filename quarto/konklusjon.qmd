@@ -1,0 +1,99 @@
+---
+title: "Konklusjon og videre arbeid"
+---
+
+# Hva vi vet
+
+Denne analysen undersøker om Navs arbeidsindikatorer i tilstrekkelig grad
+kontrollerer for arbeidsmarkedet. Spørsmålet er praktisk viktig: dersom
+indikatorene ikke er godt nok renset for arbeidsmarkedseffekter, vil de
+delvis reflektere konjunkturer og strukturelle trekk ved arbeidsmarkedet
+snarere enn Navs innsats.
+
+Vi har belyst spørsmålet gjennom to analyser:
+
+## Aggregert stramhet
+
+Analysen av arbeidsmarkedsstramhet fra bedriftsundersøkelsen viser at
+faktiske indikatorverdier (andel i jobb, gjennomsnittlig arbeidstid)
+samvarierer med stramheten — slik vi forventer dersom arbeidsmarkedet
+betyr noe for resultater. Det interessante er bildet for
+**indikatoravvikene** — den modellrensede delen. Finner vi fortsatt
+en sammenheng der, tyder det på ufullstendig kontroll.
+
+Resultatene fra stramhetsanalysen gir grunnlag for en vurdering av
+hvor godt indikatormodellens én gjenværende arbeidsmarkedsvariabel
+(tilstrømning av nye arbeidssøkere i BA-regionen) fanger opp regional
+variasjon.
+
+## Kompetansemismatch
+
+Mismatch-analysen viser at yrkesbasert mismatch og indikatorutfall
+korrelerer sterkt i perioden 2021–2025 ($r > 0.85$), men at dette
+funnet er svært sårbart: sensitivitetsanalysen viser at
+sammenhengen nesten utelukkende drives av koronaåret 2021. Uten 2021
+finner vi ingen statistisk signifikant sammenheng. Jackknife-konfidensintervallene
+for korrelasjonen med indikatoravvik inkluderer null.
+
+Den sektorbaserte SSB-analysen, med bedre statistisk kraft ($n \approx 20$
+kvartaler), finner svake og ikke-signifikante korrelasjoner ($r \approx 0.2$–$0.3$).
+
+## Samlet status
+
+Datagrunnlaget er foreløpig for begrenset til å trekke sikre konklusjoner.
+Det vi kan si er:
+
+- Indikatormodellen har per april 2025 bare **én arbeidsmarkedsvariabel**
+  (tilstrømning til ledighet). Den tidligere variabelen for lokal
+  sysselsettingsutvikling er fjernet på grunn av datakvalitetsproblemer
+  (vedlegg D i dokumentasjonsrapporten).
+- Dokumentasjonsrapporten erkjenner selv at det gjenstår arbeid med å vurdere
+  «om arbeidsmarkedet er godt nok ivaretatt i modellen».
+- Under normale konjunkturforhold (2022–2025) finner vi ingen systematisk
+  sammenheng mellom mismatch og indikatoravvik — noe som taler for at
+  modellen fungerer rimelig bra i normaltider.
+- I ekstraordinære perioder (2021, pandemi) synes modellen å etterlate
+  arbeidsmarkedsvariasjon i restleddet.
+
+# Videre arbeid
+
+## Mulige forbedringer av indikatormodellen
+
+Analysen peker mot tre mulige retninger for å styrke arbeidsmarkedskontrollen:
+
+1. **Gjeninnføre en stramhetsvariabel** — En lokal stramhetsindikator
+   (f.eks. fra bedriftsundersøkelsen eller SSBs ledige stillinger) kan
+   erstatte den fjernede shift-share-variabelen. Dette vil fange opp
+   regionale og sykliske variasjoner som tilstrømningsvariabelen ikke
+   fullt ut dekker.
+
+2. **Inkludere sektoriell eller yrkesmessig sammensetning** — Dersom
+   de sysselsattnes og de ledigeses yrkessammensetning varierer systematisk
+   over tid og regioner, kan et mismatch-mål gi modellen informasjon om
+   strukturelle arbeidsmarkedsforhold som ikke fanges opp av aggregerte mål.
+
+3. **Tidsserieegenskaper** — Den gjeldende modellen estimeres på en felles
+   periode (2017–2024). Å undersøke om effektene varierer over konjunktursykluser
+   kan gi bedre robusthet mot ekstraordinære år som 2021.
+
+## Bedre datagrunnlag
+
+- Lengre tidsserier fra bedriftsundersøkelsen (fra 2016 finnes sysselsettings-
+  barometeret) vil gi mer statistisk kraft og mulighet til å teste over
+  flere konjunkturer.
+- Regionale SSB-data på yrkes- og sektornivå kan kobles med indikatordata
+  for å gi regionale (ikke bare nasjonale) mismatch-analyser.
+- Kvartalsvis indikatordata kan kobles med SSBs kvartalsvise mål for en
+  tettere tidsserierelatert test.
+
+## Identifikasjonsstrategi
+
+De observasjonelle sammenhengene i denne analysen kan ikke skille kausal
+effekt fra konfundering. Strengere identifikasjon kan oppnås gjennom:
+
+- **Regionale instrumentvariabler** — f.eks. regional næringsstruktur som
+  eksogen driver for lokal konjunktur.
+- **Naturlige eksperimenter** — regelverksendringer eller
+  arbeidsmarkedssjokk som rammer regioner ulikt.
+- **Syntetisk kontroll** — sammenlikne enkeltregioner med syntetiske
+  referansegrupper i perioder med ulike arbeidsmarkedssjokk.

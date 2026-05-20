@@ -1,0 +1,173 @@
+---
+title: "Sensitivitet: ekskludering av 2021"
+subtitle: "Gjentatt analyse uten koronaåret 2021"
+execute:
+  echo: false
+  warning: false
+---
+
+```{python}
+import pandas as pd
+import numpy as np
+from scipy import stats
+```
+
+# Motivasjon
+
+Analysen i forrige kapittel bruker data fra 2020–2025 (kvartalsvis). Året 2021
+var imidlertid et koronapåvirket år med unormale arbeidsmønstre, høy ledighet
+i noen sektorer og atypisk lav ledighet i andre (særlig helse). Det er mulig
+at sammenhengen mellom næringsstramhet og Nav-indikator i det forrige kapittelet
+er drevet av nettopp dette ene avvikende året.
+
+Her gjentas alle tre analysedelene med 2021 **ekskludert** — både kvartalene
+2021K1–K4 fra SSB-dataene og 2021-raden fra bedriftsundersøkelsen — for å
+undersøke robustheten av funnene.
+
+# Del A — Sammenligning SSB vs bedrift (uten 2021)
+
+```{python}
+#| label: tbl-korrA
+#| tbl-cap: "Korrelasjon mellom SSB og bedrift stramhetsindikator, med og uten 2021"
+df_full = pd.read_csv("tabeller/ssb_bedrift_sammenlikning.csv")
+df_excl = pd.read_csv("tabeller/ssb_bedrift_sammenlikning_excl2021.csv")
+
+rows = []
+for label, df in [("Alle år (2021–2026)", df_full), ("Uten 2021 (2022–2026)", df_excl)]:
+    x = df["stramhetsindikator_ssb"].values
+    y = df["stramhetsindikator_bedrift"].values
+    mask = np.isfinite(x) & np.isfinite(y)
+    r, p = stats.pearsonr(x[mask], y[mask])
+    rs, ps = stats.spearmanr(x[mask], y[mask])
+    rows.append({"Utvalg": label, "Pearson r": round(r, 3), "p (Pearson)": round(p, 4),
+                 "Spearman ρ": round(rs, 3), "p (Spearman)": round(ps, 4), "N": int(mask.sum())})
+
+pd.DataFrame(rows)
+```
+
+Korrelasjonen mellom de to stramhetsmålene er faktisk *noe høyere* uten 2021
+(r = 0,53 mot 0,49). Det betyr at den moderate sammenhengen mellom SSBs og
+bedriftenes stramhetsindikator er reell, og ikke kunstig skapt av 2021.
+
+![Scatter uten 2021: SSB vs bedrift stramhetsindikator per næring.
+](figurer/ssb_bedrift_scatter_excl2021.png){#fig-scatter-excl}
+
+# Del B — Bivariate regresjoner (uten 2021)
+
+![Heatmap av Pearson r: næringsvise SSB-stramhetsindikator vs indikatoravvik,
+uten 2021 (sammenlign med forrige kapittel).
+](figurer/ssb_naering_korrelasjon_heatmap_excl2021.png){#fig-heatmap-excl}
+
+```{python}
+#| label: tbl-bivB
+#| tbl-cap: "Antall signifikante (p<0.05) bivariate næring × indikatoravvik-par"
+df_full_reg = pd.read_csv("tabeller/ssb_naering_regresjon.csv")
+df_excl_reg = pd.read_csv("tabeller/ssb_naering_regresjon_excl2021.csv")
+
+rows = []
+for label, df in [("Alle år", df_full_reg), ("Uten 2021", df_excl_reg)]:
+    avvik = df[df["utfall"].str.startswith("indikator_")]
+    sig = avvik[avvik["p"] < 0.05]
+    rows.append({
+        "Utvalg": label,
+        "Totale par": len(avvik),
+        "Signifikante (p<0.05)": len(sig),
+        "Andel (%)": round(100 * len(sig) / len(avvik), 0),
+        "Neg. sign.": len(sig[sig["r"] < 0]),
+        "Pos. sign.": len(sig[sig["r"] > 0]),
+    })
+pd.DataFrame(rows)
+```
+
+Antall signifikante næring×utfall-par faller fra 20 til 8 når 2021 ekskluderes.
+Dette er ventet: med bare 16 kvartaler er den statistiske kraften lavere, og
+noen av signifikansfunnene i originalanalysen er delvis drevet av det atypiske
+2021-årets innflytelse. Likevel overlever kjerneresultatene:
+
+```{python}
+#| label: tbl-bivB-sig
+#| tbl-cap: "Signifikante bivariate par uten 2021 (p<0.05)"
+avvik_excl = df_excl_reg[df_excl_reg["utfall"].str.startswith("indikator_")].copy()
+sig_excl = avvik_excl[avvik_excl["p"] < 0.05].copy()
+sig_excl["signif"] = sig_excl["p"].map(
+    lambda p: "***" if p < 0.001 else "**" if p < 0.01 else "*"
+)
+sig_excl[["naering_label", "utfall_label", "r", "beta", "p", "signif"]].rename(
+    columns={"naering_label": "Næring", "utfall_label": "Utfall",
+             "beta": "β", "signif": ""}
+).sort_values("r")
+```
+
+Helse- og sosialtjenester og Transport og lagring forblir signifikante for
+12-månedersutfallene. Industri og Elektrisitet, vann og renovasjon forblir
+signifikante for jobb 12 mnd.
+
+![Regresjonskoeffisienter β uten 2021 (rød = p < 0.05).
+](figurer/ssb_naering_regresjon_beta_excl2021.png){#fig-beta-excl}
+
+# Del C — Panelregresjon med næring FE (uten 2021)
+
+```{python}
+#| label: tbl-panel-sammenligning
+#| tbl-cap: "Panelregresjon: sammenligning av resultater med og uten 2021"
+df_full_p = pd.read_csv("tabeller/ssb_panel_regresjon.csv")
+df_excl_p = pd.read_csv("tabeller/ssb_panel_regresjon_excl2021.csv")
+
+avvik_full = df_full_p[df_full_p["utfall"].str.startswith("indikator_")].copy()
+avvik_excl = df_excl_p[df_excl_p["utfall"].str.startswith("indikator_")].copy()
+
+rows = []
+for _, row_f in avvik_full.iterrows():
+    row_e = avvik_excl[avvik_excl["utfall"] == row_f["utfall"]].iloc[0]
+    sig_f = "***" if row_f["p"] < 0.001 else "**" if row_f["p"] < 0.01 else "*" if row_f["p"] < 0.05 else ""
+    sig_e = "***" if row_e["p"] < 0.001 else "**" if row_e["p"] < 0.01 else "*" if row_e["p"] < 0.05 else ""
+    rows.append({
+        "Utfall": row_f["utfall_label"],
+        "β alle år": f"{row_f['beta']:.2f}{sig_f}",
+        "β uten 2021": f"{row_e['beta']:.2f}{sig_e}",
+        "R² innen (alle)": f"{row_f['r2_within']:.3f}",
+        "R² innen (u/2021)": f"{row_e['r2_within']:.3f}",
+        "N (alle)": row_f["n"],
+        "N (u/2021)": row_e["n"],
+    })
+pd.DataFrame(rows)
+```
+
+![Panel-β uten 2021: sammenligning av panel-koeffisient og bivariate β.
+](figurer/ssb_panel_koeffisienter_excl2021.png){#fig-panel-excl}
+
+## Tolkning av panelresultatene
+
+De viktigste observasjonene fra sammenligningen:
+
+**12-månedersutfall overlever utelukking av 2021:**
+
+- *Jobb 12 mnd*: β faller fra −55,1 til −40,1, men forblir sterkt signifikant
+  (p < 0,001). Det er altså ikke 2021 alene som driver funnet — koblingen
+  mellom næringsvis stramhet og indikatoravvik er til stede også i perioden
+  2022–2025.
+
+- *Atid 12 mnd*: β faller fra −10,6 til −4,0, men forblir signifikant (p < 0,01).
+  Innen-R² reduseres (0,064 → 0,036), noe som tyder på at 2021 bidrar til
+  styrken av sammenhengen, men ikke er den eneste kilden til den.
+
+**3-månedersutfall er ikke robuste:**
+
+- *Jobb 3 mnd*: β skifter fortegn fra −6,0 til +4,6 (begge ikke-signifikante).
+  Dette er et klart tegn på at den bivariate sammenhengen for jobb3 i all
+  vesentlighet er et koronaartefakt fra 2021.
+
+- *Atid 3 mnd*: Forblir ubetydelig og ikke-signifikant.
+
+## Konklusjon
+
+Kjerneresultatet — at næringsvise stramhetssvingninger er systematisk
+assosiert med indikatoravviket for **12-månedersutfall** — er **robust** for
+utelukking av koronaåret 2021. Sammenhengen er noe svakere uten 2021, men
+forsvinner ikke. Resultatene for 3-månedersutfall er derimot ikke robuste
+og bør ikke tillegges vekt uten ytterligere analyse med lengre tidsserie.
+
+Dette styrker konklusjonen om at indikatormodellens eneste
+arbeidsmarkedskontroll (andel nye arbeidssøkere) ikke fullt ut fanger opp
+næringsvis stramhetsutvikling, og at dette gir et systematisk bidrag til
+indikatoravviket på mellomlang sikt.

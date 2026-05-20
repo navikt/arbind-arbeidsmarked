@@ -1,0 +1,16 @@
+---
+title: "Arbeidsmarkedsstramhet og indikatorer"
+---
+
+Denne delen undersøker om Navs indikatorer samvarierer med aggregert
+**arbeidsmarkedsstramhet** — og om den uforklarte delen av indikatorene
+(indikatoravvikene) gjør det samme.
+
+Dersom indikatormodellen kontrollerer tilstrekkelig for arbeidsmarkedet, bør
+avvikene *ikke* variere systematisk med stramhetsgraden. Vi tester dette
+regionalt (krysseksjonelt og i panel) og nasjonalt (tidsserie), separat for:
+
+- **[Jobbindikator](jobb/rapport.qmd)** — andelen arbeidssøkere som kommer i
+  jobb innen 3 og 12 måneder.
+- **[Arbeidstidsindikator](atid/rapport.qmd)** — gjennomsnittlig ukentlig
+  arbeidstid for arbeidssøkere i løpet av 3 og 12 måneder.

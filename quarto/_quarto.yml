@@ -5,21 +5,31 @@ date: now
 date-format: DD.MM.YYYY
 author-title: Eier
 book:
-  title: 'Navs arbeidsarbeidsindikator og arbeidsmarkedet'
-  description: Navs arbeidsindikator hvordan den er påvirket av arbeidsmarkedet. Fokus på bedriftsundersøkelsen.
-    av tiltaksnedgang i Nav
+  title: 'Navs arbeidsindikator og arbeidsmarkedet'
+  description: >
+    Evaluerer om Navs arbeidsindikatorer i tilstrekkelig grad kontrollerer for
+    arbeidsmarkedet. Analyserer sammenhengen mellom indikatorer og
+    arbeidsmarkedsforhold, og diskuterer mulige forbedringer og veien videre.
   author: Jacob Sjødin
   chapters:
   - index.qmd
-  - part: bedrift/intro.qmd
+  - part: datagrunnlag/intro.qmd
     chapters:
-    - bedrift/rapport.qmd
-  - part: jobb/intro.qmd
+    - datagrunnlag/rapport.qmd
+  - part: stramhet/intro.qmd
     chapters:
-    - jobb/rapport.qmd
-  - part: atid/intro.qmd
+    - stramhet/jobb/rapport.qmd
+    - stramhet/atid/rapport.qmd
+    - stramhet/ssb_stramhet.qmd
+    - stramhet/ssb_stramhet_sensitivitet.qmd
+  - part: mismatch/intro.qmd
     chapters:
-    - atid/rapport.qmd
+    - mismatch/yrke.qmd
+    - mismatch/sensitivitet.qmd
+  - konklusjon.qmd
+
+  appendices:
+  - appendiks.qmd
 
   page-navigation: true
   page-footer: Nav - {{< meta date >}}

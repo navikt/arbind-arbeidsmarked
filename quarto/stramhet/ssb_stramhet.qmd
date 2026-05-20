@@ -1,0 +1,305 @@
+---
+title: "Næringsstramhet: SSB vs bedriftsundersøkelsen"
+subtitle: "Sammenligning av mål og regresjonsanalyse mot Nav-indikator"
+execute:
+  echo: false
+  warning: false
+---
+
+```{python}
+import pandas as pd
+from scipy import stats
+import numpy as np
+```
+
+# Motivasjon
+
+Arbeidsmarkedsstramhet kan måles på to prinsipielt ulike måter:
+
+1. **Bedriftsundersøkelsens stramhetsindikator**: NAV spør bedriftene direkte
+   hvor mange arbeidstakere de *mangler* — altså uoppfylt etterspørsel etter
+   arbeidskraft. Beregnes som estimert mangel / sysselsatte i næringen.
+   Fanger opp **latent etterspørsel**: bedrifter rapporterer mangel selv om de
+   ikke har lagt ut stillingen formelt.
+
+2. **SSBs stramhetsindikator**: Beregnet fra offisiell statistikk over *faktisk
+   utlyste stillinger* (tabell 11587) og sysselsatte (tabell 11154):
+   $$\text{Stramhetsindikator}_{\text{SSB}} = \frac{v}{v + u}$$
+   der $v$ = ledige stillinger (utlyst) og $u$ = sysselsatte. Fanger kun opp
+   **annonsert etterspørsel**: stillinger som faktisk er lyst ut.
+
+Begge mål er her omregnet til desimalbrøk (SSB er allerede på denne skalaen;
+bedrift-verdiene er delt på 100, siden de rapporteres i prosent).
+Dette gjør direkte nivåsammenligning mulig.
+
+Den konseptuelle forskjellen er viktig: SSB teller *alle* åpne stillinger
+(inkl. vikariater og stillingsskift), mens bedrift rapporterer kun stillinger
+de *ikke klarer å besette* grunnet mangel på kandidater. Vi forventer
+derfor at SSB-målet ligger noe høyere, og det gjør det: gjennomsnittet
+over 2021–2026 er ~3,0 % (SSB) mot ~1,5 % (bedrift) på tvers av næringer.
+I sektorer med svært stramt marked kan bedrifter dessuten ha sluttet å lyse
+ut stillinger formelt, noe som gjør at SSB-målet *undervurderer* stramheten
+relativt til bedriftenes rapporterte mangel.
+
+# Del A — Sammenligning av målene per næring
+
+## Korrelasjon mellom målene
+
+Begge mål er beregnet for 15 sammenliknbare næringer[^1] for perioden 2021–2026.
+SSB-verdiene er fra Q1 hvert år for å matche tidspunktet til
+bedriftsundersøkelsen (vår). Begge mål er på desimalskala.
+
+[^1]: Noen SSB-kategorier (eiendom, faglig tjenesteyting, forretningsmessig
+tjenesteyting) er slått sammen for å matche bedriftsundersøkelsens kombinerte
+kategori «eiendomsdrift, forretningsmessig og faglig tjenesteyting».
+
+```{python}
+#| label: tbl-sammenlikning
+#| tbl-cap: "Stramhetsindikator per næring 2021–2026: SSB (v/(v+u)) og bedriftsundersøkelsen (mangel/sysselsatte)"
+df = pd.read_csv("tabeller/ssb_bedrift_sammenlikning.csv")
+pivot = df.pivot_table(
+    index="felles",
+    columns="aar",
+    values=["stramhetsindikator_ssb", "stramhetsindikator_bedrift"],
+    aggfunc="first",
+)
+pivot.columns = [f"{maal.replace('stramhetsindikator_', '').upper()} {int(aar)}"
+                 for maal, aar in pivot.columns]
+pivot.index.name = "Næring"
+pivot.round(3).style.format("{:.3f}", na_rep="–")
+```
+
+```{python}
+from scipy import stats
+import numpy as np
+
+df2 = pd.read_csv("tabeller/ssb_bedrift_sammenlikning.csv")
+x = df2["stramhetsindikator_ssb"].values
+y = df2["stramhetsindikator_bedrift"].values
+mask = np.isfinite(x) & np.isfinite(y)
+r, p = stats.pearsonr(x[mask], y[mask])
+rs, ps = stats.spearmanr(x[mask], y[mask])
+n = mask.sum()
+```
+
+Pearson-korrelasjonen mellom de to målene er $r =$ `{python} f"{r:.2f}"` ($p =$ `{python} f"{p:.4f}"`), og Spearman $\rho =$ `{python} f"{rs:.2f}"` ($p =$ `{python} f"{ps:.4f}"`), over `{python} str(n)` næring-år-observasjoner. Sammenhengen er statistisk signifikant, men moderat — de to målene rangerer næringer noenlunde likt, men er langt fra identiske.
+
+![Scatter: SSB-stramhetsindikator (x-akse) vs bedriftsundersøkelsens
+stramhetsindikator (y-akse) per næring og år. Farger = næring. Begge akser
+på desimalskala. SSB-verdier er gjennomgående høyere (~3 %) enn bedrift-verdier
+(~1,5 %), fordi SSB teller alle åpne stillinger mens bedrift kun teller uoppfylt
+mangel.](figurer/ssb_bedrift_scatter.png){#fig-scatter}
+
+## Tidsseriesammenligning per næring
+
+@fig-naering-tid viser utviklingen i begge mål for hver næring.
+Noen mønster å merke seg:
+
+- **Helse- og sosialtjenester** og **Undervisning** viser høy og relativt
+  stabil stramhet i begge mål.
+- **Informasjon og kommunikasjon** (IKT) viser høy og stigende stramhet i
+  SSB-data, men ikke tilsvarende høy rapportert mangel i bedriftsundersøkelsen
+  — muligens fordi IT-bedrifter fyller stillinger gjennom nettverk uten formell
+  utlysning.
+- **Varehandel** og **Transport** viser god overensstemmelse mellom målene.
+- Bedrift-målet falt markant fra 2022 til 2025–2026 i de fleste næringer,
+  i tråd med konjunkturavmatningen. SSB-målet viser samme tendens.
+
+![Tidsseriesammenligning av stramhetsindikator per næring (blå = SSB, rød =
+bedriftsundersøkelsen). Begge på desimalskala. Merk ulik y-akse-skala mellom
+næringer.](figurer/ssb_bedrift_naering_tidsserie.png){#fig-naering-tid}
+
+# Del B — Næringsstramhet og Nav-indikator
+
+## Regresjonsoppsett
+
+For hvert kvartal fra 2021 til 2025 har vi SSB-stramhetsindikator for 15
+næringer og gjennomsnittlig nasjonal Nav-indikator. Vi kjører bivariate
+OLS-regresjoner:
+
+$$\text{Indikator}_t = \alpha + \beta \cdot \text{Stramhet}_{j,t} + \varepsilon_t$$
+
+for hvert næring $j$ og hvert indikatorutfall. Antall observasjoner er
+$n \approx 20$ kvartaler.
+
+Det mest relevante utfallet for å vurdere indikatorens bias er
+**indikatoravviket** (differansen mellom faktisk og forventet verdi) — den
+delen som modellen *ikke* forklarer. Dersom en nærings stramhet predikerer
+indikatoravviket, tyder det på at den arbeidsmarkedseffekten fra den næringen
+ikke er renset ut av modellen.
+
+## Korrelasjoner mellom næringsstramhet og indikatoravvik
+
+@fig-heatmap viser Pearson-korrelasjonen mellom SSB-stramhetsindikator per
+næring og de fire indikatoravvikene.
+
+![Heatmap av Pearson r mellom næringsvise SSB-stramhetsindikator og
+Nav-indikatoravvik (blå = positiv, rød = negativ). Bare
+indikatoravvikene er vist.
+](figurer/ssb_naering_korrelasjon_heatmap.png){#fig-heatmap}
+
+```{python}
+#| label: tbl-reg-avvik
+#| tbl-cap: "Bivariate OLS-regresjoner: SSB næringsstramhet → Nav-indikatoravvik (n≈20 kvartaler)"
+df_reg = pd.read_csv("tabeller/ssb_naering_regresjon.csv")
+avvik = df_reg[df_reg["utfall"].str.startswith("indikator_")].copy()
+avvik["signif"] = avvik["p"].map(lambda p: "***" if p < 0.001 else "**" if p < 0.01 else "*" if p < 0.05 else "")
+avvik["r_vis"] = avvik.apply(lambda row: f"{row['r']:.2f}{row['signif']}", axis=1)
+pivot_r = avvik.pivot_table(index="naering_label", columns="utfall_label", values="r_vis", aggfunc="first")
+pivot_r.index.name = "Næring"
+pivot_r
+```
+
+## Regresjonskoeffisienter β
+
+@fig-beta viser OLS-koeffisienten $\hat{\beta}$ for hver næring og hvert
+indikatoravvik. Rød = statistisk signifikant (p < 0.05).
+
+![Regresjonskoeffisienter β (SSB næringsstramhet → indikatoravvik).
+Rød = p < 0.05, grå = ikke-signifikant.
+](figurer/ssb_naering_regresjon_beta.png){#fig-beta}
+
+## Tolkning
+
+Funnene viser et konsistent mønster:
+
+**Negativ sammenheng** (høyere stramhet → *lavere* indikatoravvik) for:
+- **Helse- og sosialtjenester** ($r \approx -0.5$ til $-0.8$, signifikant for
+  alle fire utfall)
+- **Elektrisitet, vann og renovasjon** (signifikant for alle fire utfall)
+- **Varehandel** og **Transport og lagring** (signifikant for tre av fire)
+- **Bergverksdrift og utvinning** (signifikant for 12-måneders utfall)
+- **Industri** (signifikant for jobb 12 mnd)
+
+**Positiv sammenheng** for:
+- **Informasjon og kommunikasjon** (IKT): signifikant positiv for jobb3 og
+  atid3
+
+**Hva betyr den negative sammenhengen?** Når helse- og transportsektoren er
+strammere (flere utlyste stillinger relativt til sysselsatte), er Nav-indikatorens
+residual *lavere* — det vil si at faktisk andel i jobb er *lavere enn forventet*.
+Dette kan tolkes på to måter:
+
+1. *Bias-tolkning*: Disse sektorene trekker arbeidskraft *direkte* i jobbmarkedet
+   (god lønn, gode vilkår i helse og offentlig sektor), noe som gjør det vanskeligere
+   for Nav å formidle sine brukere dit. Modellen kontrollerer ikke for denne
+   typen sektoriell konkurranse om arbeidskraft, noe som skaper en systematisk
+   undervurdering av Nav-kontorers resultater i perioder med høy stramhet i disse
+   sektorene.
+
+2. *Sammenhengs-tolkning*: Høy stramhet i helse og transport sammenfaller
+   med perioder der Nav-brukernes sammensetning er vanskeligere (f.eks. at det
+   er relativt sett mer langtidsledige igjen), uten at dette er fullt ut kontrollert
+   for.
+
+Uansett tolkning viser analysen at **næringssammensetningen av arbeidsmarkedsstramheten
+har en systematisk sammenheng med indikatoravvikene** — en dimensjon som er
+fraværende i den gjeldende indikatormodellen.
+
+IKT-næringens positive sammenheng er konsistent med at IKT-stramhet faktisk
+*forbedrer* Nav-brukeres muligheter: perioder med høy etterspørsel etter
+IT-kompetanse gagner mange brukere med teknologibakgrunn.
+
+# Del C — Panelregresjon med næringsfaste effekter
+
+## Motivasjon for panelmodellen
+
+De bivariate regresjonene i Del B kjøres separat per næring (n ≈ 20 per
+regresjon). Dette har lav statistisk kraft og innebærer et problem med
+multiple sammenligninger (60 tester, ~3 forventede falsk-positive ved α = 0,05).
+
+En panelregresjon med **næringsfaste effekter** (FE) adresserer begge problemer:
+
+$$\text{Indikatoravvik}_t = \alpha_j + \beta \cdot \text{Stramhet}_{j,t} + \varepsilon_{j,t}$$
+
+- $\alpha_j$: én fast effekt per næring (kontrollerer for gjennomsnittlige
+  nivåforskjeller mellom næringer)
+- $\beta$: én felles koeffisient, identifisert fra *innen-næring*-variasjon
+  — dvs. om en næring er strammere enn sitt eget snitt i et kvartal, predikerer
+  dette indikatoravviket?
+- $n = 15 \times 20 = 300$ (alle næring-kvartal-kombinasjoner), langt større
+  stikkprøve enn bivariate regresjoner
+
+**Merk om standardfeil:** Vi bruker HC1 (heteroskedastisitets-robust), men
+med bare 15 næringer og 20 kvartaler er klyngerobuste standardfeil ikke
+pålitelige. Resultatene bør tolkes med forsiktighet.
+
+## Resultater
+
+```{python}
+#| label: tbl-panel
+#| tbl-cap: "Panelregresjon med næringsfaste effekter: SSB-stramhet → Nav-indikatoravvik (HC1-SE)"
+df_panel = pd.read_csv("tabeller/ssb_panel_regresjon.csv")
+avvik_panel = df_panel[df_panel["utfall"].str.startswith("indikator_")].copy()
+
+avvik_panel["signif"] = avvik_panel["p"].map(
+    lambda p: "***" if p < 0.001 else "**" if p < 0.01 else "*" if p < 0.05 else ""
+)
+avvik_panel["β (SE)"] = avvik_panel.apply(
+    lambda r: f"{r['beta']:.2f}{r['signif']} ({r['se']:.2f})", axis=1
+)
+avvik_panel["R² innen (adj.)"] = avvik_panel.apply(
+    lambda r: f"{r['r2_within']:.3f} ({r['r2_within_adj']:.3f})", axis=1
+)
+
+vis = avvik_panel[["utfall_label", "β (SE)", "t", "p", "R² innen (adj.)", "n"]].rename(
+    columns={"utfall_label": "Utfall", "t": "t-verdi", "p": "p-verdi", "n": "N"}
+)
+vis
+```
+
+De viktigste funnene fra panelmodellen:
+
+- **Jobb 12 mnd** ($\hat{\beta} = -55.1$, $p < 0.001$): En økning i
+  SSB-stramhetsindikator på 1 prosentpoeng (dvs. 0,01 på desimalskala)
+  er assosiert med et indikatoravvik som er ~0,55 prosentpoeng *lavere*.
+  Adjusted within-R² = 0,063 — stramhetsindikator forklarer ~6 % av
+  residualvariasjonen etter kontroll for næringsnivå.
+
+- **Atid 12 mnd** ($\hat{\beta} = -10.6$, $p < 0.001$): Lignende negativ
+  sammenheng for arbeidstidsutfallet. Adjusted within-R² = 0,005.
+
+- **Jobb 3 mnd** og **Atid 3 mnd**: Ikke signifikante i panelmodellen
+  ($p > 0.17$). Kortsiktige utfall er tilsynelatende mindre eksponert for
+  næringsvis stramhetsvariasjon.
+
+## Sammenligning: panel-β vs bivariate β
+
+@fig-panel-koeff viser panel-koeffisienten med 95 % konfidensintervall, og
+sammenligner med fordelingen av de 15 bivariate per-næring-koeffisientene.
+
+![Panel-β med 95 % KI (punkt) vs fordeling av bivariate β per næring (violin).
+Rød = signifikant panel-β (p < 0.05). Panelmodellen gir en samlet
+representasjon som er konsistent med median av de bivariate estimatene.
+](figurer/ssb_panel_koeffisienter.png){#fig-panel-koeff}
+
+Den aggregerte panel-koeffisienten fanger opp det samme bildet som
+flertallet av de bivariate koeffisientene: negativ sammenheng for
+12-månedersutfall, svak og ikke-signifikant sammenheng for 3-månedersutfall.
+Panelmodellen gir dermed styrket støtte til funnet.
+
+# Sammendrag
+
+```{python}
+#| label: tbl-oppsummering
+#| tbl-cap: "Antall signifikante (p<0.05) næring × indikatorutfall-par per utfallstype"
+df_reg = pd.read_csv("tabeller/ssb_naering_regresjon.csv")
+summary = df_reg.groupby("utfall_label").apply(
+    lambda g: pd.Series({
+        "Signifikante (p<0.05)": (g["p"] < 0.05).sum(),
+        "Herav neg. (r<0)": ((g["p"] < 0.05) & (g["r"] < 0)).sum(),
+        "Herav pos. (r>0)": ((g["p"] < 0.05) & (g["r"] > 0)).sum(),
+        "Maks |r|": g["r"].abs().max().round(2),
+    })
+).reset_index()
+summary.rename(columns={"utfall_label": "Utfall"})
+```
+
+Både bivariate regresjoner per næring (Del B) og panelregresjonen med
+næringsfaste effekter (Del C) peker i samme retning: **stramhetsvariasjoner
+innen næringer som helse, elektrisitet/vann, varehandel og transport er
+systematisk assosiert med lavere indikatoravvik for 12-månedersutfall**, og
+dette kan ikke forklares av permanente nivåforskjeller mellom næringer.
+Sammenhengen er sterkest for langsiktige utfall, noe som gir mening:
+modellenes arbeidsmarkedskontroll (kun én variabel fra 2025) har vanskeligere
+for å fange opp næringsvis stramhetsutvikling over lengre tidsperioder.

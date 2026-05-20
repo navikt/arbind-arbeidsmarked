@@ -1,0 +1,11 @@
+---
+title: "Datagrunnlag"
+---
+
+Denne delen presenterer datagrunnlaget for analysen: **NAVs
+bedriftsundersøkelse** og **SSBs kvartalsvise næringsstatistikk** som
+begge brukes som mål på arbeidsmarkedsforhold i resten av rapporten.
+
+Bedriftsundersøkelsen gir et regionalt mål på aggregert stramhet og
+rekrutteringsvansker (brukt i stramhetsanalysen). SSB-dataene gir en
+sektordimensjon med kvartalsvis frekvens (brukt i mismatch-analysen).

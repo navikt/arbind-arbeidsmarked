@@ -1,0 +1,114 @@
+---
+title: "Appendiks: Datakonstruksjon"
+---
+
+Dette appendikset dokumenterer hvordan de to datakildene – **NAVs
+bedriftsundersøkelse** og **NAVs arbeidsindikator** – er satt sammen til
+et felles analysedatasett.
+
+## Datakilder
+
+| Kilde | Råformat | Geografisk enhet | Periode |
+|---|---|---|---|
+| Bedriftsundersøkelsen | Excel (nav.no) | Nav-regioner (2021–2023) / fylker (2024–2025) | 2021–2025 |
+| NAVs arbeidsindikator | BigQuery | Nav-regioner (org-nivå 2) | Månedlig |
+
+## Geografisk standardisering
+
+### Bedriftsundersøkelsen
+
+Tabellen over estimert mangel på arbeidskraft etter geografi (Tabell 1 i
+undersøkelsen) endret geografisk oppløsning mellom undersøkelsesårene:
+
+- **2021–2023**: Dataene rapporteres direkte på **Nav-regionnivå** (tolv
+  regioner, f.eks. «Øst-Viken», «Vestland»). Disse navnes om til det
+  standardiserte formatet «Nav Øst-Viken» osv. uten noen aggregering.
+
+- **2024–2025**: Dataene rapporteres på **fylkesnivå** (femten individuelle
+  fylker). Disse aggregeres opp til de samme tolv Nav-regionene etter
+  tabellen nedenfor.
+
+### Fylke → Nav-region (2024–2025)
+
+| Fylke(r) i kildedata | Nav-region |
+|---|---|
+| Østfold, Akershus | Nav Øst-Viken |
+| Oslo | Nav Oslo |
+| Innlandet | Nav Innlandet |
+| Buskerud | Nav Vest-Viken |
+| Vestfold, Telemark | Nav Vestfold og Telemark |
+| Agder | Nav Agder |
+| Rogaland | Nav Rogaland |
+| Vestland | Nav Vestland |
+| Møre og Romsdal | Nav Møre og Romsdal |
+| Trøndelag | Nav Trøndelag |
+| Nordland | Nav Nordland |
+| Troms, Finnmark | Nav Troms og Finnmark |
+
+### Aggregeringsmetode og forutsetninger
+
+Når to eller flere fylker slås sammen til én Nav-region, behandles variablene
+ulikt avhengig av målenivå:
+
+**Antallsvariabler** (summeres):
+
+| Variabel | Beskrivelse |
+|---|---|
+| `mangel_antall` | Estimert antall personer med mangel |
+| `ki_nedre` | Nedre grense for konfidensintervall |
+| `ki_ovre` | Øvre grense for konfidensintervall |
+
+Summering er eksakt: det totale mangelestimatet for en Nav-region er summen
+av mangelestimatene for de inngående fylkene. Det samme gjelder
+konfidensintervallgrensene. Dette er en forenkling – grensene for en sum av
+uavhengige estimater burde strengt tatt beregnes via kvadratisk sammensetting
+av standardfeil. Fordi absolutte mangeltall brukes deskriptivt og ikke til
+hypotesetesting, vurderes forenklingen som akseptabel.
+
+**Ratevariabler** (vektet gjennomsnitt):
+
+| Variabel | Beskrivelse |
+|---|---|
+| `stramhetsindikator` | Andel virksomheter med mangel (%) |
+| `andel_alvorlige_rekrutteringsproblemer_pst` | Andel virksomheter med alvorlige rekrutteringsproblemer (%) |
+
+Ratevariabler aggregeres som et **vektet gjennomsnitt** der vekten er
+`mangel_antall` for hvert fylke:
+
+$$
+\bar{r}_{\text{region}} = \frac{\sum_{f \in \text{region}} \text{mangel\_antall}_f \cdot r_f}{\sum_{f \in \text{region}} \text{mangel\_antall}_f}
+$$
+
+Forutsetningen er at vekting med estimert mangel gir en bedre
+regionrepresentasjon enn et enkelt gjennomsnitt, fordi fylker med høyere
+arbeidsstyrke bidrar mer til den regionale raten. Dersom `mangel_antall` er
+null eller mangler for alle fylkene i en gruppe, faller metoden tilbake til et
+uvektet gjennomsnitt.
+
+### NAVs arbeidsindikator
+
+Indikatordata hentes allerede på Nav-regionnivå (`ORG_NIVAA = 2`) og krever
+ingen geografisk aggregering.
+
+## Tidsmessig sammenstilling
+
+Bedriftsundersøkelsen gjennomføres om våren med ulik referansemåned per år.
+Indikatordata hentes for den tilsvarende måneden slik at de to kildene
+beskriver samme tidspunkt:
+
+| Undersøkelsesår | Referansemåned |
+|---|---|
+| 2021 | Februar |
+| 2022 | April |
+| 2023 | April |
+| 2024 | Mars |
+| 2025 | Mars |
+
+## Sammenslåing
+
+De to standardiserte tabellene slås sammen med en ytre kobling
+(*outer join*) på `aar` og `nav_region`. En ytre kobling er valgt for å
+bevare rader der én kilde mangler data for en gitt region og et gitt år,
+slik at eventuelle hull i dekningen er synlige i analysedatasettet.
+
+Det endelige datasettet lagres som `data/processed/sammenliknet_fylke.csv`.

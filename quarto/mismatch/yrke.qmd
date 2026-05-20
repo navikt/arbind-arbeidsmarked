@@ -1,0 +1,242 @@
+---
+title: "Kompetansemismatch og indikatorer"
+subtitle: "Sammenheng mellom yrkesvis tilbud/etterspørsel og nasjonale indikatorutfall"
+execute:
+  echo: false
+  warning: false
+---
+
+```{python}
+import pandas as pd
+```
+
+# Data
+
+## Mismatch i arbeidsmarkedet
+
+Bedriftsundersøkelsen rapporterer for 14 yrkesgrupper^[«Ingen yrkesbakgrunn
+eller uoppgitt» ekskluderes da den mangler et etterspørselsmotstykke.]
+estimert **mangel** på arbeidskraft (etterspørsel) og antall **ledige og på
+tiltak** (tilbud). Forholdet mellom disse definerer stramhetsratioen per
+yrkesgruppe:
+
+$$
+\tau_i = \frac{\text{mangel}_i}{\text{ledige og tiltak}_i}
+$$
+
+Når $\tau > 1$ er det flere ubesatte stillinger enn tilgjengelige arbeidssøkere
+i yrkesgruppen — en strukturell mangel. Når $\tau < 1$ finnes det et overskudd
+av ledige.
+
+@fig-stramhet-yrke viser stramhetsratioen for alle yrkesgrupper over
+undersøkelsesperioden.
+
+![Stramhetsratio per yrkesgruppe 2021–2025. Røde verdier indikerer mangel
+(τ > 1), grønne verdier indikerer overskudd av
+ledige.](figurer/stramhet_per_yrke.png){#fig-stramhet-yrke}
+
+Helse, pleie og omsorg har gjennomgående høyest stramhet ($\tau > 2$), mens
+kontorarbeid og butikk/salg har vedvarende overskudd. Dette mønsteret
+innebærer at den samlede ledigheten ikke uten videre kan absorberes av
+stillinger som er vanskelige å besette — det finnes en strukturell
+kompetansemismatch.
+
+## Mismatch-mål
+
+Vi kvantifiserer mismatchen med tre komplementære tilnærminger — Jackman–Roper-indeksen,
+Cobb–Douglas-indeksen (med ulike elastisiteter) og mismatch-ledighetsandelen:
+
+```{python}
+#| label: tbl-mismatch
+#| tbl-cap: "Mismatch-mål per undersøkelsesår"
+df = pd.read_csv("tabeller/mismatch_maal.csv")
+display_cols = {
+    "aar": "År",
+    "mismatch_indeks": "JR-indeks (M)",
+    "mismatch_indeks_cd_30": "CD (α=0.3)",
+    "mismatch_indeks_cd_50": "CD (α=0.5)",
+    "mismatch_indeks_cd_70": "CD (α=0.7)",
+    "stramhetsratio": "Stramhetsratio (τ)",
+    "mismatch_ledighet_andel": "Andel mismatch-ledighet",
+    "total_mangel": "Total mangel",
+    "total_ledige": "Totalt ledige",
+}
+df[list(display_cols.keys())].rename(columns=display_cols)
+```
+
+**Jackman–Roper mismatch-indeks** ($M$) summerer absolutte avvik mellom
+etterspørsels- og tilbudsandeler på tvers av yrker:
+
+$$
+M_t = \frac{1}{2} \sum_{i} \left| \frac{v_{it}}{V_t} - \frac{u_{it}}{U_t} \right|
+$$
+
+$M = 0$ betyr perfekt samsvar mellom yrkesfordelingen av mangel og ledige;
+$M = 1$ betyr fullstendig mismatch.
+
+**Cobb–Douglas mismatch-indeks** ($M^{CD}$) gir et alternativt mål som
+vekter etterspørsels- og tilbudsandeler med en elastisitetsparameter $\alpha$:
+
+$$
+M^{CD}_t(\alpha) = 1 - \sum_{i} \left( \frac{v_{it}}{V_t} \right)^\alpha \left( \frac{u_{it}}{U_t} \right)^{1-\alpha}
+$$
+
+Når $\alpha$ er lav ($\alpha = 0.3$) vektes tilbudsfordelingen tyngre, mens
+høy $\alpha$ ($\alpha = 0.7$) gir mer vekt til etterspørselsfordelingen.
+Også her betyr $M^{CD} = 0$ perfekt samsvar og $M^{CD} = 1$ fullstendig mismatch.
+
+**Andel mismatch-ledighet** angir hvor stor del av de ledige som ikke kan
+matche tilgjengelige mangelstillinger.
+
+@fig-mismatch-indeks viser utviklingen i alle tre mål over tid.
+
+![Mismatch-mål 2021–2025. Mismatch-indeksen var klart høyest i 2021
+(pandemieffekter) og lavest i 2022–2023 da arbeidsmarkedet var strammest.
+](figurer/mismatch_indeks.png){#fig-mismatch-indeks}
+
+## Nasjonal indikatordata
+
+Indikatordata er hentet nasjonalt (org-nivå 1) med månedlig oppløsning fra
+oktober 2020 til september 2025. Vi bruker åtte utfallsmål:
+
+| Variabel | Beskrivelse |
+|---|---|
+| `faktisk_jobb3` / `faktisk_jobb12` | Andel i jobb etter 3/12 måneder (%) |
+| `indikator_jobb3` / `indikator_jobb12` | Avvik fra forventet jobb (pp) |
+| `faktisk_atid3` / `faktisk_atid12` | Gj.sn. ukentlige arbeidstimer 3/12 mnd (t/uke) |
+| `indikator_atid3` / `indikator_atid12` | Avvik fra forventet arbeidstid (t/uke) |
+
+: Utfallsvariabler fra nasjonale indikatorer {#tbl-utfall}
+
+Hvert månedlige observasjon tilknyttes nærmeste undersøkelsesår for
+bedriftsundersøkelsen slik at mismatch-målene virker som en step-funksjon
+over den månedlige tidsserien.
+
+# Analyse
+
+## Korrelasjon: Mismatch og årsgjennomsnitt
+
+@fig-scatter-faktisk og @fig-scatter-indikator viser spredningsplott av
+mismatch-indeksen mot årsgjennomsnitt av henholdsvis faktiske verdier og
+indikatoravvik.
+
+![Mismatch-indeks vs. faktiske årsgjennomsnitt. Hvert punkt er et
+undersøkelsesår.](figurer/scatter_mismatch_faktisk.png){#fig-scatter-faktisk}
+
+![Mismatch-indeks vs. indikatoravvik (fra forventet).
+](figurer/scatter_mismatch_indikator.png){#fig-scatter-indikator}
+
+```{python}
+#| label: tbl-korr
+#| tbl-cap: "Korrelasjon mellom mismatch-mål og årsgjennomsnitt av indikatorer (Pearson og Spearman)"
+df = pd.read_csv("tabeller/korrelasjon.csv")
+df[
+    ["mismatch_label", "utfall_label", "indikator_type_label", "r_pearson", "p_pearson", "r_spearman", "p_spearman", "n"]
+].rename(columns={
+    "mismatch_label": "Mismatch-mål",
+    "utfall_label": "Utfall",
+    "indikator_type_label": "Type",
+    "r_pearson": "r (Pearson)",
+    "p_pearson": "p (Pearson)",
+    "r_spearman": "r (Spearman)",
+    "p_spearman": "p (Spearman)",
+    "n": "n",
+})
+```
+
+Alle korrelasjoner for Jackman–Roper-indeksen er sterkt positive: høyere mismatch sammenfaller med
+*bedre* indikatorutfall. Cobb–Douglas-indeksene viser samme mønster, men med
+varierende styrke avhengig av elastisitetsparameteren $\alpha$. Dette kan
+virke kontraintuitivt, men reflekterer at mismatch-indeksene var høyest i
+2021 — da arbeidsmarkedet var i sterk oppgang etter pandemien og
+indikatorverdiene var uvanlig høye. Med kun 4–5 observasjoner må
+korrelasjonene tolkes med forsiktighet.
+
+## Visuell tidsserie
+
+@fig-ts-faktisk og @fig-ts-indikator viser månedlige indikatorer sammen
+med mismatch-indeksen som stiplet step-funksjon.
+
+![Månedlige faktiske verdier med mismatch-indeks (rød stiplet).
+](figurer/tidsserie_faktisk.png){#fig-ts-faktisk}
+
+![Månedlige indikatoravvik med mismatch-indeks (rød stiplet).
+](figurer/tidsserie_indikator.png){#fig-ts-indikator}
+
+Figurene viser at perioder med høy mismatch (2021, 2025) også er perioder
+med tydelige skift i indikatorverdiene, men kausalretningen er uklar:
+mismatch, total etterspørsel og konjunkturbevegelser samvarierer tett.
+
+## Regresjonsanalyse
+
+For å kontrollere for sesongvariasjoner estimerer vi en OLS-modell:
+
+$$
+y_t = \alpha + \beta \cdot M_t + \sum_{m=2}^{12} \gamma_m \cdot \mathbf{1}_{[\text{måned}_t = m]} + \varepsilon_t
+$$
+
+der $y_t$ er månedlig indikatorverdi, $M_t$ er mismatch-indeksen (step),
+og måned-dummyer absorberer sesongeffekter. Standardfeil beregnes med
+**Newey–West**-korreksjon for autokorrelasjon.
+
+```{python}
+#| label: tbl-reg
+#| tbl-cap: "OLS-regresjon: mismatch-mål → indikatorverdi (med sesongkontroll og Newey–West SE)"
+df = pd.read_csv("tabeller/regresjon.csv")
+df[
+    ["mismatch_label", "utfall_label", "indikator_type_label", "beta_mismatch", "se_newey_west", "t_stat", "p_verdi", "r2_adj", "n"]
+].rename(columns={
+    "mismatch_label": "Mismatch-mål",
+    "utfall_label": "Utfall",
+    "indikator_type_label": "Type",
+    "beta_mismatch": "β (mismatch)",
+    "se_newey_west": "SE (NW)",
+    "t_stat": "t",
+    "p_verdi": "p",
+    "r2_adj": "R² adj.",
+    "n": "n",
+})
+```
+
+Alle koeffisienter for Jackman–Roper-indeksen er positive og statistisk
+signifikante. Cobb–Douglas-indeksene bekrefter dette mønsteret på tvers av
+elastisitetsparametrene. For eksempel tyder $\hat{\beta} = 5.2$ for
+jobbindikator 3 mnd (JR-indeks) på at en økning i mismatch-indeksen på 0.1
+er assosiert med 0.52 prosentpoeng høyere indikatorverdi (avvik fra forventet).
+
+# Diskusjon
+
+## Tolkning
+
+Den sterke positive sammenhengen mellom mismatch-indeksene og indikatorutfall er
+overraskende dersom man forventer at kompetansemismatch bremser arbeidsmarkedsutfall.
+Resultatet er konsistent på tvers av både Jackman–Roper- og Cobb–Douglas-målene,
+uavhengig av valgt elastisitet $\alpha$.
+
+Forklaringen ligger i at mismatch-indeksene i denne perioden primært reflekterer
+**konjunkturtilstanden**: 2021 hadde høy mismatch fordi pandemiens ettervirkninger
+skapte store forskjeller mellom yrker — men dette var også en periode med
+eksepsjonelt sterkt arbeidsmarked. Mismatch-indeksene fanger dermed opp
+etterspørselssjokket mer enn den strukturelle kompetanseubalansen.
+
+## Begrensninger
+
+- **Kort tidsserie**: 5 undersøkelsesår gir begrenset mulighet til å skille
+  konjunktureffekter fra strukturell mismatch.
+- **Step-funksjon**: Mismatch holdes konstant mellom undersøkelser —
+  faktisk mismatch varierer innen året.
+- **Kausalitet**: Regresjonsresultatene viser assosiasjon, ikke
+  kausalsammenheng. Både mismatch og indikatorutfall drives av
+  underliggende konjunkturfaktorer.
+- **Nasjonal aggregering**: Regional variasjon i kompetansemismatch
+  kan skjule heterogene effekter.
+
+## Videre arbeid
+
+For å isolere mismatch-effekten fra konjunktur kan fremtidige analyser:
+
+1. Bruke SSB-data for regional yrkesfordeling av ledige og konstruere et
+   regionnivå mismatch-mål som varierer i tverrsnitt.
+2. Utnytte lengre tidsserier når flere undersøkelsesår foreligger.
+3. Bruke instrumentvariabler eller andre identifikasjonsstrategier som
+   separerer etterspørselssjokk fra strukturell mismatch.

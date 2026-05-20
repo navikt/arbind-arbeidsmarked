@@ -1,0 +1,49 @@
+utvalg,ekskludert_aar,utfall,utfall_label,indikator_type,indikator_type_label,r_pearson,p_pearson,r_spearman,p_spearman,n
+Alle,,jobb3,Jobb 3 mnd,faktisk,Faktisk,0.981,0.003,0.7,0.1881,5
+Alle,,jobb3,Jobb 3 mnd,indikator,Indikator (avvik),0.865,0.0581,0.4,0.5046,5
+Alle,,jobb12,Jobb 12 mnd,faktisk,Faktisk,0.998,0.0025,0.8,0.2,4
+Alle,,jobb12,Jobb 12 mnd,indikator,Indikator (avvik),0.982,0.0183,0.4,0.6,4
+Alle,,atid3,Arbeidstid 3 mnd,faktisk,Faktisk,0.983,0.0027,0.7,0.1881,5
+Alle,,atid3,Arbeidstid 3 mnd,indikator,Indikator (avvik),0.897,0.039,0.4,0.5046,5
+Alle,,atid12,Arbeidstid 12 mnd,faktisk,Faktisk,0.996,0.0041,0.8,0.2,4
+Alle,,atid12,Arbeidstid 12 mnd,indikator,Indikator (avvik),0.989,0.0113,0.4,0.6,4
+Uten 2021,2021.0,jobb3,Jobb 3 mnd,faktisk,Faktisk,0.222,0.7785,0.4,0.6,4
+Uten 2021,2021.0,jobb3,Jobb 3 mnd,indikator,Indikator (avvik),-0.535,0.4651,-0.2,0.8,4
+Uten 2021,2021.0,jobb12,Jobb 12 mnd,faktisk,Faktisk,0.663,0.5382,0.5,0.6667,3
+Uten 2021,2021.0,jobb12,Jobb 12 mnd,indikator,Indikator (avvik),-0.355,0.7688,-0.5,0.6667,3
+Uten 2021,2021.0,atid3,Arbeidstid 3 mnd,faktisk,Faktisk,0.372,0.6278,0.4,0.6,4
+Uten 2021,2021.0,atid3,Arbeidstid 3 mnd,indikator,Indikator (avvik),-0.471,0.529,-0.2,0.8,4
+Uten 2021,2021.0,atid12,Arbeidstid 12 mnd,faktisk,Faktisk,0.561,0.6211,0.5,0.6667,3
+Uten 2021,2021.0,atid12,Arbeidstid 12 mnd,indikator,Indikator (avvik),-0.021,0.9865,-0.5,0.6667,3
+Uten 2022,2022.0,jobb3,Jobb 3 mnd,faktisk,Faktisk,0.992,0.0075,1.0,0.0,4
+Uten 2022,2022.0,jobb3,Jobb 3 mnd,indikator,Indikator (avvik),0.887,0.113,0.4,0.6,4
+Uten 2022,2022.0,jobb12,Jobb 12 mnd,faktisk,Faktisk,0.997,0.0459,1.0,0.0,3
+Uten 2022,2022.0,jobb12,Jobb 12 mnd,indikator,Indikator (avvik),0.983,0.1162,0.5,0.6667,3
+Uten 2022,2022.0,atid3,Arbeidstid 3 mnd,faktisk,Faktisk,0.996,0.0041,1.0,0.0,4
+Uten 2022,2022.0,atid3,Arbeidstid 3 mnd,indikator,Indikator (avvik),0.909,0.0915,0.4,0.6,4
+Uten 2022,2022.0,atid12,Arbeidstid 12 mnd,faktisk,Faktisk,0.998,0.0416,1.0,0.0,3
+Uten 2022,2022.0,atid12,Arbeidstid 12 mnd,indikator,Indikator (avvik),0.991,0.085,0.5,0.6667,3
+Uten 2023,2023.0,jobb3,Jobb 3 mnd,faktisk,Faktisk,0.979,0.0206,0.4,0.6,4
+Uten 2023,2023.0,jobb3,Jobb 3 mnd,indikator,Indikator (avvik),0.859,0.1411,0.4,0.6,4
+Uten 2023,2023.0,jobb12,Jobb 12 mnd,faktisk,Faktisk,0.999,0.0337,0.5,0.6667,3
+Uten 2023,2023.0,jobb12,Jobb 12 mnd,indikator,Indikator (avvik),0.987,0.1033,0.5,0.6667,3
+Uten 2023,2023.0,atid3,Arbeidstid 3 mnd,faktisk,Faktisk,0.98,0.0197,0.4,0.6,4
+Uten 2023,2023.0,atid3,Arbeidstid 3 mnd,indikator,Indikator (avvik),0.891,0.1094,0.4,0.6,4
+Uten 2023,2023.0,atid12,Arbeidstid 12 mnd,faktisk,Faktisk,0.995,0.0618,0.5,0.6667,3
+Uten 2023,2023.0,atid12,Arbeidstid 12 mnd,indikator,Indikator (avvik),0.99,0.0907,0.5,0.6667,3
+Uten 2024,2024.0,jobb3,Jobb 3 mnd,faktisk,Faktisk,0.981,0.0192,0.8,0.2,4
+Uten 2024,2024.0,jobb3,Jobb 3 mnd,indikator,Indikator (avvik),0.883,0.1168,0.4,0.6,4
+Uten 2024,2024.0,jobb12,Jobb 12 mnd,faktisk,Faktisk,1.0,0.0123,1.0,0.0,3
+Uten 2024,2024.0,jobb12,Jobb 12 mnd,indikator,Indikator (avvik),1.0,0.0124,1.0,0.0,3
+Uten 2024,2024.0,atid3,Arbeidstid 3 mnd,faktisk,Faktisk,0.983,0.0171,0.8,0.2,4
+Uten 2024,2024.0,atid3,Arbeidstid 3 mnd,indikator,Indikator (avvik),0.915,0.0847,0.4,0.6,4
+Uten 2024,2024.0,atid12,Arbeidstid 12 mnd,faktisk,Faktisk,1.0,0.0199,1.0,0.0,3
+Uten 2024,2024.0,atid12,Arbeidstid 12 mnd,indikator,Indikator (avvik),1.0,0.0059,1.0,0.0,3
+Uten 2025,2025.0,jobb3,Jobb 3 mnd,faktisk,Faktisk,0.993,0.0074,0.8,0.2,4
+Uten 2025,2025.0,jobb3,Jobb 3 mnd,indikator,Indikator (avvik),0.994,0.0059,1.0,0.0,4
+Uten 2025,2025.0,jobb12,Jobb 12 mnd,faktisk,Faktisk,0.998,0.0025,0.8,0.2,4
+Uten 2025,2025.0,jobb12,Jobb 12 mnd,indikator,Indikator (avvik),0.982,0.0183,0.4,0.6,4
+Uten 2025,2025.0,atid3,Arbeidstid 3 mnd,faktisk,Faktisk,0.99,0.0096,0.8,0.2,4
+Uten 2025,2025.0,atid3,Arbeidstid 3 mnd,indikator,Indikator (avvik),0.995,0.0048,1.0,0.0,4
+Uten 2025,2025.0,atid12,Arbeidstid 12 mnd,faktisk,Faktisk,0.996,0.0041,0.8,0.2,4
+Uten 2025,2025.0,atid12,Arbeidstid 12 mnd,indikator,Indikator (avvik),0.989,0.0113,0.4,0.6,4

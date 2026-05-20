@@ -1,31 +1,63 @@
 ---
-title: "Oversikt"
+title: "Navs arbeidsindikator og arbeidsmarkedet"
 ---
 
-Denne boken samler analyser av sammenhengen mellom **Navs bedriftsundersøkelse**
-og **Navs arbeidsindikator** på Nav-regionsnivå, 2021–2025.
+Navs arbeidsindikator er konstruert for å måle resultatene av Navs arbeid
+uavhengig av to faktorer Nav ikke kan påvirke: **brukersammensetningen** på
+de enkelte kontorene og **utviklingen i arbeidsmarkedet**. Den første faktoren
+håndteres ved at modellen kontrollerer for individuelle kjennetegn. Den andre
+faktoren — arbeidsmarkedet — er mer krevende å kontrollere for, og er
+utgangspunktet for denne analysen.
 
-## Struktur
+**Spørsmålet vi stiller er: Kontrollerer indikatormodellen tilstrekkelig for
+arbeidsmarkedet?**
 
-**[Bedriftsundersøkelsen](bedrift/rapport.qmd)** presenterer
-arbeidsmarkedsstramhet, mangel på arbeidskraft og regional variasjon fra
-NAVs bedriftsundersøkelse 2021–2025. Denne delen er felles for begge
-indikatoranalysene.
+Dersom indikatorene ikke er tilstrekkelig renset for arbeidsmarkedseffekter,
+vil de reflektere konjunktursvingninger og strukturelle trekk ved
+arbeidsmarkedet snarere enn Navs egen innsats. Dette kan gi et misvisende
+bilde av om Nav gjør det bedre eller dårligere over tid, og av om noen
+regioner eller kontor presterer bedre enn andre.
 
-**[Jobbindikator](jobb/rapport.qmd)** undersøker om regioner med høyere
-arbeidsmarkedsstramhet plasserer en større andel av registrerte arbeidssøkere
-i jobb (3 og 12 måneder etter registrering).
+## Hva analyserer vi?
 
-**[Arbeidstidsindikator](atid/rapport.qmd)** undersøker om stramhet i
-arbeidsmarkedet fører til at registrerte arbeidssøkere arbeider flere
-gjennomsnittlige timer per uke de 3 og 12 månedene etter at de er registert.
+Vi belyser spørsmålet fra to vinkler:
+
+**[Arbeidsmarkedsstramhet](stramhet/jobb/rapport.qmd)** — Vi undersøker om
+regioner med strammere arbeidsmarked oppnår
+bedre indikatorresultater enn regioner med løsere arbeidsmarked. Dersom
+arbeidsmarkedskontrollene er tilstrekkelige, bør indikatoravvikene (den
+uforklarte delen) ikke samvariere med stramheten.
+
+**[Kompetansemismatch](mismatch/yrke.qmd)** — Vi undersøker om strukturell
+ubalanse mellom hvilke kompetanser bedriftene etterspør og hvilke kompetanser
+de ledige besitter, påvirker indikatorene. Mismatch inngår ikke i
+indikatormodellens kontroller, og en sammenheng kan tyde på et hull i
+kontrollen.
+
+Analysen dekker ikke (ennå) mulige *forbedringer* av indikatormodellen —
+dette er tematisert som videre arbeid i [konklusjonen](konklusjon.qmd).
 
 ## Data
 
 | Kilde | Periode | Geografisk nivå | Frekvens |
 |---|---|---|---|
-| Bedriftsundersøkelsen | 2021–2025 | 12 Nav-regioner | Årlig (vår) |
-| Navs arbeidsindikator | 2021–2025 | 12 Nav-regioner | Månedlig |
+| NAVs bedriftsundersøkelse | 2021–2026 | 12 Nav-regioner | Årlig (vår) |
+| SSB tabell 11587 (ledige stillinger) | 2016– | Næring (NACE) | Kvartalsvis |
+| SSB tabell 11154 (sysselsatte) | 2016– | Næring (NACE) | Kvartalsvis |
+| Navs arbeidsindikator | 2021–2025 | 12 Nav-regioner / Nasjolat | Månedlig |
 
-Begge datakildene er sammenstilt til samme geografiske enhet (Nav-region) og
-samme tidspunkt (undersøkelsens referansemåned per år).
+## Struktur
+
+1. **[Datagrunnlag](datagrunnlag/rapport.qmd)** — presenterer
+   bedriftsundersøkelsen og SSB-dataene som brukes i analysene.
+
+2. **[Stramhet og indikatorer](stramhet/jobb/rapport.qmd)** — analyserer
+   sammenhengen mellom aggregert arbeidsmarkedsstramhet og indikatorutfall,
+   for jobbindikator og arbeidstidsindikator separat.
+
+3. **[Kompetansemismatch](mismatch/yrke.qmd)** — analyserer strukturell
+   mismatch mellom etterspørsel og tilbud av kompetanse, og sammenhengen med
+   indikatorene, inkludert sektordimensjonen fra SSB og en sensitivitetsanalyse.
+
+4. **[Konklusjon](konklusjon.qmd)** — oppsummerer hva vi vet, hva vi ikke vet,
+   og skisserer videre arbeid.

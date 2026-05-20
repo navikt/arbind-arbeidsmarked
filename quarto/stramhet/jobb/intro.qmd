@@ -1,0 +1,8 @@
+---
+title: "Jobbindikator og stramhet"
+---
+
+Denne delen analyserer sammenhengen mellom arbeidsmarkedsstramhet
+(fra bedriftsundersøkelsen) og **jobbindikatorene** — og vurderer om
+indikatormodellens arbeidsmarkedskontroller er tilstrekkelige for å
+rense bort denne sammenhengen.

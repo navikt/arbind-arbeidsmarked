@@ -1,0 +1,251 @@
+---
+title: "Kontrollerer indikatoren tilstrekkelig for arbeidsmarkedet?"
+subtitle: "Sensitivitetsanalyse med leave-one-out og jackknife"
+execute:
+  echo: false
+  warning: false
+---
+
+```{python}
+import pandas as pd
+```
+
+# Motivasjon
+
+Navs arbeidsindikator måler avviket mellom faktisk og *forventet*
+arbeidsdeltagelse, der forventningen beregnes med en regresjonsmodell som
+kontrollerer for brukeregenskaper og arbeidsmarkedsforhold[^dok].
+Dersom modellen kontrollerer tilstrekkelig
+for arbeidsmarkedet, bør indikatoravvikene — det modellen *ikke* forklarer
+— være uavhengige av arbeidsmarkedsforholdene.
+
+## Hva kontrollerer indikatormodellen for?
+
+Ifølge dokumentasjonsrapporten[^dok] kontrollerer
+modellen for arbeidsmarkedet gjennom:
+
+1. **Nye arbeidssøkere som andel av arbeidsstyrken** i BA-regionen — et
+   mål på tilstrømning til ledighet i perioden etter måletidspunktet.
+2. **Forventet utvikling i sysselsetting** i den lokale
+   arbeidsmarkedsregionen, basert på en shift-share-tilnærming (nasjonal
+   næringsutvikling × lokal næringssammensetning).
+
+Variabel (2) ble imidlertid **fjernet fra modellen** i april 2025 på
+grunn av datakvalitetsproblemer og vanskelig tolkbare koeffisienter
+(vedlegg D i dokumentasjonsrapporten[^dok]). Dokumentasjonen
+noterer eksplisitt at «det skal gjøres et arbeid for å vurdere om
+arbeidsmarkedet er godt nok ivaretatt i modellen».
+
+Den gjeldende modellen har dermed **kun én arbeidsmarkedsvariabel** —
+tilstrømning til ledighet — og kontrollerer ikke for verken
+arbeidsmarkedsstramhet, nærings- eller yrkesmismatch.
+
+## Hva tester vi?
+
+Dersom indikatormodellen kontrollerer tilstrekkelig for arbeidsmarkedet,
+bør mismatch-indeksen — en egenskap ved arbeidsmarkedet som ikke inngår i
+modellen — *ikke* samvariere systematisk med indikatoravvikene. Motsatt: en
+sterk sammenheng mellom mismatch og indikatoravvik tyder på at modellen
+*ikke* fanger opp all relevant arbeidsmarkedsvariasjon.
+
+Hovedanalysen finner sterke korrelasjoner ($r > 0.85$) og signifikante
+regresjonskoeffisienter, men bygger på kun fem datapunkter (2021–2025).
+Året 2021 skiller seg ut med **både høyest mismatch-indeks** ($M = 0.51$)
+**og høyeste indikatorverdier** — en konsekvens av koronapandemiens
+ettervirkninger. Med så få observasjoner kan denne ene uteliggeren drive
+hele resultatet. Vi undersøker dette med to komplementære metoder:
+
+1. **Leave-one-out (LOO)**: Fjern ett år om gangen og gjenta korrelasjon
+   og regresjon for å identifisere hvilke år som driver resultatene.
+2. **Jackknife**: Beregn bias-korrigerte korrelasjonsestimater med
+   standardfeil og konfidensintervall basert på alle LOO-utvalgene.
+
+# Leave-one-out korrelasjon
+
+@fig-loo-korr viser Pearson-korrelasjonen mellom mismatch-indeksen og
+faktiske indikatorverdier for hvert LOO-utvalg.
+
+![Leave-one-out sensitivitet for korrelasjon mellom mismatch-indeks og
+faktiske verdier. Eksklusjon av 2021 (rød ruter) endrer resultatet
+dramatisk, mens fjerning av ethvert annet år har minimal
+effekt.](figurer/loo_korrelasjon.png){#fig-loo-korr}
+
+```{python}
+#| label: tbl-loo-korr
+#| tbl-cap: "Leave-one-out korrelasjoner: mismatch-indeks vs. årsgjennomsnitt (Pearson r)"
+df = pd.read_csv("tabeller/loo_korrelasjon.csv")
+sub = df[df["indikator_type"] == "faktisk"][
+    ["utvalg", "utfall_label", "r_pearson", "p_pearson", "n"]
+].rename(columns={
+    "utvalg": "Utvalg",
+    "utfall_label": "Utfall",
+    "r_pearson": "r (Pearson)",
+    "p_pearson": "p",
+    "n": "n",
+})
+sub
+```
+
+Uten 2021 kollapser korrelasjonene fra $r > 0.98$ til $r \approx 0.2{-}0.7$,
+og ingen er statistisk signifikante. Alle andre år kan fjernes uten at
+konklusjonen endres vesentlig. Det betyr at den tilsynelatende sterke
+sammenhengen mellom mismatch og faktiske utfall nesten utelukkende drives av
+det ekstreme panemiåret.
+
+For **indikatoravvikene** — det den forventede verdien fra modellen
+*ikke* forklarer — er bildet enda tydeligere:
+
+```{python}
+#| label: tbl-loo-korr-ind
+#| tbl-cap: "Leave-one-out korrelasjoner: mismatch-indeks vs. indikatoravvik (Pearson r)"
+df = pd.read_csv("tabeller/loo_korrelasjon.csv")
+sub = df[df["indikator_type"] == "indikator"][
+    ["utvalg", "utfall_label", "r_pearson", "p_pearson", "n"]
+].rename(columns={
+    "utvalg": "Utvalg",
+    "utfall_label": "Utfall",
+    "r_pearson": "r (Pearson)",
+    "p_pearson": "p",
+    "n": "n",
+})
+sub
+```
+
+Uten 2021 snur korrelasjonene mellom mismatch og indikatoravvik
+*fortegn* — fra sterkt positive til svakt negative. Hadde
+indikatormodellen kontrollert tilstrekkelig for arbeidsmarkedet, burde
+verken fullt utvalg eller utvalget uten 2021 vist noen systematisk
+sammenheng. At korrelasjonen er sterk *med* 2021 og forsvinner *uten*,
+tyder på at modellen ikke fanger opp den ekstreme
+arbeidsmarkedssituasjonen som preget panemiåret.
+
+# Leave-one-out regresjon
+
+@fig-loo-reg viser regresjonskoeffisientene ($\hat{\beta}$) med Newey–West
+standardfeil for hvert LOO-utvalg. Her er det indikatoravvikene som er
+utfallsmålet — altså den delen av variansen som indikatormodellen ikke
+forklarer.
+
+![Leave-one-out sensitivitet for regresjonskoeffisienten β (mismatch →
+indikatoravvik). Feilstolper viser ±1.96 Newey–West SE. Uten 2021 faller β
+markant og er i flere tilfeller ikke lenger statistisk
+signifikant.](figurer/loo_regresjon.png){#fig-loo-reg}
+
+```{python}
+#| label: tbl-loo-reg
+#| tbl-cap: "Leave-one-out regresjon: β (mismatch → indikatoravvik) med Newey–West SE"
+df = pd.read_csv("tabeller/loo_regresjon.csv")
+sub = df[df["indikator_type"] == "indikator"][
+    ["utvalg", "utfall_label", "beta_mismatch", "se_newey_west", "t_stat", "p_verdi", "r2_adj", "n"]
+].rename(columns={
+    "utvalg": "Utvalg",
+    "utfall_label": "Utfall",
+    "beta_mismatch": "β",
+    "se_newey_west": "SE (NW)",
+    "t_stat": "t",
+    "p_verdi": "p",
+    "r2_adj": "R² adj.",
+    "n": "n",
+})
+sub
+```
+
+Når 2021 fjernes, faller regresjonskoeffisientene vesentlig. At mismatch
+predikerer indikatoravviket — det modellen *ikke* fanger opp — antyder
+at det er residual arbeidsmarkedsvariasjon i indikatoren som ikke er
+kontrollert bort. Men denne prediksjonsevnen er helt avhengig av det
+ekstreme året 2021.
+
+# Jackknife-estimater
+
+Jackknife-metoden bruker alle LOO-utvalgene til å beregne et bias-korrigert
+estimat av korrelasjonen med tilhørende standardfeil og 95 %
+konfidensintervall.
+
+@fig-jackknife viser jackknife-korrelasjonene for alle utfall og
+indikatortyper.
+
+![Jackknife-korrelasjoner med 95 % konfidensintervall. Blå sirkel =
+jackknife-estimat, grå firkant = fullt utvalg, rød ruter = uten 2021.
+Brede konfidensintervall for indikatoravvik inkluderer null — vi kan ikke
+fastslå at sammenhengen er reell.
+](figurer/jackknife_korrelasjon.png){#fig-jackknife}
+
+```{python}
+#| label: tbl-jackknife
+#| tbl-cap: "Jackknife-estimater for korrelasjon (mismatch-indeks vs. indikatorer)"
+df = pd.read_csv("tabeller/jackknife_korrelasjon.csv")
+df[
+    ["utfall_label", "indikator_type_label", "r_full", "r_jackknife",
+     "se_jackknife", "ki_nedre", "ki_ovre", "r_uten_2021"]
+].rename(columns={
+    "utfall_label": "Utfall",
+    "indikator_type_label": "Type",
+    "r_full": "r (fullt)",
+    "r_jackknife": "r (jackknife)",
+    "se_jackknife": "SE",
+    "ki_nedre": "KI nedre",
+    "ki_ovre": "KI øvre",
+    "r_uten_2021": "r (uten 2021)",
+})
+```
+
+Jackknife-standardfeilene er store ($\text{SE} \approx 0.3{-}1.2$), og
+konfidensintervallene for **indikatoravvik** inkluderer null i alle
+tilfeller. Vi kan dermed ikke statistisk fastslå at mismatch samvarierer
+med den uforklarte delen av indikatoren.
+
+# Diskusjon: Er arbeidsmarkedet godt nok kontrollert for?
+
+Spørsmålet vi stiller er om Navs indikatormodell kontrollerer tilstrekkelig
+for arbeidsmarkedsforholdene. Resultatene gir et sammensatt bilde:
+
+**Argumenter for at kontrollen er utilstrekkelig:**
+
+- Indikatormodellen har per april 2025 kun **én arbeidsmarkedsvariabel**
+  (tilstrømning til ledighet). Den tidligere shift-share-variabelen for
+  lokal sysselsettingsutvikling er fjernet.
+- I hovedanalysen ($n = 5$) samvarierer mismatch-indeksen sterkt med
+  indikatoravvikene ($r > 0.85$). At en arbeidsmarkedsegenskap som ikke
+  inngår i modellen predikerer avvikene, antyder at modellen etterlater
+  arbeidsmarkedsvariasjon i restleddet.
+- Dokumentasjonsrapporten[^dok] erkjenner selv at
+  det gjenstår arbeid med å vurdere «om arbeidsmarkedet er godt nok
+  ivaretatt i modellen» (vedlegg D).
+
+**Argumenter for at vi ikke kan trekke sikre slutninger:**
+
+- Sensitivitetsanalysen viser at resultatene **drives helt av 2021** —
+  et unntaksår preget av pandemien. Uten dette ene datapunktet finner
+  vi ingen signifikant sammenheng.
+- Jackknife-konfidensintervallene for korrelasjonen med indikatoravvik
+  inkluderer null.
+- Den sektorbaserte SSB-analysen (forrige kapittel), som har bedre
+  statistisk kraft ($n \approx 20$ kvartaler), finner ingen signifikant
+  sammenheng mellom sektormismatch og indikatorutfall.
+- Med kun fem årlige observasjoner fra bedriftsundersøkelsen er det
+  umulig å skille strukturell mismatch-effekt fra generell
+  konjunktursamvariasjon.
+
+**Samlet vurdering:**
+
+Datagrunnlaget er for begrenset til å konkludere om indikatormodellen
+kontrollerer tilstrekkelig for arbeidsmarkedet. At 2021 — med pandemiens
+eksepsjonelle arbeidsmarkedssjokk — driver hele den observerte
+sammenhengen, er forenlig med to tolkninger:
+
+1. *Modellen kontrollerer ikke godt nok for ekstreme sjokk*. Pandemien
+   skapte en arbeidsmarkedssituasjon som én tilstrømningsvariabel ikke
+   kan fange opp. At forventet sysselsettingsvariabelen nettopp ble
+   fjernet, forsterker denne bekymringen.
+2. *2021 er en uteligger som ikke bør tillegges vekt*. Pandemien var et
+   engangssjokk som ingen arbeidsmarkedskontroll kan forventes å
+   håndtere. Under mer normale forhold (2022–2025) er det ingen
+   sammenheng mellom mismatch og indikatoravvik, noe som tyder på at
+   modellen fungerer tilfredsstillende i normaltider.
+
+For å avgjøre mellom disse tolkningene trengs lengre tidsserier —
+fortrinnsvis gjennom flere konjunktursykluser — eller alternative
+identifikasjonsstrategier med regional eller sektoriell variasjon.
+
+[^dok]: Kann, I.C. (2025). *Dokumentasjonsrapport: Arbeidsindikator*. Nav. Tilgjengelig fra: <https://bibliotek.nav.no/record/5410>

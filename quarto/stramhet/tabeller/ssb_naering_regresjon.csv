@@ -1,0 +1,121 @@
+utfall,utfall_label,naering_col,naering_label,beta,se,r,p,r2,n
+faktisk_atid12,Faktisk atid 12 mnd,ssb_bergverksdrift_og_utvinning,Bergverksdrift Og Utvinning,-165.7332,35.3956,-0.771,0.0003,0.594,17
+faktisk_atid12,Faktisk atid 12 mnd,ssb_bygge__og_anlegg,Bygge  Og Anlegg,-71.5788,52.6039,-0.331,0.1937,0.11,17
+faktisk_atid12,Faktisk atid 12 mnd,ssb_eiendom_og_tjenesteyting,Eiendom Og Tjenesteyting,-41.9259,31.8652,-0.322,0.208,0.103,17
+faktisk_atid12,Faktisk atid 12 mnd,ssb_elektrisitet_vann_og_renovasjon,Elektrisitet Vann Og Renovasjon,-159.9045,32.5093,-0.786,0.0002,0.617,17
+faktisk_atid12,Faktisk atid 12 mnd,ssb_finans_og_forsikring,Finans Og Forsikring,-103.5778,87.6201,-0.292,0.2556,0.085,17
+faktisk_atid12,Faktisk atid 12 mnd,ssb_helse__og_sosialtjenester,Helse  Og Sosialtjenester,-171.8845,30.6273,-0.823,0.0,0.677,17
+faktisk_atid12,Faktisk atid 12 mnd,ssb_industri,Industri,-228.8438,66.8594,-0.662,0.0038,0.439,17
+faktisk_atid12,Faktisk atid 12 mnd,ssb_informasjon_og_kommunikasjon,Informasjon Og Kommunikasjon,74.18,46.9751,0.378,0.1352,0.143,17
+faktisk_atid12,Faktisk atid 12 mnd,ssb_jordbruk_skogbruk_og_fiske,Jordbruk Skogbruk Og Fiske,23.9535,26.8472,0.224,0.3864,0.05,17
+faktisk_atid12,Faktisk atid 12 mnd,ssb_kultur_og_personlige_tjenester,Kultur Og Personlige Tjenester,-106.4008,48.4676,-0.493,0.0443,0.243,17
+faktisk_atid12,Faktisk atid 12 mnd,ssb_offentlig_administrasjon,Offentlig Administrasjon,-76.7088,73.6905,-0.26,0.3144,0.067,17
+faktisk_atid12,Faktisk atid 12 mnd,ssb_overnatting_og_servering,Overnatting Og Servering,-31.1355,15.4466,-0.462,0.0621,0.213,17
+faktisk_atid12,Faktisk atid 12 mnd,ssb_transport_og_lagring,Transport Og Lagring,-118.3599,30.1738,-0.712,0.0014,0.506,17
+faktisk_atid12,Faktisk atid 12 mnd,ssb_undervisning,Undervisning,-229.743,122.7352,-0.435,0.0809,0.189,17
+faktisk_atid12,Faktisk atid 12 mnd,ssb_varehandel,Varehandel,-88.6029,23.9006,-0.691,0.0021,0.478,17
+faktisk_atid3,Faktisk atid 3 mnd,ssb_bergverksdrift_og_utvinning,Bergverksdrift Og Utvinning,-81.4415,25.8368,-0.596,0.0055,0.356,20
+faktisk_atid3,Faktisk atid 3 mnd,ssb_bygge__og_anlegg,Bygge  Og Anlegg,-23.9788,32.6421,-0.171,0.472,0.029,20
+faktisk_atid3,Faktisk atid 3 mnd,ssb_eiendom_og_tjenesteyting,Eiendom Og Tjenesteyting,-8.3656,19.1819,-0.102,0.6679,0.01,20
+faktisk_atid3,Faktisk atid 3 mnd,ssb_elektrisitet_vann_og_renovasjon,Elektrisitet Vann Og Renovasjon,-89.8768,21.3075,-0.705,0.0005,0.497,20
+faktisk_atid3,Faktisk atid 3 mnd,ssb_finans_og_forsikring,Finans Og Forsikring,-29.646,52.4506,-0.132,0.5789,0.017,20
+faktisk_atid3,Faktisk atid 3 mnd,ssb_helse__og_sosialtjenester,Helse  Og Sosialtjenester,-111.334,21.1948,-0.778,0.0001,0.605,20
+faktisk_atid3,Faktisk atid 3 mnd,ssb_industri,Industri,-120.8356,41.8919,-0.562,0.0099,0.316,20
+faktisk_atid3,Faktisk atid 3 mnd,ssb_informasjon_og_kommunikasjon,Informasjon Og Kommunikasjon,55.6527,22.0679,0.511,0.0213,0.261,20
+faktisk_atid3,Faktisk atid 3 mnd,ssb_jordbruk_skogbruk_og_fiske,Jordbruk Skogbruk Og Fiske,26.2054,15.4307,0.372,0.1067,0.138,20
+faktisk_atid3,Faktisk atid 3 mnd,ssb_kultur_og_personlige_tjenester,Kultur Og Personlige Tjenester,-32.5016,29.5343,-0.251,0.2856,0.063,20
+faktisk_atid3,Faktisk atid 3 mnd,ssb_offentlig_administrasjon,Offentlig Administrasjon,-39.6429,45.7597,-0.2,0.3977,0.04,20
+faktisk_atid3,Faktisk atid 3 mnd,ssb_overnatting_og_servering,Overnatting Og Servering,-12.6245,10.2366,-0.279,0.2333,0.078,20
+faktisk_atid3,Faktisk atid 3 mnd,ssb_transport_og_lagring,Transport Og Lagring,-62.3433,21.1549,-0.57,0.0086,0.325,20
+faktisk_atid3,Faktisk atid 3 mnd,ssb_undervisning,Undervisning,-48.1838,67.1494,-0.167,0.4822,0.028,20
+faktisk_atid3,Faktisk atid 3 mnd,ssb_varehandel,Varehandel,-53.7415,16.4362,-0.61,0.0043,0.373,20
+faktisk_jobb12,Faktisk jobb 12 mnd,ssb_bergverksdrift_og_utvinning,Bergverksdrift Og Utvinning,-619.5738,112.066,-0.819,0.0001,0.671,17
+faktisk_jobb12,Faktisk jobb 12 mnd,ssb_bygge__og_anlegg,Bygge  Og Anlegg,-303.5883,179.7547,-0.4,0.1119,0.16,17
+faktisk_jobb12,Faktisk jobb 12 mnd,ssb_eiendom_og_tjenesteyting,Eiendom Og Tjenesteyting,-187.7035,107.9886,-0.409,0.1027,0.168,17
+faktisk_jobb12,Faktisk jobb 12 mnd,ssb_elektrisitet_vann_og_renovasjon,Elektrisitet Vann Og Renovasjon,-538.7408,121.7005,-0.753,0.0005,0.566,17
+faktisk_jobb12,Faktisk jobb 12 mnd,ssb_finans_og_forsikring,Finans Og Forsikring,-458.2489,299.6975,-0.367,0.1471,0.135,17
+faktisk_jobb12,Faktisk jobb 12 mnd,ssb_helse__og_sosialtjenester,Helse  Og Sosialtjenester,-596.0442,110.8334,-0.811,0.0001,0.658,17
+faktisk_jobb12,Faktisk jobb 12 mnd,ssb_industri,Industri,-899.9933,210.9194,-0.74,0.0007,0.548,17
+faktisk_jobb12,Faktisk jobb 12 mnd,ssb_informasjon_og_kommunikasjon,Informasjon Og Kommunikasjon,209.1884,170.0524,0.303,0.2376,0.092,17
+faktisk_jobb12,Faktisk jobb 12 mnd,ssb_jordbruk_skogbruk_og_fiske,Jordbruk Skogbruk Og Fiske,65.4898,95.4119,0.175,0.5029,0.03,17
+faktisk_jobb12,Faktisk jobb 12 mnd,ssb_kultur_og_personlige_tjenester,Kultur Og Personlige Tjenester,-379.1857,169.7357,-0.5,0.0411,0.25,17
+faktisk_jobb12,Faktisk jobb 12 mnd,ssb_offentlig_administrasjon,Offentlig Administrasjon,-257.861,259.9892,-0.248,0.337,0.062,17
+faktisk_jobb12,Faktisk jobb 12 mnd,ssb_overnatting_og_servering,Overnatting Og Servering,-126.9484,51.7358,-0.535,0.0268,0.286,17
+faktisk_jobb12,Faktisk jobb 12 mnd,ssb_transport_og_lagring,Transport Og Lagring,-413.4978,106.8508,-0.707,0.0015,0.5,17
+faktisk_jobb12,Faktisk jobb 12 mnd,ssb_undervisning,Undervisning,-842.9815,427.2001,-0.454,0.0672,0.206,17
+faktisk_jobb12,Faktisk jobb 12 mnd,ssb_varehandel,Varehandel,-316.461,82.85,-0.702,0.0017,0.493,17
+faktisk_jobb3,Faktisk jobb 3 mnd,ssb_bergverksdrift_og_utvinning,Bergverksdrift Og Utvinning,-238.3271,82.9518,-0.561,0.0101,0.314,20
+faktisk_jobb3,Faktisk jobb 3 mnd,ssb_bygge__og_anlegg,Bygge  Og Anlegg,-55.5408,102.2752,-0.127,0.5938,0.016,20
+faktisk_jobb3,Faktisk jobb 3 mnd,ssb_eiendom_og_tjenesteyting,Eiendom Og Tjenesteyting,-18.697,59.856,-0.073,0.7584,0.005,20
+faktisk_jobb3,Faktisk jobb 3 mnd,ssb_elektrisitet_vann_og_renovasjon,Elektrisitet Vann Og Renovasjon,-274.4531,67.5353,-0.692,0.0007,0.478,20
+faktisk_jobb3,Faktisk jobb 3 mnd,ssb_finans_og_forsikring,Finans Og Forsikring,-51.319,164.2491,-0.073,0.7583,0.005,20
+faktisk_jobb3,Faktisk jobb 3 mnd,ssb_helse__og_sosialtjenester,Helse  Og Sosialtjenester,-330.1671,70.4755,-0.741,0.0002,0.549,20
+faktisk_jobb3,Faktisk jobb 3 mnd,ssb_industri,Industri,-340.0554,135.7757,-0.508,0.0221,0.258,20
+faktisk_jobb3,Faktisk jobb 3 mnd,ssb_informasjon_og_kommunikasjon,Informasjon Og Kommunikasjon,174.7429,68.4711,0.515,0.02,0.266,20
+faktisk_jobb3,Faktisk jobb 3 mnd,ssb_jordbruk_skogbruk_og_fiske,Jordbruk Skogbruk Og Fiske,87.2683,47.4675,0.398,0.0826,0.158,20
+faktisk_jobb3,Faktisk jobb 3 mnd,ssb_kultur_og_personlige_tjenester,Kultur Og Personlige Tjenester,-92.7903,92.4145,-0.23,0.3287,0.053,20
+faktisk_jobb3,Faktisk jobb 3 mnd,ssb_offentlig_administrasjon,Offentlig Administrasjon,-109.7836,143.0436,-0.178,0.4527,0.032,20
+faktisk_jobb3,Faktisk jobb 3 mnd,ssb_overnatting_og_servering,Overnatting Og Servering,-33.0049,32.2553,-0.234,0.3198,0.055,20
+faktisk_jobb3,Faktisk jobb 3 mnd,ssb_transport_og_lagring,Transport Og Lagring,-187.6918,66.8592,-0.552,0.0117,0.305,20
+faktisk_jobb3,Faktisk jobb 3 mnd,ssb_undervisning,Undervisning,-131.4246,209.694,-0.146,0.5387,0.021,20
+faktisk_jobb3,Faktisk jobb 3 mnd,ssb_varehandel,Varehandel,-160.2481,52.3911,-0.585,0.0068,0.342,20
+indikator_atid12,Indikatoravvik atid 12 mnd,ssb_bergverksdrift_og_utvinning,Bergverksdrift Og Utvinning,-33.0869,12.5344,-0.563,0.0186,0.317,17
+indikator_atid12,Indikatoravvik atid 12 mnd,ssb_bygge__og_anlegg,Bygge  Og Anlegg,-8.1586,15.0831,-0.138,0.5965,0.019,17
+indikator_atid12,Indikatoravvik atid 12 mnd,ssb_eiendom_og_tjenesteyting,Eiendom Og Tjenesteyting,-5.709,9.0734,-0.16,0.5387,0.026,17
+indikator_atid12,Indikatoravvik atid 12 mnd,ssb_elektrisitet_vann_og_renovasjon,Elektrisitet Vann Og Renovasjon,-40.4437,9.8481,-0.728,0.0009,0.529,17
+indikator_atid12,Indikatoravvik atid 12 mnd,ssb_finans_og_forsikring,Finans Og Forsikring,-12.0846,24.8277,-0.125,0.6335,0.016,17
+indikator_atid12,Indikatoravvik atid 12 mnd,ssb_helse__og_sosialtjenester,Helse  Og Sosialtjenester,-42.0198,9.9612,-0.737,0.0007,0.543,17
+indikator_atid12,Indikatoravvik atid 12 mnd,ssb_industri,Industri,-42.4553,21.7677,-0.45,0.0701,0.202,17
+indikator_atid12,Indikatoravvik atid 12 mnd,ssb_informasjon_og_kommunikasjon,Informasjon Og Kommunikasjon,21.5471,12.6907,0.402,0.1102,0.161,17
+indikator_atid12,Indikatoravvik atid 12 mnd,ssb_jordbruk_skogbruk_og_fiske,Jordbruk Skogbruk Og Fiske,7.1995,7.2921,0.247,0.3391,0.061,17
+indikator_atid12,Indikatoravvik atid 12 mnd,ssb_kultur_og_personlige_tjenester,Kultur Og Personlige Tjenester,-25.3035,13.7437,-0.429,0.0855,0.184,17
+indikator_atid12,Indikatoravvik atid 12 mnd,ssb_offentlig_administrasjon,Offentlig Administrasjon,-19.8653,20.2016,-0.246,0.341,0.061,17
+indikator_atid12,Indikatoravvik atid 12 mnd,ssb_overnatting_og_servering,Overnatting Og Servering,-4.674,4.6007,-0.254,0.3258,0.064,17
+indikator_atid12,Indikatoravvik atid 12 mnd,ssb_transport_og_lagring,Transport Og Lagring,-28.1567,9.2062,-0.62,0.008,0.384,17
+indikator_atid12,Indikatoravvik atid 12 mnd,ssb_undervisning,Undervisning,-48.9104,35.0278,-0.339,0.1829,0.115,17
+indikator_atid12,Indikatoravvik atid 12 mnd,ssb_varehandel,Varehandel,-21.5097,7.129,-0.615,0.0087,0.378,17
+indikator_atid3,Indikatoravvik atid 3 mnd,ssb_bergverksdrift_og_utvinning,Bergverksdrift Og Utvinning,-9.6899,8.7384,-0.253,0.2821,0.064,20
+indikator_atid3,Indikatoravvik atid 3 mnd,ssb_bygge__og_anlegg,Bygge  Og Anlegg,4.3459,9.2392,0.11,0.6437,0.012,20
+indikator_atid3,Indikatoravvik atid 3 mnd,ssb_eiendom_og_tjenesteyting,Eiendom Og Tjenesteyting,1.9394,5.3916,0.084,0.7233,0.007,20
+indikator_atid3,Indikatoravvik atid 3 mnd,ssb_elektrisitet_vann_og_renovasjon,Elektrisitet Vann Og Renovasjon,-19.2077,7.1125,-0.537,0.0146,0.288,20
+indikator_atid3,Indikatoravvik atid 3 mnd,ssb_finans_og_forsikring,Finans Og Forsikring,10.6788,14.6331,0.17,0.4749,0.029,20
+indikator_atid3,Indikatoravvik atid 3 mnd,ssb_helse__og_sosialtjenester,Helse  Og Sosialtjenester,-21.8675,7.939,-0.545,0.013,0.297,20
+indikator_atid3,Indikatoravvik atid 3 mnd,ssb_industri,Industri,-15.2895,13.7502,-0.254,0.2808,0.064,20
+indikator_atid3,Indikatoravvik atid 3 mnd,ssb_informasjon_og_kommunikasjon,Informasjon Og Kommunikasjon,15.9284,6.1481,0.521,0.0185,0.272,20
+indikator_atid3,Indikatoravvik atid 3 mnd,ssb_jordbruk_skogbruk_og_fiske,Jordbruk Skogbruk Og Fiske,6.3315,4.4187,0.32,0.169,0.102,20
+indikator_atid3,Indikatoravvik atid 3 mnd,ssb_kultur_og_personlige_tjenester,Kultur Og Personlige Tjenester,-4.5899,8.4931,-0.126,0.5955,0.016,20
+indikator_atid3,Indikatoravvik atid 3 mnd,ssb_offentlig_administrasjon,Offentlig Administrasjon,-5.9697,13.0296,-0.107,0.6523,0.012,20
+indikator_atid3,Indikatoravvik atid 3 mnd,ssb_overnatting_og_servering,Overnatting Og Servering,-0.1643,2.9911,-0.013,0.9568,0.0,20
+indikator_atid3,Indikatoravvik atid 3 mnd,ssb_transport_og_lagring,Transport Og Lagring,-14.0958,6.4189,-0.46,0.0414,0.211,20
+indikator_atid3,Indikatoravvik atid 3 mnd,ssb_undervisning,Undervisning,-5.0144,19.0735,-0.062,0.7956,0.004,20
+indikator_atid3,Indikatoravvik atid 3 mnd,ssb_varehandel,Varehandel,-12.7771,4.9835,-0.517,0.0195,0.268,20
+indikator_jobb12,Indikatoravvik jobb 12 mnd,ssb_bergverksdrift_og_utvinning,Bergverksdrift Og Utvinning,-174.1115,36.3622,-0.778,0.0002,0.605,17
+indikator_jobb12,Indikatoravvik jobb 12 mnd,ssb_bygge__og_anlegg,Bygge  Og Anlegg,-68.3586,55.3035,-0.304,0.2354,0.092,17
+indikator_jobb12,Indikatoravvik jobb 12 mnd,ssb_eiendom_og_tjenesteyting,Eiendom Og Tjenesteyting,-44.1954,33.1293,-0.326,0.2021,0.106,17
+indikator_jobb12,Indikatoravvik jobb 12 mnd,ssb_elektrisitet_vann_og_renovasjon,Elektrisitet Vann Og Renovasjon,-152.5118,37.9856,-0.72,0.0011,0.518,17
+indikator_jobb12,Indikatoravvik jobb 12 mnd,ssb_finans_og_forsikring,Finans Og Forsikring,-123.3537,89.9078,-0.334,0.1902,0.112,17
+indikator_jobb12,Indikatoravvik jobb 12 mnd,ssb_helse__og_sosialtjenester,Helse  Og Sosialtjenester,-170.3726,34.884,-0.784,0.0002,0.614,17
+indikator_jobb12,Indikatoravvik jobb 12 mnd,ssb_industri,Industri,-254.5482,65.6577,-0.707,0.0015,0.501,17
+indikator_jobb12,Indikatoravvik jobb 12 mnd,ssb_informasjon_og_kommunikasjon,Informasjon Og Kommunikasjon,69.4252,49.6837,0.339,0.1826,0.115,17
+indikator_jobb12,Indikatoravvik jobb 12 mnd,ssb_jordbruk_skogbruk_og_fiske,Jordbruk Skogbruk Og Fiske,21.8905,28.1223,0.197,0.4484,0.039,17
+indikator_jobb12,Indikatoravvik jobb 12 mnd,ssb_kultur_og_personlige_tjenester,Kultur Og Personlige Tjenester,-97.6197,52.2436,-0.435,0.0813,0.189,17
+indikator_jobb12,Indikatoravvik jobb 12 mnd,ssb_offentlig_administrasjon,Offentlig Administrasjon,-79.4121,76.7561,-0.258,0.3172,0.067,17
+indikator_jobb12,Indikatoravvik jobb 12 mnd,ssb_overnatting_og_servering,Overnatting Og Servering,-30.9236,16.2775,-0.44,0.0769,0.194,17
+indikator_jobb12,Indikatoravvik jobb 12 mnd,ssb_transport_og_lagring,Transport Og Lagring,-113.7055,33.7264,-0.657,0.0042,0.431,17
+indikator_jobb12,Indikatoravvik jobb 12 mnd,ssb_undervisning,Undervisning,-218.1472,130.2763,-0.397,0.1148,0.157,17
+indikator_jobb12,Indikatoravvik jobb 12 mnd,ssb_varehandel,Varehandel,-88.1362,25.8599,-0.661,0.0039,0.436,17
+indikator_jobb3,Indikatoravvik jobb 3 mnd,ssb_bergverksdrift_og_utvinning,Bergverksdrift Og Utvinning,-24.3303,29.4109,-0.191,0.4189,0.037,20
+indikator_jobb3,Indikatoravvik jobb 3 mnd,ssb_bygge__og_anlegg,Bygge  Og Anlegg,15.1166,30.6337,0.116,0.6277,0.013,20
+indikator_jobb3,Indikatoravvik jobb 3 mnd,ssb_eiendom_og_tjenesteyting,Eiendom Og Tjenesteyting,9.79,17.8025,0.129,0.5891,0.017,20
+indikator_jobb3,Indikatoravvik jobb 3 mnd,ssb_elektrisitet_vann_og_renovasjon,Elektrisitet Vann Og Renovasjon,-57.7874,24.4312,-0.487,0.0294,0.237,20
+indikator_jobb3,Indikatoravvik jobb 3 mnd,ssb_finans_og_forsikring,Finans Og Forsikring,39.3357,48.3798,0.188,0.4268,0.035,20
+indikator_jobb3,Indikatoravvik jobb 3 mnd,ssb_helse__og_sosialtjenester,Helse  Og Sosialtjenester,-65.7342,27.3143,-0.493,0.0271,0.243,20
+indikator_jobb3,Indikatoravvik jobb 3 mnd,ssb_industri,Industri,-48.5777,45.7478,-0.243,0.3023,0.059,20
+indikator_jobb3,Indikatoravvik jobb 3 mnd,ssb_informasjon_og_kommunikasjon,Informasjon Og Kommunikasjon,53.0804,20.3631,0.523,0.0178,0.274,20
+indikator_jobb3,Indikatoravvik jobb 3 mnd,ssb_jordbruk_skogbruk_og_fiske,Jordbruk Skogbruk Og Fiske,17.174,14.9344,0.262,0.2652,0.068,20
+indikator_jobb3,Indikatoravvik jobb 3 mnd,ssb_kultur_og_personlige_tjenester,Kultur Og Personlige Tjenester,-14.7751,28.1905,-0.123,0.6066,0.015,20
+indikator_jobb3,Indikatoravvik jobb 3 mnd,ssb_offentlig_administrasjon,Offentlig Administrasjon,-24.8498,43.0826,-0.135,0.5712,0.018,20
+indikator_jobb3,Indikatoravvik jobb 3 mnd,ssb_overnatting_og_servering,Overnatting Og Servering,-0.397,9.9238,-0.009,0.9685,0.0,20
+indikator_jobb3,Indikatoravvik jobb 3 mnd,ssb_transport_og_lagring,Transport Og Lagring,-44.9864,21.5073,-0.442,0.0509,0.196,20
+indikator_jobb3,Indikatoravvik jobb 3 mnd,ssb_undervisning,Undervisning,-8.4272,63.3693,-0.031,0.8957,0.001,20
+indikator_jobb3,Indikatoravvik jobb 3 mnd,ssb_varehandel,Varehandel,-39.7099,16.8992,-0.485,0.0304,0.235,20
