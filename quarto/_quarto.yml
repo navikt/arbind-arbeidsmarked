@@ -26,6 +26,13 @@ book:
     chapters:
     - mismatch/yrke.qmd
     - mismatch/sensitivitet.qmd
+  - part: modellendringer/intro.qmd
+    chapters:
+    - modellendringer/koeffisienter.qmd
+    - modellendringer/nasjonalt.qmd
+    - modellendringer/regionalt.qmd
+    - modellendringer/stramhet_sensitivitet.qmd
+    - modellendringer/mismatch.qmd
   - konklusjon.qmd
 
   appendices:

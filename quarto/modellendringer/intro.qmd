@@ -1,0 +1,21 @@
+---
+title: "Modellendringer"
+---
+
+Denne delen undersøker om utvidelse av indikatormodellen med flere
+arbeidsmarkedsvariabler reduserer indikatorens følsomhet for
+arbeidsmarkedsforhold.
+
+Referansemodellen (gjeldende produksjonsmodell) kontrollerer for
+arbeidsmarked gjennom kun én variabel: **tilstrømming** av nye arbeidsledige
+som andel av arbeidsstyrken per bo- og arbeidsmarkedsregion. Vi tester fire
+utvidede varianter der hver legger til en ekstra arbeidsmarkedsvariabel:
+
+- **[Koeffisientanalyse](koeffisienter.qmd)** — koeffisientene for de nye
+  variablene og stabiliteten til tilstrømmingskoeffisientene.
+- **[Nasjonal sammenlikning](nasjonalt.qmd)** — endring i volatilitet og
+  tidsserieforløp på nasjonalt nivå.
+- **[Regional sammenlikning](regionalt.qmd)** — endring i regionale
+  rangeringer og spredning.
+- **[Stramhetstest](stramhet_sensitivitet.qmd)** — den sentrale testen:
+  reduseres sammenhengen med uavhengige stramhetsmål?

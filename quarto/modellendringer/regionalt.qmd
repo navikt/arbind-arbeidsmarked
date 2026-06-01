@@ -1,0 +1,105 @@
+---
+title: "Regional sammenlikning"
+subtitle: "Endring i regionale rangeringer og spredning mellom modeller"
+execute:
+  echo: false
+  warning: false
+---
+
+```{python}
+import pandas as pd
+import numpy as np
+```
+
+# Rangkorrelasjon med referansemodellen
+
+For hver måned beregner vi Spearman-rangkorrelasjon mellom referansemodellens
+og de utvidede modellenes regionale indikatorer. Høy ρ betyr at regionenes
+rangering er stabil på tvers av modeller; lav ρ betyr at modellvalget endrer
+hvilke regioner som vurderes best og dårligst.
+
+```{python}
+#| label: tbl-rangkorrelasjon
+#| tbl-cap: "Spearman rangkorrelasjon mellom utvidede modeller og referansemodellen"
+df = pd.read_csv("../../data/results/modellendringer_regionalt_rangkorrelasjon.csv")
+
+utfall_labels = {
+    "indikator_jobb3": "Jobb 3 mnd",
+    "indikator_jobb12": "Jobb 12 mnd",
+    "indikator_atid3": "Atid 3 mnd",
+    "indikator_atid12": "Atid 12 mnd",
+}
+
+rows = []
+for utfall in df["utfall"].unique():
+    for modell in df["modell"].unique():
+        sub = df[(df["utfall"] == utfall) & (df["modell"] == modell)]
+        rows.append({
+            "Utfall": utfall_labels.get(utfall, utfall),
+            "Modell": modell,
+            "Gj.sn. ρ": f"{sub['spearman_rho'].mean():.3f}",
+            "Min ρ": f"{sub['spearman_rho'].min():.3f}",
+            "Andel ρ < 0.9": f"{np.mean(sub['spearman_rho'] < 0.9):.0%}",
+        })
+pd.DataFrame(rows)
+```
+
+De fleste modellene har gjennomsnittlig ρ over 0.85, noe som tyder på at
+regionenes rangering i stor grad er stabil. Unntaket er **stillingsrate**-modellen
+for jobb 12 mnd (ρ = 0.70), som endrer rangeringen vesentlig.
+
+# Rangendringer
+
+```{python}
+#| label: tbl-rangendring
+#| tbl-cap: "Rangendringer mellom utvidede modeller og referansemodellen"
+df_endring = pd.read_csv("../../data/results/modellendringer_regionalt_rangendring.csv")
+
+rows = []
+for utfall in df_endring["utfall"].unique():
+    sub = df_endring[df_endring["utfall"] == utfall]
+    for modell in sub["modell"].unique():
+        msub = sub[sub["modell"] == modell]
+        rows.append({
+            "Utfall": utfall_labels.get(utfall, utfall),
+            "Modell": modell,
+            "Gj.sn. |endring|": f"{msub['rang_endring'].abs().mean():.1f}",
+            "Max |endring|": f"{msub['rang_endring'].abs().max():.0f}",
+            "Andel ≥ 3 plasser": f"{np.mean(msub['rang_endring'].abs() >= 3):.0%}",
+        })
+pd.DataFrame(rows)
+```
+
+For de fleste utfall og modeller er den gjennomsnittlige absolutte
+rangendringen under 1 plass. Andelen region-måneder der rangeringen
+endres med 3 eller flere plasser er generelt under 15 %, men kan være
+høyere for 12-måneders-utfallene.
+
+# Regional spredning
+
+```{python}
+#| label: tbl-spredning
+#| tbl-cap: "Regional spredning (standardavvik på tvers av regioner) per modell"
+df_spred = pd.read_csv("../../data/results/modellendringer_regionalt_spredning.csv")
+
+rows = []
+for utfall in df_spred["utfall"].unique():
+    ref_std = df_spred[(df_spred["utfall"] == utfall) & (df_spred["result_id"] == 77)]["std_regioner"].mean()
+    for modell in ["Referanse", "Stillingsrate", "Shiftshare", "Ledighetsrate", "Ledighetsrate ung"]:
+        msub = df_spred[(df_spred["utfall"] == utfall) & (df_spred["modell"] == modell)]
+        mean_std = msub["std_regioner"].mean()
+        pct = (mean_std - ref_std) / ref_std * 100
+        rows.append({
+            "Utfall": utfall_labels.get(utfall, utfall),
+            "Modell": modell,
+            "Gj.sn. std": f"{mean_std:.5f}",
+            "Endring vs. ref.": f"{pct:+.0f} %",
+        })
+pd.DataFrame(rows)
+```
+
+Interessant nok øker den regionale spredningen noe i de utvidede modellene
+for flere utfall. Dette kan virke kontraintuitivt, men er konsistent med at
+de utvidede modellene fjerner en nasjonal komponent fra indikatoren, mens
+den regionale variasjonen — som reflekterer reelle forskjeller mellom
+regionenes Nav-kontorer — bevares eller øker.

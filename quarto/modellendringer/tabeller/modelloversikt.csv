@@ -1,0 +1,6 @@
+result_id,Modell,Ekstra LM-variabel,Beskrivelse
+77,Referanse,(kun tilstrømming),Gjeldende produksjonsmodell
+78,Stillingsrate,Stillingrate per BA-region (desiler),Antall stillingsutlysninger / befolkning i bo- og arbeidsmarkedsregion
+79,Shiftshare,Shiftshare per BA-region (desiler),Instrumentvariabel: nasjonale sektortrender × lokal næringsstruktur
+80,Ledighetsrate,Ledighetsrate per BA-region (desiler),Arbeidsledighet som andel av arbeidsstyrken
+81,Ledighetsrate ung,Ledighetsrate unge per BA-region (desiler),Arbeidsledighet for personer under 30 som andel av arbeidsstyrken

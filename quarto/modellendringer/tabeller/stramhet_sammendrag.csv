@@ -1,0 +1,17 @@
+modell,indikator_var,gj_sn_abs_r_reduksjon
+Stillingsrate,indikator_jobb3,0.076
+Stillingsrate,indikator_jobb12,0.1668
+Stillingsrate,indikator_atid3,0.0088
+Stillingsrate,indikator_atid12,0.2232
+Shiftshare,indikator_jobb3,-0.0412
+Shiftshare,indikator_jobb12,-0.004
+Shiftshare,indikator_atid3,0.0025
+Shiftshare,indikator_atid12,-0.0197
+Ledighetsrate,indikator_jobb3,-0.0078
+Ledighetsrate,indikator_jobb12,-0.1162
+Ledighetsrate,indikator_atid3,0.0237
+Ledighetsrate,indikator_atid12,-0.0457
+Ledighetsrate ung,indikator_jobb3,-0.036
+Ledighetsrate ung,indikator_jobb12,-0.0806
+Ledighetsrate ung,indikator_atid3,0.0106
+Ledighetsrate ung,indikator_atid12,-0.0471

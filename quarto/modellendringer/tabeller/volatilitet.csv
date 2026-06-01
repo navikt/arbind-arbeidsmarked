@@ -1,0 +1,21 @@
+utfall,modell,gjennomsnitt,std,range,iqr
+indikator_jobb3,Referanse,0.00115,0.00791,0.04,0.008
+indikator_jobb3,Stillingsrate,0.00122,0.00623,0.031,0.006
+indikator_jobb3,Shiftshare,0.00133,0.00734,0.044,0.006
+indikator_jobb3,Ledighetsrate,0.00158,0.00568,0.03,0.006
+indikator_jobb3,Ledighetsrate ung,0.00148,0.00652,0.035,0.00625
+indikator_jobb12,Referanse,-6e-05,0.01322,0.044,0.0185
+indikator_jobb12,Stillingsrate,0.00027,0.00961,0.035,0.0125
+indikator_jobb12,Shiftshare,0.00084,0.00867,0.035,0.0115
+indikator_jobb12,Ledighetsrate,0.0009,0.00748,0.027,0.0115
+indikator_jobb12,Ledighetsrate ung,0.00061,0.00918,0.03,0.015
+indikator_atid3,Referanse,-0.0123,0.23594,1.314,0.19975
+indikator_atid3,Stillingsrate,-0.0119,0.23214,1.31,0.204
+indikator_atid3,Shiftshare,-0.00778,0.21699,1.193,0.22025
+indikator_atid3,Ledighetsrate,-0.00177,0.17492,1.025,0.1575
+indikator_atid3,Ledighetsrate ung,-0.0062,0.20226,1.198,0.192
+indikator_atid12,Referanse,-0.04712,0.34934,1.23,0.499
+indikator_atid12,Stillingsrate,-0.0378,0.26813,1.113,0.3105
+indikator_atid12,Shiftshare,-0.02567,0.23554,0.909,0.334
+indikator_atid12,Ledighetsrate,-0.02667,0.24757,1.024,0.343
+indikator_atid12,Ledighetsrate ung,-0.03571,0.27056,1.046,0.3925

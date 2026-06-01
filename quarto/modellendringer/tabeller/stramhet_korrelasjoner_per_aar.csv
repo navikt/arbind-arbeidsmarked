@@ -1,0 +1,26 @@
+modell,aar,indikator_atid12,indikator_atid3,indikator_jobb12,indikator_jobb3
+Ledighetsrate,2021,0.521,0.345,0.488,0.117
+Ledighetsrate,2022,0.755,0.823,0.585,0.8
+Ledighetsrate,2023,0.718,0.663,0.656,0.655
+Ledighetsrate,2024,0.495,0.583,0.563,0.465
+Ledighetsrate,2025,,0.019,,0.131
+Ledighetsrate ung,2021,0.274,0.323,0.14,0.097
+Ledighetsrate ung,2022,0.774,0.794,0.601,0.752
+Ledighetsrate ung,2023,0.658,0.663,0.612,0.668
+Ledighetsrate ung,2024,0.467,0.663,0.464,0.576
+Ledighetsrate ung,2025,,0.039,,0.136
+Referanse,2021,0.244,0.336,-0.077,0.07
+Referanse,2022,0.683,0.824,0.444,0.778
+Referanse,2023,0.702,0.711,0.584,0.696
+Referanse,2024,0.511,0.564,0.559,0.486
+Referanse,2025,,-0.109,,0.053
+Shiftshare,2021,0.281,0.406,-0.108,0.21
+Shiftshare,2022,0.721,0.799,0.507,0.733
+Shiftshare,2023,0.683,0.702,0.565,0.634
+Shiftshare,2024,0.55,0.571,0.559,0.437
+Shiftshare,2025,,0.05,,0.196
+Stillingsrate,2021,0.134,0.32,-0.182,-0.025
+Stillingsrate,2022,0.506,0.857,0.263,0.728
+Stillingsrate,2023,0.222,0.68,0.108,0.417
+Stillingsrate,2024,0.177,0.54,0.189,0.279
+Stillingsrate,2025,,-0.137,,0.196

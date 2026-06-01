@@ -1,0 +1,21 @@
+modell,indikator_var,abs_r,r_reduksjon
+Referanse,jobb3,0.873,0.0
+Stillingsrate,jobb3,0.97,-0.097
+Shiftshare,jobb3,0.791,0.082
+Ledighetsrate,jobb3,0.663,0.21
+Ledighetsrate ung,jobb3,0.77,0.103
+Referanse,jobb12,0.981,0.0
+Stillingsrate,jobb12,0.986,-0.005
+Shiftshare,jobb12,0.596,0.385
+Ledighetsrate,jobb12,0.943,0.038
+Ledighetsrate ung,jobb12,0.984,-0.003
+Referanse,atid3,0.897,0.0
+Stillingsrate,atid3,0.893,0.004
+Shiftshare,atid3,0.815,0.082
+Ledighetsrate,atid3,0.747,0.15
+Ledighetsrate ung,atid3,0.837,0.06
+Referanse,atid12,0.987,0.0
+Stillingsrate,atid12,0.993,-0.006
+Shiftshare,atid12,0.749,0.238
+Ledighetsrate,atid12,0.955,0.032
+Ledighetsrate ung,atid12,0.99,-0.003
