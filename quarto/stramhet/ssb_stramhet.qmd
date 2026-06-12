@@ -12,7 +12,7 @@ from scipy import stats
 import numpy as np
 ```
 
-# Motivasjon
+## Motivasjon
 
 Arbeidsmarkedsstramhet kan måles på to prinsipielt ulike måter:
 
@@ -41,9 +41,9 @@ I sektorer med svært stramt marked kan bedrifter dessuten ha sluttet å lyse
 ut stillinger formelt, noe som gjør at SSB-målet *undervurderer* stramheten
 relativt til bedriftenes rapporterte mangel.
 
-# Del A — Sammenligning av målene per næring
+## Del A — Sammenligning av målene per næring
 
-## Korrelasjon mellom målene
+### Korrelasjon mellom målene
 
 Begge mål er beregnet for 15 sammenliknbare næringer[^1] for perioden 2021–2026.
 SSB-verdiene er fra Q1 hvert år for å matche tidspunktet til
@@ -90,7 +90,7 @@ på desimalskala. SSB-verdier er gjennomgående høyere (~3 %) enn bedrift-verdi
 (~1,5 %), fordi SSB teller alle åpne stillinger mens bedrift kun teller uoppfylt
 mangel.](figurer/ssb_bedrift_scatter.png){#fig-scatter}
 
-## Tidsseriesammenligning per næring
+### Tidsseriesammenligning per næring
 
 @fig-naering-tid viser utviklingen i begge mål for hver næring.
 Noen mønster å merke seg:
@@ -109,9 +109,9 @@ Noen mønster å merke seg:
 bedriftsundersøkelsen). Begge på desimalskala. Merk ulik y-akse-skala mellom
 næringer.](figurer/ssb_bedrift_naering_tidsserie.png){#fig-naering-tid}
 
-# Del B — Næringsstramhet og Nav-indikator
+## Del B — Næringsstramhet og Nav-indikator
 
-## Regresjonsoppsett
+### Regresjonsoppsett
 
 For hvert kvartal fra 2021 til 2025 har vi SSB-stramhetsindikator for 15
 næringer og gjennomsnittlig nasjonal Nav-indikator. Vi kjører bivariate
@@ -128,7 +128,7 @@ delen som modellen *ikke* forklarer. Dersom en nærings stramhet predikerer
 indikatoravviket, tyder det på at den arbeidsmarkedseffekten fra den næringen
 ikke er renset ut av modellen.
 
-## Korrelasjoner mellom næringsstramhet og indikatoravvik
+### Korrelasjoner mellom næringsstramhet og indikatoravvik
 
 @fig-heatmap viser Pearson-korrelasjonen mellom SSB-stramhetsindikator per
 næring og de fire indikatoravvikene.
@@ -150,7 +150,7 @@ pivot_r.index.name = "Næring"
 pivot_r
 ```
 
-## Regresjonskoeffisienter β
+### Regresjonskoeffisienter β
 
 @fig-beta viser OLS-koeffisienten $\hat{\beta}$ for hver næring og hvert
 indikatoravvik. Rød = statistisk signifikant (p < 0.05).
@@ -159,7 +159,7 @@ indikatoravvik. Rød = statistisk signifikant (p < 0.05).
 Rød = p < 0.05, grå = ikke-signifikant.
 ](figurer/ssb_naering_regresjon_beta.png){#fig-beta}
 
-## Tolkning
+### Tolkning
 
 Funnene viser et konsistent mønster:
 
@@ -200,9 +200,9 @@ IKT-næringens positive sammenheng er konsistent med at IKT-stramhet faktisk
 *forbedrer* Nav-brukeres muligheter: perioder med høy etterspørsel etter
 IT-kompetanse gagner mange brukere med teknologibakgrunn.
 
-# Del C — Panelregresjon med næringsfaste effekter
+## Del C — Panelregresjon med næringsfaste effekter
 
-## Motivasjon for panelmodellen
+### Motivasjon for panelmodellen
 
 De bivariate regresjonene i Del B kjøres separat per næring (n ≈ 20 per
 regresjon). Dette har lav statistisk kraft og innebærer et problem med
@@ -224,7 +224,7 @@ $$\text{Indikatoravvik}_t = \alpha_j + \beta \cdot \text{Stramhet}_{j,t} + \vare
 med bare 15 næringer og 20 kvartaler er klyngerobuste standardfeil ikke
 pålitelige. Resultatene bør tolkes med forsiktighet.
 
-## Resultater
+### Resultater
 
 ```{python}
 #| label: tbl-panel
@@ -263,7 +263,7 @@ De viktigste funnene fra panelmodellen:
   ($p > 0.17$). Kortsiktige utfall er tilsynelatende mindre eksponert for
   næringsvis stramhetsvariasjon.
 
-## Sammenligning: panel-β vs bivariate β
+### Sammenligning: panel-β vs bivariate β
 
 @fig-panel-koeff viser panel-koeffisienten med 95 % konfidensintervall, og
 sammenligner med fordelingen av de 15 bivariate per-næring-koeffisientene.
@@ -278,7 +278,7 @@ flertallet av de bivariate koeffisientene: negativ sammenheng for
 12-månedersutfall, svak og ikke-signifikant sammenheng for 3-månedersutfall.
 Panelmodellen gir dermed styrket støtte til funnet.
 
-# Sammendrag
+## Sammendrag
 
 ```{python}
 #| label: tbl-oppsummering

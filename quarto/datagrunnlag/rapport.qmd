@@ -10,7 +10,7 @@ execute:
 import pandas as pd
 ```
 
-# Bakgrunn
+## Bakgrunn
 
 NAV produserer to komplementære informasjonskilder om det norske arbeidsmarkedet:
 
@@ -29,9 +29,9 @@ Målet med disse analysene er å undersøke om regionale forskjeller i
 arbeidsmarkedsstramhet – slik bedriftsundersøkelsen måler det – samvarierer
 med utfall for arbeidssøkere slik indikatorene måler det.
 
-# Data
+## Data
 
-## Bedriftsundersøkelsen 2021–2025
+### Bedriftsundersøkelsen 2021–2025
 
 Dataene er hentet fra NAVs nettside og dekker årene 2021–2025. Fra
 undersøkelsen bruker vi følgende regionale variable:
@@ -51,7 +51,7 @@ Dataene for 2024–2025 er aggregert tilbake til Nav-regionsnivå: summable
 størrelser (mangel, konfidensintervaller) er summert, mens rater
 (stramhetsindikator, rekrutteringsproblemer) er vektet med estimert mangel.
 
-## Datasett etter standardisering
+### Datasett etter standardisering
 
 ```{python}
 #| label: tbl-oversikt
@@ -63,7 +63,7 @@ størrelser (mangel, konfidensintervaller) er summert, mens rater
 )
 ```
 
-## Geografisk mapping
+### Geografisk mapping
 
 ```{python}
 #| label: tbl-geomap
@@ -71,9 +71,9 @@ størrelser (mangel, konfidensintervaller) er summert, mens rater
 pd.read_csv("tabeller/tbl_geomap.csv").style.hide(axis="index")
 ```
 
-# Metode
+## Metode
 
-## Temporal standardisering
+### Temporal standardisering
 
 For å sammenstille bedriftsundersøkelsen med indikatordata er indikatordata
 filtrert til den referansemåneden bedriftsundersøkelsen bruker for hvert år:
@@ -88,9 +88,9 @@ filtrert til den referansemåneden bedriftsundersøkelsen bruker for hvert år:
 
 : Valgte referansemåneder for indikatordata per undersøkelsesår {#tbl-refmnd}
 
-# Resultater
+## Resultater
 
-## Nasjonal utvikling 2021–2025
+### Nasjonal utvikling 2021–2025
 
 ![Nasjonal stramhetsindikator, andel rekrutteringsproblemer og sysselsettingsbarometer](figurer/fig_nasjonal.png){#fig-nasjonal}
 
@@ -131,7 +131,7 @@ filtrert til den referansemåneden bedriftsundersøkelsen bruker for hvert år:
 
 : Total estimert mangel på arbeidskraft per år (NAVs bedriftsundersøkelse) {#tbl-mangel-trend}
 
-## Mangel på arbeidskraft etter yrkesgruppe
+### Mangel på arbeidskraft etter yrkesgruppe
 
 ![Estimert mangel på arbeidskraft etter yrkesgruppe, 2021–2025](figurer/fig_yrke.png){#fig-yrke}
 
@@ -148,7 +148,7 @@ og maskinfag (4 050 personer), bygg- og anleggsfag (2 450) og elektrofag
 (1 800). Dette indikerer et strukturelt kompetansemismatch der etterspørselen
 etter fagarbeidere er høyere enn tilgangen.
 
-## Regional variasjon i stramhet
+### Regional variasjon i stramhet
 
 ![Stramhetsindikator per Nav-region og år](figurer/fig_regional.png){#fig-regional}
 

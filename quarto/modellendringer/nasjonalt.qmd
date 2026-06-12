@@ -10,7 +10,7 @@ execute:
 import pandas as pd
 ```
 
-# Nasjonal tidsserie
+## Nasjonal tidsserie
 
 @fig-nasj-tid viser indikatorverdiene for alle fem modellvarianter over tid
 på nasjonalt nivå. Alle modeller følger det samme overordnede mønsteret,
@@ -18,7 +18,7 @@ men med ulik amplitude.
 
 ![Nasjonal indikator over tid — alle modellvarianter](figurer/nasjonal_tidsserie.png){#fig-nasj-tid}
 
-# Avvik fra referansemodellen
+## Avvik fra referansemodellen
 
 @fig-nasj-delta viser avviket (delta) mellom hver utvidet modell og
 referansemodellen over tid. Positive verdier betyr at den utvidede modellen
@@ -30,7 +30,7 @@ Avvikene er ikke konstante over tid — de varierer med arbeidsmarkedssyklusen.
 Dette er forventet: de utvidede modellene absorberer arbeidsmarkedsvariasjon
 som referansemodellen lar stå igjen i indikatoravviket.
 
-# Volatilitet
+## Volatilitet
 
 @fig-volatilitet viser standardavviket i nasjonal indikator per modell. Lavere
 volatilitet betyr mer stabile indikatorer over tid.
@@ -72,7 +72,7 @@ særlig for **jobb 12 mnd** og **arbeidstid 12 mnd**. Ledighetsrate-modellen
 gir den største reduksjonen for jobb 12 mnd (−43 %).
 
 ::: {.callout-note}
-## Tolkning
+### Tolkning
 Lavere volatilitet er *ikke* i seg selv bevis på bedre arbeidsmarkedskontroll.
 Det kan også skyldes forskjeller i utvalg eller overføring av variasjon.
 Den direkte testen — om korrelasjon med stramhetsmål reduseres — presenteres

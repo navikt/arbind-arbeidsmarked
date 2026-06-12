@@ -2,21 +2,40 @@
 title: "Navs arbeidsindikator og arbeidsmarkedet"
 ---
 
-Navs arbeidsindikator er konstruert for å måle resultatene av Navs arbeid
-uavhengig av to faktorer Nav ikke kan påvirke: **brukersammensetningen** på
-de enkelte kontorene og **utviklingen i arbeidsmarkedet**. Den første faktoren
-håndteres ved at modellen kontrollerer for individuelle kjennetegn. Den andre
-faktoren — arbeidsmarkedet — er mer krevende å kontrollere for, og er
-utgangspunktet for denne analysen.
+Navs arbeidsindikator er laget for å måle resultater av Navs oppfølging
+uavhengig av to forhold Nav i liten grad styrer: **brukersammensetningen**
+og **utviklingen i arbeidsmarkedet**. Brukersammensetning håndteres i modellen
+gjennom individuelle kjennetegn. Denne rapporten undersøker den andre delen:
+om arbeidsmarkedet er godt nok ivaretatt i indikatorene.
 
 **Spørsmålet vi stiller er: Kontrollerer indikatormodellen tilstrekkelig for
 arbeidsmarkedet?**
 
-Dersom indikatorene ikke er tilstrekkelig renset for arbeidsmarkedseffekter,
-vil de reflektere konjunktursvingninger og strukturelle trekk ved
-arbeidsmarkedet snarere enn Navs egen innsats. Dette kan gi et misvisende
-bilde av om Nav gjør det bedre eller dårligere over tid, og av om noen
-regioner eller kontor presterer bedre enn andre.
+Dersom svaret er nei, vil indikatorene delvis fange konjunkturer og
+arbeidsmarkedsstruktur, ikke bare Navs innsats. Det kan gi et misvisende bilde
+av utvikling over tid og av forskjeller mellom regioner.
+
+## Slik leser du rapporten
+
+Rapporten bruker tre nivåer av evidens:
+
+1. **Robust funn**: resultatet står seg på tvers av metoder eller delutvalg.
+2. **Tentativt funn**: resultatet peker i én retning, men er følsomt for valg av periode eller metode.
+3. **Uavklart**: datagrunnlaget er for tynt til klar konklusjon.
+
+Vi legger hovedvekt på mønstre som er robuste. Der datagrunnlaget er begrenset
+(særlig i mismatch-analysene), tolkes resultatene som tentative.
+
+## Begreper brukt i rapporten
+
+| Begrep | Betydning i denne rapporten |
+|---|---|
+| **Indikatorutfall** | Faktisk resultat (f.eks. andel i jobb eller arbeidstid) |
+| **Indikatoravvik** | Avvik mellom faktisk og forventet resultat gitt brukerprofil (modellrenset del) |
+| **Arbeidsmarkedsstramhet** | Hvor vanskelig det er for arbeidsgivere å rekruttere, målt i bedriftsundersøkelsen |
+| **Kompetansemismatch** | Ubalanse mellom etterspurt og tilgjengelig kompetanse på tvers av yrker/sektorer |
+| **Referansemodell** | Dagens produksjonsmodell for arbeidsindikatoren |
+| **Utvidet modell** | Modellvariant med ekstra arbeidsmarkedsvariabel(er) |
 
 ## Hva analyserer vi?
 
@@ -32,10 +51,10 @@ uforklarte delen) ikke samvariere med stramheten.
 ubalanse mellom hvilke kompetanser bedriftene etterspør og hvilke kompetanser
 de ledige besitter, påvirker indikatorene. Mismatch inngår ikke i
 indikatormodellens kontroller, og en sammenheng kan tyde på et hull i
-kontrollen.
+kontrollen. Vi tester også hvor følsomme disse resultatene er for enkeltår.
 
-Analysen dekker ikke (ennå) mulige *forbedringer* av indikatormodellen —
-dette er tematisert som videre arbeid i [konklusjonen](konklusjon.qmd).
+I tillegg inkluderer rapporten en del om **modellendringer**, der vi tester
+om utvidede modellvarianter reduserer følsomhet for arbeidsmarkedsforhold.
 
 ## Data
 
@@ -44,7 +63,7 @@ dette er tematisert som videre arbeid i [konklusjonen](konklusjon.qmd).
 | NAVs bedriftsundersøkelse | 2021–2026 | 12 Nav-regioner | Årlig (vår) |
 | SSB tabell 11587 (ledige stillinger) | 2016– | Næring (NACE) | Kvartalsvis |
 | SSB tabell 11154 (sysselsatte) | 2016– | Næring (NACE) | Kvartalsvis |
-| Navs arbeidsindikator | 2021–2025 | 12 Nav-regioner / Nasjolat | Månedlig |
+| Navs arbeidsindikator | 2021–2025 | 12 Nav-regioner / Nasjonalt | Månedlig |
 
 ## Struktur
 
@@ -56,8 +75,10 @@ dette er tematisert som videre arbeid i [konklusjonen](konklusjon.qmd).
    for jobbindikator og arbeidstidsindikator separat.
 
 3. **[Kompetansemismatch](mismatch/yrke.qmd)** — analyserer strukturell
-   mismatch mellom etterspørsel og tilbud av kompetanse, og sammenhengen med
-   indikatorene, inkludert sektordimensjonen fra SSB og en sensitivitetsanalyse.
+   mismatch mellom etterspørsel og tilbud av kompetanse, samt robusthetstester.
 
-4. **[Konklusjon](konklusjon.qmd)** — oppsummerer hva vi vet, hva vi ikke vet,
-   og skisserer videre arbeid.
+4. **[Modellendringer](modellendringer/intro.qmd)** — tester om utvidede modeller
+   reduserer samvariasjon med stramhet og mismatch.
+
+5. **[Konklusjon](konklusjon.qmd)** — samler funn i robuste, tentative og
+   uavklarte resultater, og skisserer videre arbeid.

@@ -10,7 +10,7 @@ execute:
 import pandas as pd
 ```
 
-# Motivasjon
+## Motivasjon
 
 Stramhetstesten viste at stillingsrate-modellen reduserer sammenhengen mellom
 indikatoravvikene og arbeidsmarkedsstramhet, mens shiftshare og
@@ -27,18 +27,18 @@ Dersom en modellvariant kontrollerer bedre for arbeidsmarkedet, bør
 indikatoravvikene vise *svakere* korrelasjon med mismatch-indeksene.
 
 ::: {.callout-note}
-## Merk: Datapunktene er svært få
+### Merk: Datapunktene er svært få
 Mismatch-data er kun tilgjengelig på årsplan fra bedriftsundersøkelsen
 (2021–2025), noe som gir maksimalt fem datapunkter. Med dette utgangspunktet er
 alle korrelasjoner statistisk svakt fundert — spesielt gjelder dette 12-månedersutfallene
 der siste år mangler observasjoner.
 
-Fra [sensitiv­itetstesten](../mismatch/sensitivitet.qmd) vet vi at korrelasjonen
+Fra [sensitivitetstesten](../mismatch/sensitivitet.qmd) vet vi at korrelasjonen
 mellom mismatch og indikator i all vesentlighet drives av én observasjon (2021,
 pandemigjenopeningen). Resultatene her bør tolkes med tilsvarende forsiktighet.
 :::
 
-# Korrelasjoner per modell
+## Korrelasjoner per modell
 
 For hvert år beregner vi årsgjennomsnitt av indikatoren (nasjonalt) per modell,
 og korrelerer med de tilhørende mismatch-indeksene fra bedriftsundersøkelsen.
@@ -92,7 +92,7 @@ pd.DataFrame(rows)
 @fig-mismatch-korr viser de absolutte Pearson-korrelasjonene mellom indikatoren
 (avvikskomponenten) og Jackman–Roper mismatch-indeksen, per modell og utfall.
 
-# Regresjon per modell
+## Regresjon per modell
 
 ```{python}
 #| label: tbl-mismatch-reg
@@ -124,7 +124,7 @@ for utfall in ["jobb3", "jobb12", "atid3", "atid12"]:
 pd.DataFrame(rows)
 ```
 
-# Oppsummering
+## Oppsummering
 
 ```{python}
 #| label: tbl-mismatch-samm
@@ -136,8 +136,8 @@ pivot = pivot.reindex(modell_rekkefølge)
 pivot.round(3)
 ```
 
-I motsetning til stramhetstesten viser mismatch-testen et mye flatere mønster
-på tvers av modellvariantene:
+I motsetning til stramhetstesten viser mismatch-testen et flatere og mindre
+stabilt mønster på tvers av modellvariantene:
 
 - **Ledighetsrate** og **Ledighetsrate ung** reduserer korrelasjonen med
   mismatch-indeksen for 3-månedersutfallene, men ikke systematisk for
@@ -151,19 +151,21 @@ identiske mål. Mismatch avspeiler en strukturell ubalanse mellom
 tilgjengelige og etterspurte kompetanser, mens stramhet i større grad
 fanger opp konjunkturelle svingninger.
 
+### Hvor sikre er vi?
+
+Resultatene i dette kapitlet vurderes som **tentative**:
+
+- mismatchserien har bare fem årsobservasjoner
+- 2021 har stor påvirkning på estimatene
+- 12-månedersutfall mangler siste år og blir ekstra følsomme
+
 ::: {.callout-important}
-## Tolkning
-Det er ingen enkelt modellvariant som konsistent og tydelig reduserer
-sammenhengen med *begge* eksterne mål (stramhet og mismatch). Stillingsrate
-fungerer best mot stramhet, men forverrer noe mot mismatch. Ledighetsrate
-gjør det omvendt.
+### Tolkning
+Det er ingen modellvariant som konsistent reduserer sammenhengen med *begge*
+eksterne mål (stramhet og mismatch). Stillingsrate ser best ut mot stramhet,
+mens ledighetsrate oftere reduserer mismatch-sammenheng på kort sikt.
 
-At funnene er inkonsekvente på tvers av de to målene svekker ikke
-nødvendigvis verdien av de utvidede modellene — det kan reflektere at
-stramhet og mismatch fanger opp ulike dimensjoner av arbeidsmarkedsforholdene,
-og at ingen enkelt kontrollvariabel er «nok» til å eliminere begge.
-
-Gitt det svært begrensede antallet datapunkter (5 år), bør alle resultater i
-dette kapittelet tolkes som tentative og ikke som grunnlag for sterke
-konklusjoner.
+Dette peker mot at stramhet og mismatch fanger ulike sider av arbeidsmarkedet.
+Funnene bør brukes som beslutningsstøtte for videre modelltesting, ikke som et
+endelig valg mellom modellvariantene.
 :::

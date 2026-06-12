@@ -12,7 +12,7 @@ import numpy as np
 from scipy import stats
 ```
 
-# Motivasjon
+## Motivasjon
 
 Analysen i forrige kapittel bruker data fra 2020–2025 (kvartalsvis). Året 2021
 var imidlertid et koronapåvirket år med unormale arbeidsmønstre, høy ledighet
@@ -24,7 +24,7 @@ Her gjentas alle tre analysedelene med 2021 **ekskludert** — både kvartalene
 2021K1–K4 fra SSB-dataene og 2021-raden fra bedriftsundersøkelsen — for å
 undersøke robustheten av funnene.
 
-# Del A — Sammenligning SSB vs bedrift (uten 2021)
+## Del A — Sammenligning SSB vs bedrift (uten 2021)
 
 ```{python}
 #| label: tbl-korrA
@@ -52,7 +52,7 @@ bedriftenes stramhetsindikator er reell, og ikke kunstig skapt av 2021.
 ![Scatter uten 2021: SSB vs bedrift stramhetsindikator per næring.
 ](figurer/ssb_bedrift_scatter_excl2021.png){#fig-scatter-excl}
 
-# Del B — Bivariate regresjoner (uten 2021)
+## Del B — Bivariate regresjoner (uten 2021)
 
 ![Heatmap av Pearson r: næringsvise SSB-stramhetsindikator vs indikatoravvik,
 uten 2021 (sammenlign med forrige kapittel).
@@ -105,7 +105,7 @@ signifikante for jobb 12 mnd.
 ![Regresjonskoeffisienter β uten 2021 (rød = p < 0.05).
 ](figurer/ssb_naering_regresjon_beta_excl2021.png){#fig-beta-excl}
 
-# Del C — Panelregresjon med næring FE (uten 2021)
+## Del C — Panelregresjon med næring FE (uten 2021)
 
 ```{python}
 #| label: tbl-panel-sammenligning
@@ -136,7 +136,7 @@ pd.DataFrame(rows)
 ![Panel-β uten 2021: sammenligning av panel-koeffisient og bivariate β.
 ](figurer/ssb_panel_koeffisienter_excl2021.png){#fig-panel-excl}
 
-## Tolkning av panelresultatene
+### Tolkning av panelresultatene
 
 De viktigste observasjonene fra sammenligningen:
 
@@ -159,7 +159,7 @@ De viktigste observasjonene fra sammenligningen:
 
 - *Atid 3 mnd*: Forblir ubetydelig og ikke-signifikant.
 
-## Konklusjon
+### Konklusjon
 
 Kjerneresultatet — at næringsvise stramhetssvingninger er systematisk
 assosiert med indikatoravviket for **12-månedersutfall** — er **robust** for

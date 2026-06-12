@@ -10,11 +10,14 @@ Mismatch inngår ikke i indikatormodellens kontroller. En systematisk
 sammenheng mellom mismatch og indikatoravvik vil tyde på at modellen ikke
 fanger opp all relevant arbeidsmarkedsvariasjon.
 
-Analysen dekker to datadimensjoner:
+Analysen dekker to komplementære grep:
 
 - **[Yrkesbasert mismatch](yrke.qmd)** fra bedriftsundersøkelsen — nasjonal,
   årlig 2021–2025.
-- **[Sektorbasert mismatch](sektor.qmd)** fra SSB — nasjonal, kvartalsvis.
 - **[Sensitivitetsanalyse](sensitivitet.qmd)** — robusthet av de
   yrkesbaserte funnene, og hva de betyr for vurderingen av indikatorens
   arbeidsmarkedskontroller.
+
+Siden bedriftsundersøkelsen kun gir få årsobservasjoner, er hovedspørsmålet i
+denne delen ikke bare *om* vi finner samvariasjon, men også *hvor robust*
+samvariasjonen er når enkeltår tas ut.

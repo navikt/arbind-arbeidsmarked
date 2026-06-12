@@ -10,9 +10,9 @@ execute:
 import pandas as pd
 ```
 
-# Data
+## Data
 
-## NAVs jobbindikator 2021–2025
+### NAVs jobbindikator 2021–2025
 
 Indikatordata er hentet fra NAVs BigQuery-tjeneste og inneholder månedlige
 observasjoner per Nav-region. Vi bruker fire utfallsmål:
@@ -34,25 +34,25 @@ at noen regioner strukturelt sett har en mer krevende søkerpopulasjon.
 *Merknad:* `faktisk_jobb12` mangler for 2025 fordi 12-månedersutfallet for
 arbeidssøkere registrert i mars 2025 ikke vil foreligge før mars 2026.
 
-# Metode
+## Metode
 
-## Korrelasjonsanalyse
+### Korrelasjonsanalyse
 
-Sammenhengen mellom bedrifts- og indikatorvariabler analyseres på to måter:
+Vi analyserer sammenhengen mellom stramhet og indikatorer på to måter:
 
 **Krysseksjonell analyse innen hvert år** sammenligner de tolv Nav-regionene
 i samme undersøkelsesår. Denne tilnærmingen eliminerer nasjonale
 konjunkturbevegelser – det at alle regioner stiger og faller simultant –
 og isolerer den *regionale* variasjonen i arbeidsmarkedsstramhet.
 
-**Pooled panel med år-faste effekter** demeaner alle variabler (trekker fra
-årsgjennomsnitt) før korrelasjon beregnes på poolet datasett. Dette er
-ekvivalent med en OLS-regresjon med år-dummyer og gir en robust
-sammenstilling på tvers av alle år og regioner.
+**Pooled panel med år-faste effekter** trekker fra årsgjennomsnittet i hver
+variabel før korrelasjon beregnes. I praksis betyr dette at vi ser på om
+regioner som ligger over snittet i stramhet det aktuelle året også ligger over
+snittet i indikatorutfall samme år.
 
-# Resultater
+## Resultater
 
-## Nasjonal utvikling i jobbindikator
+### Nasjonal utvikling i jobbindikator
 
 ![Nasjonal gjennomsnittlig faktisk jobbsannsynlighet og indikatoravvik over tid](figurer/fig_ind_tid.png){#fig-ind-tid}
 
@@ -64,7 +64,7 @@ jobbsannsynligheten), mens de gjenværende registrerte i 2022–2023 utgjorde
 en mer krevende gruppe. Det er nettopp derfor *indikatorvariabelen* (avvik
 fra forventet) er det reneste sammenligningsmålet.
 
-## Sammenheng mellom stramhet og indikatorutfall
+### Sammenheng mellom stramhet og indikatorutfall
 
 ![Stramhetsindikator vs. jobbresultater – alle observasjoner fargekodet på år](figurer/fig_scatter_all.png){#fig-scatter-all}
 
@@ -77,7 +77,7 @@ mulig tolkning er at koronapandemiens ettereffekter forstyrret signalet i
 2021 – mange permitterte gikk tilbake til sin opprinnelige arbeidsgiver
 uavhengig av regional stramhet.
 
-## Korrelasjonstabeller
+### Korrelasjonstabeller
 
 ```{python}
 #| label: tbl-kor-per-aar
@@ -100,7 +100,7 @@ med år-faste effekter: stramhetsindikator er signifikant korrelert med
 `faktisk_jobb3` (r = 0,63, p < 0,001) og `faktisk_jobb12`
 (r = 0,46, p < 0,01) etter at nasjonale trender er fjernet.
 
-## Samvariasjon etter fjerning av år-effekter
+### Samvariasjon etter fjerning av år-effekter
 
 ![Demeaned stramhetsindikator vs. demeaned utfall – år-faste effekter fjernet](figurer/fig_demeaned.png){#fig-demeaned}
 
@@ -109,41 +109,23 @@ konjunktursykluser er trukket ut: regioner som ligger *over* gjennomsnittet
 i stramhet det aktuelle året, tenderer til å plassere *flere* arbeidssøkere
 i jobb enn gjennomsnittet det samme året.
 
-# Konklusjon
+## Konklusjon
 
-Analysen dokumenterer en statistisk signifikant og substansiell positiv
-sammenheng mellom bedriftsundersøkelsens stramhetsmål og indikatorutfallene
-for arbeidssøkere i NAV. Hovedfunnene er:
+### Hva finner vi?
 
-1. **Sterk krysseksjonell sammenheng:** Regioner med høy stramhetsindikator
-   plasserer markant flere arbeidssøkere i jobb enn regioner med lav
-   stramhet – innen samme år er r = 0,70–0,89 for faktisk jobbsannsynlighet
-   (2022–2024).
+1. Regioner med høyere stramhet har gjennomgående bedre jobbutfall enn regioner
+   med lavere stramhet, særlig fra 2022 og utover.
+2. Sammenhengen står seg også når nasjonale årssvingninger tas ut.
+3. Sammenhengen er svakere i 2021, som skiller seg ut som et pandemiår.
 
-2. **Sammenhengen holder med år-faste effekter:** Etter at nasjonale
-   konjunkturbevegelser er fjernet (demeaning), forblir Pearson r = 0,63
-   (p < 0,001) for faktisk jobb 3 mnd, og r = 0,37 (p < 0,01) for avviket
-   fra forventet utfall (`indikator_jobb3`).
+### Hvor sikre er vi?
 
-3. **Svakt signal i 2021:** Sammenhengen er svak det første analyseåret,
-   trolig fordi permitterte arbeidstakere gikk tilbake til sine
-   opprinnelige arbeidsgivere uavhengig av regional stramhet etter pandemien.
+Funnene i denne delen vurderes som **relativt robuste**: mønsteret går igjen i
+både årlige krysseksnitt og pooled analyse med år-faste effekter.
 
-4. **Indikator-variabelen anbefales som primærmål:** `indikator_jobb3`
-   og `indikator_jobb12` (avvik fra forventet) er renere mål fordi de
-   kontrollerer for at noen regioner strukturelt sett har en mer krevende
-   søkerpopulasjon.
+### Hva betyr det?
 
-5. **Helse og omsorg dominerer mangelen:** Uavhengig av år er mangelen
-   størst innen helse, pleie og omsorg – en sektor der økt stramhet
-   paradoksalt ikke nødvendigvis hjelper plassering av arbeidssøkere,
-   fordi behovene er svært kompetansespesifikke.
-
-**Videre arbeid:**
-
-- OLS-regresjon med region-klynge-robuste standardfeil på de demeaned
-  variablene vil gi koeffisienter i stedet for r-verdier.
-- Forsinkede effekter bør undersøkes: påvirker arbeidsmarkedsstramhet
-  *om våren* indikatorutfallene *om høsten* eller neste vår?
-- Bransjenivå-analyse: sammenhengen mellom næringsvise mangeltall og
-  indikatorutfall for arbeidssøkere med bakgrunn i de aktuelle næringene.
+At også indikatoravvik samvarierer med stramhet, tyder på at arbeidsmarkedet
+fortsatt påvirker den delen av indikatoren som skal være renset for
+omgivelsesforhold. Resultatene alene avgjør ikke modellvalg, men de peker på
+at arbeidsmarkedskontrollen kan styrkes.

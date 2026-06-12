@@ -19,3 +19,5 @@ utvidede varianter der hver legger til en ekstra arbeidsmarkedsvariabel:
   rangeringer og spredning.
 - **[Stramhetstest](stramhet_sensitivitet.qmd)** — den sentrale testen:
   reduseres sammenhengen med uavhengige stramhetsmål?
+- **[Mismatch-test](mismatch.qmd)** — supplerende test:
+  reduseres sammenhengen med kompetansemismatch?

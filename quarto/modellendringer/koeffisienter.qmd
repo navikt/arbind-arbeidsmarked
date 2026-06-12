@@ -10,7 +10,7 @@ execute:
 import pandas as pd
 ```
 
-# Modelloversikt
+## Modelloversikt
 
 Vi sammenligner fem modellvarianter som alle estimerer forventet utfall for
 arbeidssøkere, men med ulike arbeidsmarkedskontroller:
@@ -26,7 +26,7 @@ Alle modeller er estimert på bo- og arbeidsmarkedsregioner (160 regioner i
 Norge), der arbeidsmarkedsvariablene er kategorisert i desiler. Referansemodellen
 er den gjeldende produksjonsmodellen brukt i Navs arbeidsindikator.
 
-# Koeffisienter for nye arbeidsmarkedsvariabler
+## Koeffisienter for nye arbeidsmarkedsvariabler
 
 @fig-koeff-desil viser koeffisientene for de nye arbeidsmarkedsvariablene
 i de fire utvidede modellene, for utfallet *jobb 3 måneder*. Koeffisientene
@@ -35,13 +35,13 @@ viser effekten av å tilhøre et gitt desil relativt til referansedesilen
 
 ![Koeffisienter for nye arbeidsmarkedsvariabler per desil (jobb 3 mnd)](figurer/koeffisienter_desil_jobb3.png){#fig-koeff-desil}
 
+
 Et stigende mønster indikerer at høyere verdier på arbeidsmarkedsvariabelen
 (f.eks. høyere stillingsrate eller lavere ledighetsrate) er assosiert med
-bedre jobbresultat, selv etter kontroll for individuelle kjennetegn og
-tilstrømming. Alle fire variabler viser generelt stigende koeffisienter
+høyere forventning. Alle fire variabler viser generelt stigende koeffisienter
 fra lave til høye desiler, med varierende grad av monotonitet.
 
-# Stabilitet i tilstrømmingskoeffisienter
+## Stabilitet i tilstrømmingskoeffisienter
 
 Et sentralt spørsmål er om de eksisterende tilstrømmingskoeffisientene
 endres vesentlig når nye variabler legges til. Stor endring kan tyde på

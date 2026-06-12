@@ -10,7 +10,7 @@ execute:
 import pandas as pd
 ```
 
-# Motivasjon
+## Motivasjon
 
 Navs arbeidsindikator måler avviket mellom faktisk og *forventet*
 arbeidsdeltagelse, der forventningen beregnes med en regresjonsmodell som
@@ -19,7 +19,7 @@ Dersom modellen kontrollerer tilstrekkelig
 for arbeidsmarkedet, bør indikatoravvikene — det modellen *ikke* forklarer
 — være uavhengige av arbeidsmarkedsforholdene.
 
-## Hva kontrollerer indikatormodellen for?
+### Hva kontrollerer indikatormodellen for?
 
 Ifølge dokumentasjonsrapporten[^dok] kontrollerer
 modellen for arbeidsmarkedet gjennom:
@@ -40,7 +40,7 @@ Den gjeldende modellen har dermed **kun én arbeidsmarkedsvariabel** —
 tilstrømning til ledighet — og kontrollerer ikke for verken
 arbeidsmarkedsstramhet, nærings- eller yrkesmismatch.
 
-## Hva tester vi?
+### Hva tester vi?
 
 Dersom indikatormodellen kontrollerer tilstrekkelig for arbeidsmarkedet,
 bør mismatch-indeksen — en egenskap ved arbeidsmarkedet som ikke inngår i
@@ -60,7 +60,7 @@ hele resultatet. Vi undersøker dette med to komplementære metoder:
 2. **Jackknife**: Beregn bias-korrigerte korrelasjonsestimater med
    standardfeil og konfidensintervall basert på alle LOO-utvalgene.
 
-# Leave-one-out korrelasjon
+## Leave-one-out korrelasjon
 
 @fig-loo-korr viser Pearson-korrelasjonen mellom mismatch-indeksen og
 faktiske indikatorverdier for hvert LOO-utvalg.
@@ -90,7 +90,7 @@ Uten 2021 kollapser korrelasjonene fra $r > 0.98$ til $r \approx 0.2{-}0.7$,
 og ingen er statistisk signifikante. Alle andre år kan fjernes uten at
 konklusjonen endres vesentlig. Det betyr at den tilsynelatende sterke
 sammenhengen mellom mismatch og faktiske utfall nesten utelukkende drives av
-det ekstreme panemiåret.
+det ekstreme pandemiåret.
 
 For **indikatoravvikene** — det den forventede verdien fra modellen
 *ikke* forklarer — er bildet enda tydeligere:
@@ -117,9 +117,9 @@ indikatormodellen kontrollert tilstrekkelig for arbeidsmarkedet, burde
 verken fullt utvalg eller utvalget uten 2021 vist noen systematisk
 sammenheng. At korrelasjonen er sterk *med* 2021 og forsvinner *uten*,
 tyder på at modellen ikke fanger opp den ekstreme
-arbeidsmarkedssituasjonen som preget panemiåret.
+arbeidsmarkedssituasjonen som preget pandemiåret.
 
-# Leave-one-out regresjon
+## Leave-one-out regresjon
 
 @fig-loo-reg viser regresjonskoeffisientene ($\hat{\beta}$) med Newey–West
 standardfeil for hvert LOO-utvalg. Her er det indikatoravvikene som er
@@ -156,7 +156,7 @@ at det er residual arbeidsmarkedsvariasjon i indikatoren som ikke er
 kontrollert bort. Men denne prediksjonsevnen er helt avhengig av det
 ekstreme året 2021.
 
-# Jackknife-estimater
+## Jackknife-estimater
 
 Jackknife-metoden bruker alle LOO-utvalgene til å beregne et bias-korrigert
 estimat av korrelasjonen med tilhørende standardfeil og 95 %
@@ -195,7 +195,7 @@ konfidensintervallene for **indikatoravvik** inkluderer null i alle
 tilfeller. Vi kan dermed ikke statistisk fastslå at mismatch samvarierer
 med den uforklarte delen av indikatoren.
 
-# Diskusjon: Er arbeidsmarkedet godt nok kontrollert for?
+## Diskusjon: Er arbeidsmarkedet godt nok kontrollert for?
 
 Spørsmålet vi stiller er om Navs indikatormodell kontrollerer tilstrekkelig
 for arbeidsmarkedsforholdene. Resultatene gir et sammensatt bilde:
@@ -247,5 +247,13 @@ sammenhengen, er forenlig med to tolkninger:
 For å avgjøre mellom disse tolkningene trengs lengre tidsserier —
 fortrinnsvis gjennom flere konjunktursykluser — eller alternative
 identifikasjonsstrategier med regional eller sektoriell variasjon.
+
+### Hva betyr dette for rapportens hovedkonklusjon?
+
+Dette kapitlet flytter vurderingen fra et mulig **robust funn** til et
+**tentativt funn**: vi ser et signal i fullutvalget, men signalet er ikke
+stabilt når ett ekstremår tas ut. Hovedbudskapet er derfor at dagens data ikke
+er sterke nok til å avgjøre om mismatch påvirker indikatoravvik systematisk i
+normale konjunkturperioder.
 
 [^dok]: Kann, I.C. (2025). *Dokumentasjonsrapport: Arbeidsindikator*. Nav. Tilgjengelig fra: <https://bibliotek.nav.no/record/5410>

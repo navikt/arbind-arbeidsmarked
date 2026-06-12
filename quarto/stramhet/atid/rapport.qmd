@@ -10,9 +10,9 @@ execute:
 import pandas as pd
 ```
 
-# Data
+## Data
 
-## NAVs arbeidstidsindikator 2021–2025
+### NAVs arbeidstidsindikator 2021–2025
 
 Indikatordata er hentet fra NAVs BigQuery-tjeneste og inneholder månedlige
 observasjoner per Nav-region. Vi bruker fire utfallsmål for arbeidstid:
@@ -34,35 +34,34 @@ at noen regioner strukturelt sett har en mer krevende søkerpopulasjon.
 *Merknad:* `faktisk_atid12` mangler for 2025 fordi 12-månedersutfallet for
 arbeidssøkere registrert i mars 2025 ikke vil foreligge før mars 2026.
 
-# Metode
+## Metode
 
-## Korrelasjonsanalyse
+### Korrelasjonsanalyse
 
-Sammenhengen mellom bedrifts- og indikatorvariabler analyseres på to måter:
+Vi analyserer sammenhengen mellom stramhet og arbeidstidsutfall på to måter:
 
 **Krysseksjonell analyse innen hvert år** sammenligner de tolv Nav-regionene
 i samme undersøkelsesår. Denne tilnærmingen eliminerer nasjonale
 konjunkturbevegelser og isolerer den *regionale* variasjonen i
 arbeidsmarkedsstramhet.
 
-**Pooled panel med år-faste effekter** demeaner alle variabler (trekker fra
-årsgjennomsnitt) før korrelasjon beregnes på poolet datasett. Dette er
-ekvivalent med en OLS-regresjon med år-dummyer og gir en robust
-sammenstilling på tvers av alle år og regioner.
+**Pooled panel med år-faste effekter** trekker fra årsgjennomsnittet i hver
+variabel før korrelasjon beregnes. Det gir et samlet mål på om regioner som
+ligger over snittet i stramhet også ligger over snittet i arbeidstid samme år.
 
-# Resultater
+## Resultater
 
-## Nasjonal utvikling i arbeidstidsindikator
+### Nasjonal utvikling i arbeidstidsindikator
 
 ![Nasjonal gjennomsnittlig faktisk arbeidstid og indikatoravvik over tid](figurer/fig_ind_tid.png){#fig-ind-tid}
 
 @fig-ind-tid viser utviklingen i gjennomsnittlig ukentlig arbeidstid 3 måneder
 etter registrering, og avviket fra forventet arbeidstid. Mønsteret ligner
-jobbindikatoren: sammensetningseffekter gjør at faktisk arbeidstid kan bevege
-seg mot strømmens av stramheten, mens indikatorvariabelen (avvik fra forventet)
+jobbindikatoren: sammensetningseffekter kan trekke faktisk arbeidstid i en
+annen retning enn stramheten, mens indikatorvariabelen (avvik fra forventet)
 gir et renere bilde av om regionene leverer mer eller mindre enn ventet.
 
-## Sammenheng mellom stramhet og arbeidstidsutfall
+### Sammenheng mellom stramhet og arbeidstidsutfall
 
 ![Stramhetsindikator vs. arbeidstidsresultater – alle observasjoner fargekodet på år](figurer/fig_scatter_all.png){#fig-scatter-all}
 
@@ -76,7 +75,7 @@ for jobbindikatoren, noe som tyder på at begge utfallsmål fanger opp den
 samme underliggende mekanismen: i strammere markeder jobber nyregistrerte
 arbeidssøkere mer timer per uke.
 
-## Korrelasjonstabeller
+### Korrelasjonstabeller
 
 ```{python}
 #| label: tbl-kor-per-aar
@@ -101,7 +100,7 @@ indikatoravvikene `indikator_atid3` (r = 0,46, p < 0,001) og
 `indikator_atid12` (r = 0,51, p < 0,001) er begge sterkt signifikante.
 Sammenhengen for arbeidstid er noe sterkere enn for jobbindikatoravviket.
 
-## Samvariasjon etter fjerning av år-effekter
+### Samvariasjon etter fjerning av år-effekter
 
 ![Demeaned stramhetsindikator vs. demeaned arbeidstid – år-faste effekter fjernet](figurer/fig_demeaned.png){#fig-demeaned}
 
@@ -110,42 +109,23 @@ konjunktursykluser er trukket ut: regioner som ligger *over* gjennomsnittet
 i stramhet det aktuelle året, tenderer til å ha arbeidssøkere som arbeider
 *flere timer per uke* enn gjennomsnittet det samme året.
 
-# Konklusjon
+## Konklusjon
 
-Analysen dokumenterer en statistisk signifikant og substansiell positiv
-sammenheng mellom bedriftsundersøkelsens stramhetsmål og arbeidstidsutfallene
-for arbeidssøkere i NAV. Hovedfunnene er:
+### Hva finner vi?
 
-1. **Sterk krysseksjonell sammenheng:** Regioner med høy stramhetsindikator
-   har arbeidssøkere som jobber markant flere timer per uke – innen samme år
-   er r = 0,70–0,90 for faktisk arbeidstid 3 mnd (2022–2024).
+1. Regioner med høyere stramhet har gjennomgående høyere arbeidstid for
+   nyregistrerte arbeidssøkere.
+2. Sammenhengen holder også når nasjonale årssvingninger tas ut.
+3. Arbeidstidsindikatoren viser gjennomgående et tydeligere stramhetssignal enn
+   jobbindikatoren i samme periode.
 
-2. **Sammenhengen holder med år-faste effekter:** Etter at nasjonale
-   konjunkturbevegelser er fjernet (demeaning), forblir Pearson r = 0,66
-   (p < 0,001) for faktisk arbeidstid 3 mnd og r = 0,46 (p < 0,001) for
-   avviket fra forventet utfall (`indikator_atid3`).
+### Hvor sikre er vi?
 
-3. **Sterkere signal enn jobbindikatoren:** Korrelasjonskoeffisientene for
-   atid (arbeidstid) er gjennomgående høyere enn de tilsvarende for
-   jobbindikatoren. En mulig forklaring er at arbeidstid er et mer
-   kontinuerlig og sensitivt mål som fanger opp gradvise endringer i
-   arbeidsmarkedstilpasningen.
+Funnene vurderes som **relativt robuste** innenfor tilgjengelig datagrunnlag:
+samme retning finnes både i årlige krysseksnitt og pooled analyser.
 
-4. **Svakt signal i 2021:** Sammenhengen er svakest det første analyseåret,
-   trolig pga. koronapandemiens ettereffekter der mange permitterte gikk
-   tilbake til opprinnelig arbeidsgiver – med fullt timetall – uavhengig av
-   regional stramhet.
+### Hva betyr det?
 
-5. **Indikator-variabelen anbefales som primærmål:** `indikator_atid3`
-   og `indikator_atid12` kontrollerer for at noen regioner strukturelt sett
-   har en mer krevende søkerpopulasjon og gir dermed mer robuste komparative
-   mål.
-
-**Videre arbeid:**
-
-- OLS-regresjon med region-klynge-robuste standardfeil på de demeaned
-  variablene vil gi koeffisienter (timer/uke per enhet stramhet).
-- Forsinkede effekter bør undersøkes: påvirker arbeidsmarkedsstramhet
-  *om våren* arbeidstidsutfallene *om høsten* eller neste vår?
-- Sammenligning av atid- og jobbindikatoren i en felles modell for å
-  forstå hvilken dimensjon av arbeidstilpasningen stramhet påvirker mest.
+Når også indikatoravvik samvarierer med stramhet, tyder det på at modellen ikke
+fullt ut fanger arbeidsmarkedstilstanden. Det styrker behovet for å teste
+utvidede arbeidsmarkedskontroller i indikatormodellen.

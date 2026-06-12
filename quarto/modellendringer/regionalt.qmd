@@ -11,7 +11,7 @@ import pandas as pd
 import numpy as np
 ```
 
-# Rangkorrelasjon med referansemodellen
+## Rangkorrelasjon med referansemodellen
 
 For hver måned beregner vi Spearman-rangkorrelasjon mellom referansemodellens
 og de utvidede modellenes regionale indikatorer. Høy ρ betyr at regionenes
@@ -48,7 +48,7 @@ De fleste modellene har gjennomsnittlig ρ over 0.85, noe som tyder på at
 regionenes rangering i stor grad er stabil. Unntaket er **stillingsrate**-modellen
 for jobb 12 mnd (ρ = 0.70), som endrer rangeringen vesentlig.
 
-# Rangendringer
+## Rangendringer
 
 ```{python}
 #| label: tbl-rangendring
@@ -75,7 +75,7 @@ rangendringen under 1 plass. Andelen region-måneder der rangeringen
 endres med 3 eller flere plasser er generelt under 15 %, men kan være
 høyere for 12-måneders-utfallene.
 
-# Regional spredning
+## Regional spredning
 
 ```{python}
 #| label: tbl-spredning
