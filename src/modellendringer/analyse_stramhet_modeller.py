@@ -24,6 +24,8 @@ from pathlib import Path
 import pandas as pd
 from scipy import stats
 
+from src.common.config import REFERANSEMAANED
+
 _PROCESSED = Path("data/processed")
 _RESULTS = Path("data/results")
 
@@ -33,15 +35,6 @@ _MODELLNAVN = {
     79: "Shiftshare",
     80: "Ledighetsrate",
     81: "Ledighetsrate ung",
-}
-
-# Referansemåned per undersøkelsesår (samme som standardiser_data.py)
-_REFERANSEMAANED: dict[int, int] = {
-    2021: 2,
-    2022: 4,
-    2023: 4,
-    2024: 3,
-    2025: 3,
 }
 
 _BEDRIFTS_VARS = {
@@ -65,7 +58,7 @@ def _hent_modell_per_referansemaaned(df_reg: pd.DataFrame) -> pd.DataFrame:
     df["maaned"] = df["beholdningsmaaned"].dt.month
 
     rows = []
-    for aar, ref_mnd in _REFERANSEMAANED.items():
+    for aar, ref_mnd in REFERANSEMAANED.items():
         utsnitt = df[(df["aar"] == aar) & (df["maaned"] == ref_mnd)]
         if utsnitt.empty:
             print(f"  Advarsel: ingen data for {aar} måned {ref_mnd}")

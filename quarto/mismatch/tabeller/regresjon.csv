@@ -1,49 +1,49 @@
-mismatch_var,mismatch_label,utfall,utfall_label,indikator_type,indikator_type_label,beta_mismatch,se_newey_west,t_stat,p_verdi,r2_adj,n
-mismatch_indeks,Jackman–Roper mismatch-indeks,jobb3,Jobb 3 mnd,faktisk,Faktisk,21.7466,2.8802,7.55,0.0,0.7639,60
-mismatch_indeks,Jackman–Roper mismatch-indeks,jobb3,Jobb 3 mnd,indikator,Indikator (avvik),5.2216,1.2158,4.295,0.0001,0.3861,60
-mismatch_indeks,Jackman–Roper mismatch-indeks,jobb12,Jobb 12 mnd,faktisk,Faktisk,35.6074,5.2329,6.804,0.0,0.7444,51
-mismatch_indeks,Jackman–Roper mismatch-indeks,jobb12,Jobb 12 mnd,indikator,Indikator (avvik),10.6047,1.3806,7.681,0.0,0.738,51
-mismatch_indeks,Jackman–Roper mismatch-indeks,atid3,Arbeidstid 3 mnd,faktisk,Faktisk,7.0999,0.8193,8.666,0.0,0.8021,60
-mismatch_indeks,Jackman–Roper mismatch-indeks,atid3,Arbeidstid 3 mnd,indikator,Indikator (avvik),1.6672,0.3461,4.818,0.0,0.4526,60
-mismatch_indeks,Jackman–Roper mismatch-indeks,atid12,Arbeidstid 12 mnd,faktisk,Faktisk,10.3644,1.2814,8.089,0.0,0.7984,51
-mismatch_indeks,Jackman–Roper mismatch-indeks,atid12,Arbeidstid 12 mnd,indikator,Indikator (avvik),2.6712,0.3652,7.315,0.0,0.7026,51
-mismatch_indeks_cd_30,Cobb–Douglas mismatch (α=0.3),jobb3,Jobb 3 mnd,faktisk,Faktisk,55.8731,7.5038,7.446,0.0,0.7565,60
-mismatch_indeks_cd_30,Cobb–Douglas mismatch (α=0.3),jobb3,Jobb 3 mnd,indikator,Indikator (avvik),13.5578,3.1505,4.303,0.0001,0.3939,60
-mismatch_indeks_cd_30,Cobb–Douglas mismatch (α=0.3),jobb12,Jobb 12 mnd,faktisk,Faktisk,91.5073,13.5468,6.755,0.0,0.7373,51
-mismatch_indeks_cd_30,Cobb–Douglas mismatch (α=0.3),jobb12,Jobb 12 mnd,indikator,Indikator (avvik),27.1473,3.5953,7.551,0.0,0.7229,51
-mismatch_indeks_cd_30,Cobb–Douglas mismatch (α=0.3),atid3,Arbeidstid 3 mnd,faktisk,Faktisk,18.2149,2.1437,8.497,0.0,0.7912,60
-mismatch_indeks_cd_30,Cobb–Douglas mismatch (α=0.3),atid3,Arbeidstid 3 mnd,indikator,Indikator (avvik),4.3307,0.891,4.86,0.0,0.462,60
-mismatch_indeks_cd_30,Cobb–Douglas mismatch (α=0.3),atid12,Arbeidstid 12 mnd,faktisk,Faktisk,26.5803,3.3413,7.955,0.0,0.7865,51
-mismatch_indeks_cd_30,Cobb–Douglas mismatch (α=0.3),atid12,Arbeidstid 12 mnd,indikator,Indikator (avvik),6.8454,0.9512,7.196,0.0,0.6911,51
-mismatch_indeks_cd_50,Cobb–Douglas mismatch (α=0.5),jobb3,Jobb 3 mnd,faktisk,Faktisk,48.5533,6.6144,7.341,0.0,0.7482,60
-mismatch_indeks_cd_50,Cobb–Douglas mismatch (α=0.5),jobb3,Jobb 3 mnd,indikator,Indikator (avvik),11.7767,2.7598,4.267,0.0001,0.3887,60
-mismatch_indeks_cd_50,Cobb–Douglas mismatch (α=0.5),jobb12,Jobb 12 mnd,faktisk,Faktisk,79.5753,11.83,6.727,0.0,0.7335,51
-mismatch_indeks_cd_50,Cobb–Douglas mismatch (α=0.5),jobb12,Jobb 12 mnd,indikator,Indikator (avvik),23.5761,3.1482,7.489,0.0,0.7164,51
-mismatch_indeks_cd_50,Cobb–Douglas mismatch (α=0.5),atid3,Arbeidstid 3 mnd,faktisk,Faktisk,15.8264,1.8954,8.35,0.0,0.7822,60
-mismatch_indeks_cd_50,Cobb–Douglas mismatch (α=0.5),atid3,Arbeidstid 3 mnd,indikator,Indikator (avvik),3.7654,0.7795,4.83,0.0,0.4574,60
-mismatch_indeks_cd_50,Cobb–Douglas mismatch (α=0.5),atid12,Arbeidstid 12 mnd,faktisk,Faktisk,23.0973,2.9283,7.888,0.0,0.7809,51
-mismatch_indeks_cd_50,Cobb–Douglas mismatch (α=0.5),atid12,Arbeidstid 12 mnd,indikator,Indikator (avvik),5.947,0.8332,7.137,0.0,0.6859,51
-mismatch_indeks_cd_70,Cobb–Douglas mismatch (α=0.7),jobb3,Jobb 3 mnd,faktisk,Faktisk,58.5576,8.1103,7.22,0.0,0.7389,60
-mismatch_indeks_cd_70,Cobb–Douglas mismatch (α=0.7),jobb3,Jobb 3 mnd,indikator,Indikator (avvik),14.2045,3.3589,4.229,0.0001,0.3835,60
-mismatch_indeks_cd_70,Cobb–Douglas mismatch (α=0.7),jobb12,Jobb 12 mnd,faktisk,Faktisk,96.0389,14.3573,6.689,0.0,0.7284,51
-mismatch_indeks_cd_70,Cobb–Douglas mismatch (α=0.7),jobb12,Jobb 12 mnd,indikator,Indikator (avvik),28.4096,3.834,7.41,0.0,0.7082,51
-mismatch_indeks_cd_70,Cobb–Douglas mismatch (α=0.7),atid3,Arbeidstid 3 mnd,faktisk,Faktisk,19.0844,2.3319,8.184,0.0,0.7721,60
-mismatch_indeks_cd_70,Cobb–Douglas mismatch (α=0.7),atid3,Arbeidstid 3 mnd,indikator,Indikator (avvik),4.546,0.9477,4.797,0.0,0.4527,60
-mismatch_indeks_cd_70,Cobb–Douglas mismatch (α=0.7),atid12,Arbeidstid 12 mnd,faktisk,Faktisk,27.8549,3.5687,7.805,0.0,0.7739,51
-mismatch_indeks_cd_70,Cobb–Douglas mismatch (α=0.7),atid12,Arbeidstid 12 mnd,indikator,Indikator (avvik),7.1695,1.0151,7.063,0.0,0.6794,51
-stramhetsratio,Aggregert stramhetsratio (mangel/ledige),jobb3,Jobb 3 mnd,faktisk,Faktisk,-5.6019,1.4662,-3.821,0.0004,0.3421,60
-stramhetsratio,Aggregert stramhetsratio (mangel/ledige),jobb3,Jobb 3 mnd,indikator,Indikator (avvik),-1.2139,0.5016,-2.42,0.0194,0.0911,60
-stramhetsratio,Aggregert stramhetsratio (mangel/ledige),jobb12,Jobb 12 mnd,faktisk,Faktisk,-11.0306,2.0636,-5.345,0.0,0.5634,51
-stramhetsratio,Aggregert stramhetsratio (mangel/ledige),jobb12,Jobb 12 mnd,indikator,Indikator (avvik),-3.1903,0.5971,-5.343,0.0,0.5095,51
-stramhetsratio,Aggregert stramhetsratio (mangel/ledige),atid3,Arbeidstid 3 mnd,faktisk,Faktisk,-1.8373,0.4582,-4.01,0.0002,0.3654,60
-stramhetsratio,Aggregert stramhetsratio (mangel/ledige),atid3,Arbeidstid 3 mnd,indikator,Indikator (avvik),-0.4055,0.1445,-2.805,0.0073,0.1476,60
-stramhetsratio,Aggregert stramhetsratio (mangel/ledige),atid12,Arbeidstid 12 mnd,faktisk,Faktisk,-3.1579,0.5653,-5.586,0.0,0.5795,51
-stramhetsratio,Aggregert stramhetsratio (mangel/ledige),atid12,Arbeidstid 12 mnd,indikator,Indikator (avvik),-0.8099,0.1595,-5.079,0.0,0.5091,51
-mismatch_ledighet_andel,Andel mismatch-ledighet,jobb3,Jobb 3 mnd,faktisk,Faktisk,10.2253,2.0845,4.905,0.0,0.4832,60
-mismatch_ledighet_andel,Andel mismatch-ledighet,jobb3,Jobb 3 mnd,indikator,Indikator (avvik),2.2585,0.769,2.937,0.0051,0.1677,60
-mismatch_ledighet_andel,Andel mismatch-ledighet,jobb12,Jobb 12 mnd,faktisk,Faktisk,18.9428,3.0457,6.22,0.0,0.6633,51
-mismatch_ledighet_andel,Andel mismatch-ledighet,jobb12,Jobb 12 mnd,indikator,Indikator (avvik),5.5297,0.8423,6.565,0.0,0.6197,51
-mismatch_ledighet_andel,Andel mismatch-ledighet,atid3,Arbeidstid 3 mnd,faktisk,Faktisk,3.3583,0.6342,5.296,0.0,0.5169,60
-mismatch_ledighet_andel,Andel mismatch-ledighet,atid3,Arbeidstid 3 mnd,indikator,Indikator (avvik),0.7441,0.2204,3.375,0.0015,0.2308,60
-mismatch_ledighet_andel,Andel mismatch-ledighet,atid12,Arbeidstid 12 mnd,faktisk,Faktisk,5.4635,0.7896,6.919,0.0,0.6952,51
-mismatch_ledighet_andel,Andel mismatch-ledighet,atid12,Arbeidstid 12 mnd,indikator,Indikator (avvik),1.4015,0.2243,6.247,0.0,0.6069,51
+mismatch_var,mismatch_label,utfall,utfall_label,indikator_type,indikator_type_label,beta_mismatch,se_newey_west,t_stat,p_verdi,r2_adj,n,p_verdi_fdr
+mismatch_indeks,Jackman–Roper mismatch-indeks,jobb3,Jobb 3 mnd,faktisk,Faktisk,21.7466,2.8802,7.55,0.0,0.7639,60,0.0
+mismatch_indeks,Jackman–Roper mismatch-indeks,jobb3,Jobb 3 mnd,indikator,Indikator (avvik),5.2216,1.2158,4.295,0.0001,0.3861,60,0.0001
+mismatch_indeks,Jackman–Roper mismatch-indeks,jobb12,Jobb 12 mnd,faktisk,Faktisk,35.6074,5.2329,6.804,0.0,0.7444,51,0.0
+mismatch_indeks,Jackman–Roper mismatch-indeks,jobb12,Jobb 12 mnd,indikator,Indikator (avvik),10.6047,1.3806,7.681,0.0,0.738,51,0.0
+mismatch_indeks,Jackman–Roper mismatch-indeks,atid3,Arbeidstid 3 mnd,faktisk,Faktisk,7.0999,0.8193,8.666,0.0,0.8021,60,0.0
+mismatch_indeks,Jackman–Roper mismatch-indeks,atid3,Arbeidstid 3 mnd,indikator,Indikator (avvik),1.6672,0.3461,4.818,0.0,0.4526,60,0.0
+mismatch_indeks,Jackman–Roper mismatch-indeks,atid12,Arbeidstid 12 mnd,faktisk,Faktisk,10.3644,1.2814,8.089,0.0,0.7984,51,0.0
+mismatch_indeks,Jackman–Roper mismatch-indeks,atid12,Arbeidstid 12 mnd,indikator,Indikator (avvik),2.6712,0.3652,7.315,0.0,0.7026,51,0.0
+mismatch_indeks_cd_30,Cobb–Douglas mismatch (α=0.3),jobb3,Jobb 3 mnd,faktisk,Faktisk,55.8731,7.5038,7.446,0.0,0.7565,60,0.0
+mismatch_indeks_cd_30,Cobb–Douglas mismatch (α=0.3),jobb3,Jobb 3 mnd,indikator,Indikator (avvik),13.5578,3.1505,4.303,0.0001,0.3939,60,0.0001
+mismatch_indeks_cd_30,Cobb–Douglas mismatch (α=0.3),jobb12,Jobb 12 mnd,faktisk,Faktisk,91.5073,13.5468,6.755,0.0,0.7373,51,0.0
+mismatch_indeks_cd_30,Cobb–Douglas mismatch (α=0.3),jobb12,Jobb 12 mnd,indikator,Indikator (avvik),27.1473,3.5953,7.551,0.0,0.7229,51,0.0
+mismatch_indeks_cd_30,Cobb–Douglas mismatch (α=0.3),atid3,Arbeidstid 3 mnd,faktisk,Faktisk,18.2149,2.1437,8.497,0.0,0.7912,60,0.0
+mismatch_indeks_cd_30,Cobb–Douglas mismatch (α=0.3),atid3,Arbeidstid 3 mnd,indikator,Indikator (avvik),4.3307,0.891,4.86,0.0,0.462,60,0.0
+mismatch_indeks_cd_30,Cobb–Douglas mismatch (α=0.3),atid12,Arbeidstid 12 mnd,faktisk,Faktisk,26.5803,3.3413,7.955,0.0,0.7865,51,0.0
+mismatch_indeks_cd_30,Cobb–Douglas mismatch (α=0.3),atid12,Arbeidstid 12 mnd,indikator,Indikator (avvik),6.8454,0.9512,7.196,0.0,0.6911,51,0.0
+mismatch_indeks_cd_50,Cobb–Douglas mismatch (α=0.5),jobb3,Jobb 3 mnd,faktisk,Faktisk,48.5533,6.6144,7.341,0.0,0.7482,60,0.0
+mismatch_indeks_cd_50,Cobb–Douglas mismatch (α=0.5),jobb3,Jobb 3 mnd,indikator,Indikator (avvik),11.7767,2.7598,4.267,0.0001,0.3887,60,0.0001
+mismatch_indeks_cd_50,Cobb–Douglas mismatch (α=0.5),jobb12,Jobb 12 mnd,faktisk,Faktisk,79.5753,11.83,6.727,0.0,0.7335,51,0.0
+mismatch_indeks_cd_50,Cobb–Douglas mismatch (α=0.5),jobb12,Jobb 12 mnd,indikator,Indikator (avvik),23.5761,3.1482,7.489,0.0,0.7164,51,0.0
+mismatch_indeks_cd_50,Cobb–Douglas mismatch (α=0.5),atid3,Arbeidstid 3 mnd,faktisk,Faktisk,15.8264,1.8954,8.35,0.0,0.7822,60,0.0
+mismatch_indeks_cd_50,Cobb–Douglas mismatch (α=0.5),atid3,Arbeidstid 3 mnd,indikator,Indikator (avvik),3.7654,0.7795,4.83,0.0,0.4574,60,0.0
+mismatch_indeks_cd_50,Cobb–Douglas mismatch (α=0.5),atid12,Arbeidstid 12 mnd,faktisk,Faktisk,23.0973,2.9283,7.888,0.0,0.7809,51,0.0
+mismatch_indeks_cd_50,Cobb–Douglas mismatch (α=0.5),atid12,Arbeidstid 12 mnd,indikator,Indikator (avvik),5.947,0.8332,7.137,0.0,0.6859,51,0.0
+mismatch_indeks_cd_70,Cobb–Douglas mismatch (α=0.7),jobb3,Jobb 3 mnd,faktisk,Faktisk,58.5576,8.1103,7.22,0.0,0.7389,60,0.0
+mismatch_indeks_cd_70,Cobb–Douglas mismatch (α=0.7),jobb3,Jobb 3 mnd,indikator,Indikator (avvik),14.2045,3.3589,4.229,0.0001,0.3835,60,0.0001
+mismatch_indeks_cd_70,Cobb–Douglas mismatch (α=0.7),jobb12,Jobb 12 mnd,faktisk,Faktisk,96.0389,14.3573,6.689,0.0,0.7284,51,0.0
+mismatch_indeks_cd_70,Cobb–Douglas mismatch (α=0.7),jobb12,Jobb 12 mnd,indikator,Indikator (avvik),28.4096,3.834,7.41,0.0,0.7082,51,0.0
+mismatch_indeks_cd_70,Cobb–Douglas mismatch (α=0.7),atid3,Arbeidstid 3 mnd,faktisk,Faktisk,19.0844,2.3319,8.184,0.0,0.7721,60,0.0
+mismatch_indeks_cd_70,Cobb–Douglas mismatch (α=0.7),atid3,Arbeidstid 3 mnd,indikator,Indikator (avvik),4.546,0.9477,4.797,0.0,0.4527,60,0.0
+mismatch_indeks_cd_70,Cobb–Douglas mismatch (α=0.7),atid12,Arbeidstid 12 mnd,faktisk,Faktisk,27.8549,3.5687,7.805,0.0,0.7739,51,0.0
+mismatch_indeks_cd_70,Cobb–Douglas mismatch (α=0.7),atid12,Arbeidstid 12 mnd,indikator,Indikator (avvik),7.1695,1.0151,7.063,0.0,0.6794,51,0.0
+stramhetsratio,Aggregert stramhetsratio (mangel/ledige),jobb3,Jobb 3 mnd,faktisk,Faktisk,-5.6019,1.4662,-3.821,0.0004,0.3421,60,0.0004
+stramhetsratio,Aggregert stramhetsratio (mangel/ledige),jobb3,Jobb 3 mnd,indikator,Indikator (avvik),-1.2139,0.5016,-2.42,0.0194,0.0911,60,0.0194
+stramhetsratio,Aggregert stramhetsratio (mangel/ledige),jobb12,Jobb 12 mnd,faktisk,Faktisk,-11.0306,2.0636,-5.345,0.0,0.5634,51,0.0
+stramhetsratio,Aggregert stramhetsratio (mangel/ledige),jobb12,Jobb 12 mnd,indikator,Indikator (avvik),-3.1903,0.5971,-5.343,0.0,0.5095,51,0.0
+stramhetsratio,Aggregert stramhetsratio (mangel/ledige),atid3,Arbeidstid 3 mnd,faktisk,Faktisk,-1.8373,0.4582,-4.01,0.0002,0.3654,60,0.0002
+stramhetsratio,Aggregert stramhetsratio (mangel/ledige),atid3,Arbeidstid 3 mnd,indikator,Indikator (avvik),-0.4055,0.1445,-2.805,0.0073,0.1476,60,0.0075
+stramhetsratio,Aggregert stramhetsratio (mangel/ledige),atid12,Arbeidstid 12 mnd,faktisk,Faktisk,-3.1579,0.5653,-5.586,0.0,0.5795,51,0.0
+stramhetsratio,Aggregert stramhetsratio (mangel/ledige),atid12,Arbeidstid 12 mnd,indikator,Indikator (avvik),-0.8099,0.1595,-5.079,0.0,0.5091,51,0.0
+mismatch_ledighet_andel,Andel mismatch-ledighet,jobb3,Jobb 3 mnd,faktisk,Faktisk,10.2253,2.0845,4.905,0.0,0.4832,60,0.0
+mismatch_ledighet_andel,Andel mismatch-ledighet,jobb3,Jobb 3 mnd,indikator,Indikator (avvik),2.2585,0.769,2.937,0.0051,0.1677,60,0.0053
+mismatch_ledighet_andel,Andel mismatch-ledighet,jobb12,Jobb 12 mnd,faktisk,Faktisk,18.9428,3.0457,6.22,0.0,0.6633,51,0.0
+mismatch_ledighet_andel,Andel mismatch-ledighet,jobb12,Jobb 12 mnd,indikator,Indikator (avvik),5.5297,0.8423,6.565,0.0,0.6197,51,0.0
+mismatch_ledighet_andel,Andel mismatch-ledighet,atid3,Arbeidstid 3 mnd,faktisk,Faktisk,3.3583,0.6342,5.296,0.0,0.5169,60,0.0
+mismatch_ledighet_andel,Andel mismatch-ledighet,atid3,Arbeidstid 3 mnd,indikator,Indikator (avvik),0.7441,0.2204,3.375,0.0015,0.2308,60,0.0016
+mismatch_ledighet_andel,Andel mismatch-ledighet,atid12,Arbeidstid 12 mnd,faktisk,Faktisk,5.4635,0.7896,6.919,0.0,0.6952,51,0.0
+mismatch_ledighet_andel,Andel mismatch-ledighet,atid12,Arbeidstid 12 mnd,indikator,Indikator (avvik),1.4015,0.2243,6.247,0.0,0.6069,51,0.0

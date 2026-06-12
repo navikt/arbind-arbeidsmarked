@@ -9,7 +9,7 @@ Lagrer filer til:
   quarto/stramhet/atid/tabeller/    – CSV-tabeller (atid-indikator)
 
 Kjøres før quarto render:
-  uv run python src/stramhet/lag_rapport_data.py
+  uv run python -m src.stramhet.lag_rapport_data
 """
 
 from __future__ import annotations
@@ -22,6 +22,8 @@ import matplotlib.ticker as mticker
 import numpy as np
 import pandas as pd
 from scipy import stats
+
+from src.common.config import NAV_REGIONER
 
 # ── Stier ─────────────────────────────────────────────────────────────────────
 _RESULTS = Path("data/results")
@@ -581,34 +583,8 @@ def tbl_geomap() -> None:
     """Geografisk mapping fra undersøkelsesenheter til Nav-regioner."""
     geo = pd.DataFrame(
         {
-            "Nav-region": [
-                "Nav Øst-Viken",
-                "Nav Vest-Viken",
-                "Nav Oslo",
-                "Nav Innlandet",
-                "Nav Vestfold og Telemark",
-                "Nav Agder",
-                "Nav Rogaland",
-                "Nav Vestland",
-                "Nav Møre og Romsdal",
-                "Nav Trøndelag",
-                "Nav Nordland",
-                "Nav Troms og Finnmark",
-            ],
-            "2021–2023 (region)": [
-                "Øst-Viken",
-                "Vest-Viken",
-                "Oslo",
-                "Innlandet",
-                "Vestfold og Telemark",
-                "Agder",
-                "Rogaland",
-                "Vestland",
-                "Møre og Romsdal",
-                "Trøndelag",
-                "Nordland",
-                "Troms og Finnmark",
-            ],
+            "Nav-region": list(NAV_REGIONER),
+            "2021–2023 (region)": [r.replace("Nav ", "") for r in NAV_REGIONER],
             "2024–2025 (fylker aggregert)": [
                 "Østfold + Akershus",
                 "Buskerud",

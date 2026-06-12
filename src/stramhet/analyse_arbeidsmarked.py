@@ -30,10 +30,13 @@ Produserer:
 
 from __future__ import annotations
 
+import warnings
 from pathlib import Path
 
 import pandas as pd
 from scipy import stats
+
+from src.common.validation import require_columns
 
 _PROCESSED = Path("data/processed/")
 _RESULTS = Path("data/results/")
@@ -133,14 +136,19 @@ def _nasjonal_tidsserie(df: pd.DataFrame) -> pd.DataFrame:
     agg = df.groupby("aar")[alle_vars].mean().round(3).reset_index()
 
     # Legg til sysselsettingsbarometer (nasjonal nettoandel)
-    try:
-        baro = pd.read_csv(_PROCESSED / "sysselsettingsbarometer.csv")
+    baro_sti = _PROCESSED / "sysselsettingsbarometer.csv"
+    if baro_sti.exists():
+        baro = pd.read_csv(baro_sti)
         baro = baro[baro["aar"].isin(agg["aar"])][
             ["aar", "nettoandel", "okning_pst", "nedgang_pst"]
         ]
         agg = agg.merge(baro, on="aar", how="left")
-    except FileNotFoundError:
-        pass
+    else:
+        warnings.warn(
+            f"Mangler {baro_sti}; nasjonal tidsserie produseres uten "
+            "sysselsettingsbarometer. Kjør datagrunnlag-stegene først.",
+            stacklevel=2,
+        )
 
     return agg
 
@@ -158,7 +166,11 @@ def _skriv_pivottabell(df_kor: pd.DataFrame) -> None:
 def main() -> None:
     """Kjør hele analysen og skriv resultatfiler."""
     print("Leser kombinert datasett...")
-    df = pd.read_csv(_PROCESSED / "sammenliknet_fylke.csv")
+    df = require_columns(
+        pd.read_csv(_PROCESSED / "sammenliknet_fylke.csv"),
+        ["nav_region", "aar"],
+        source="sammenliknet_fylke.csv",
+    )
     print(
         f"  {len(df)} rader, {df['nav_region'].nunique()} regioner, år {df['aar'].min()}–{df['aar'].max()}"
     )

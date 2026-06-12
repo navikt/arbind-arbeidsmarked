@@ -16,7 +16,7 @@ Kobler mismatch-mål til månedlige indikatorer som step-funksjon og lagrer:
   data/processed/mismatch_aar.csv             — årlige mismatch-mål
 
 Kjøres:
-  uv run python src/standardiser_mismatch_data.py
+  uv run python -m src.datagrunnlag.standardiser_mismatch_data
 """
 
 from __future__ import annotations
@@ -26,17 +26,11 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
+from src.common.config import REFERANSEMAANED
+from src.common.validation import require_columns
+
 _PROCESSED = Path("data/processed")
 _RAW = Path("data/raw")
-
-# Referansemåned per undersøkelsesår (identisk med standardiser_data.py)
-_REFERANSEMAANED: dict[int, int] = {
-    2021: 2,  # februar
-    2022: 4,  # april
-    2023: 4,  # april
-    2024: 3,  # mars
-    2025: 3,  # mars
-}
 
 # Kategori uten etterspørselsmotstykke — ekskluderes
 _EKSKLUDER_YRKER = {"Ingen yrkesbakgrunn eller uoppgitt"}
@@ -120,7 +114,7 @@ def _tilknytt_undersokelsesaar(df_ind: pd.DataFrame) -> pd.DataFrame:
     df["maaned_obs"] = df["beholdningsmaaned"].dt.month
 
     # Bygg grenseverdier (år, måned) for hvert undersøkelsesår
-    cutoffs = sorted(_REFERANSEMAANED.items())  # [(2021, 2), (2022, 4), ...]
+    cutoffs = sorted(REFERANSEMAANED.items())  # [(2021, 2), (2022, 4), ...]
 
     def _finn_undersokelsesaar(row: pd.Series) -> int:
         y, m = row["aar_obs"], row["maaned_obs"]
@@ -137,7 +131,11 @@ def _tilknytt_undersokelsesaar(df_ind: pd.DataFrame) -> pd.DataFrame:
 def main() -> None:
     """Les data, beregn mismatch, koble med indikatorer, skriv resultat."""
     print("Leser mangel_per_yrkesgruppe.csv...")
-    df_yrke = pd.read_csv(_PROCESSED / "mangel_per_yrkesgruppe.csv")
+    df_yrke = require_columns(
+        pd.read_csv(_PROCESSED / "mangel_per_yrkesgruppe.csv"),
+        ["aar"],
+        source="mangel_per_yrkesgruppe.csv",
+    )
     print(f"  {len(df_yrke)} rader, år {df_yrke['aar'].min()}–{df_yrke['aar'].max()}")
 
     # Yrkesvis stramhet
@@ -157,7 +155,11 @@ def main() -> None:
 
     # Les og tilknytt nasjonale indikatorer
     print("\nLeser indikator_data_nasjonalt.csv...")
-    df_ind = pd.read_csv(_RAW / "indikator_data_nasjonalt.csv")
+    df_ind = require_columns(
+        pd.read_csv(_RAW / "indikator_data_nasjonalt.csv"),
+        ["beholdningsmaaned"],
+        source="indikator_data_nasjonalt.csv",
+    )
     print(f"  {len(df_ind)} rader")
 
     print("Tilknytter undersøkelsesår...")

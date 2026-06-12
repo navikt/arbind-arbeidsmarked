@@ -9,7 +9,7 @@ Fire analytiske tilnærminger:
 Produserer figurer og tabeller til quarto/mismatch/.
 
 Kjøres:
-  uv run python src/mismatch/analyse_mismatch.py
+  uv run python -m src.mismatch.analyse_mismatch
 """
 
 from __future__ import annotations
@@ -20,6 +20,9 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 from scipy import stats
+
+from src.common.stats import adjust_pvalues, newey_west_se
+from src.common.validation import require_columns, require_nonempty
 
 # ── Stier ──────────────────────────────────────────────────────────────────────
 _PROCESSED = Path("data/processed")
@@ -178,6 +181,15 @@ def _korrelasjon_mismatch_indikatorer(
                     continue
                 r_pearson, p_pearson = stats.pearsonr(sub[mvar], sub[ind_type])
                 r_spearman, p_spearman = stats.spearmanr(sub[mvar], sub[ind_type])
+                n = len(sub)
+                # Fisher-z 95 %-konfidensintervall for Pearson r (krever n > 3).
+                if n > 3:
+                    z = np.arctanh(r_pearson)
+                    se_z = 1.0 / np.sqrt(n - 3)
+                    ci_lav = round(float(np.tanh(z - 1.96 * se_z)), 3)
+                    ci_hoy = round(float(np.tanh(z + 1.96 * se_z)), 3)
+                else:
+                    ci_lav, ci_hoy = np.nan, np.nan
                 records.append(
                     {
                         "mismatch_var": mvar,
@@ -188,13 +200,25 @@ def _korrelasjon_mismatch_indikatorer(
                         "indikator_type_label": ind_label,
                         "r_pearson": round(r_pearson, 3),
                         "p_pearson": round(p_pearson, 4),
+                        "r_pearson_ci_lav": ci_lav,
+                        "r_pearson_ci_hoy": ci_hoy,
                         "r_spearman": round(r_spearman, 3),
                         "p_spearman": round(p_spearman, 4),
-                        "n": len(sub),
+                        "n": n,
+                        "liten_utvalg": n < 6,
                     }
                 )
 
-    return pd.DataFrame(records)
+    resultat = pd.DataFrame(records)
+    if not resultat.empty:
+        # Korriger for multippel testing på tvers av korrelasjonsfamilien.
+        resultat["p_pearson_fdr"] = np.round(
+            adjust_pvalues(resultat["p_pearson"].to_numpy()), 4
+        )
+        resultat["p_spearman_fdr"] = np.round(
+            adjust_pvalues(resultat["p_spearman"].to_numpy()), 4
+        )
+    return resultat
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -262,34 +286,6 @@ def _ref_month(year: int) -> int:
 # ═══════════════════════════════════════════════════════════════════════════════
 
 
-def _newey_west_se(
-    residuals: np.ndarray, X: np.ndarray, max_lag: int | None = None
-) -> np.ndarray:
-    """Beregn Newey–West standardfeil for OLS-koeffisienter."""
-    n, k = X.shape
-    if max_lag is None:
-        max_lag = int(np.floor(4 * (n / 100) ** (2 / 9)))
-
-    # S = Σ_0 + Σ_{l=1}^{L} w_l (Σ_l + Σ_l')
-    e = residuals.reshape(-1, 1)
-    S = np.zeros((k, k))
-
-    for lag in range(max_lag + 1):
-        w = 1.0 if lag == 0 else 1 - lag / (max_lag + 1)
-        for t in range(lag, n):
-            xt = X[t : t + 1].T
-            xs = X[t - lag : t - lag + 1].T
-            contrib = (e[t] * e[t - lag]) * (xt @ xs.T)
-            if lag == 0:
-                S += w * contrib
-            else:
-                S += w * (contrib + contrib.T)
-
-    XtX_inv = np.linalg.inv(X.T @ X)
-    V = XtX_inv @ S @ XtX_inv
-    return np.sqrt(np.diag(V))
-
-
 def _regresjon_mismatch(df_nasjonal: pd.DataFrame) -> pd.DataFrame:
     """OLS-regresjon: indikator ~ mismatch_var + måned-dummyer."""
     df = df_nasjonal.copy()
@@ -325,7 +321,7 @@ def _regresjon_mismatch(df_nasjonal: pd.DataFrame) -> pd.DataFrame:
                 n, k = X.shape
 
                 # Newey–West SE
-                nw_se = _newey_west_se(resid, X)
+                nw_se = newey_west_se(resid, X)
 
                 # R²
                 ss_res = np.sum(resid**2)
@@ -354,7 +350,14 @@ def _regresjon_mismatch(df_nasjonal: pd.DataFrame) -> pd.DataFrame:
                     }
                 )
 
-    return pd.DataFrame(records)
+    resultat = pd.DataFrame(records)
+    if not resultat.empty:
+        # Korriger for multippel testing på tvers av familien av regresjoner
+        # (mismatch-variabel × utfall × indikatortype).
+        resultat["p_verdi_fdr"] = np.round(
+            adjust_pvalues(resultat["p_verdi"].to_numpy()), 4
+        )
+    return resultat
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -426,9 +429,19 @@ def main() -> None:
     _TBL_DIR.mkdir(parents=True, exist_ok=True)
 
     print("Leser data...")
-    df_yrke = pd.read_csv(_PROCESSED / "mismatch_yrke.csv")
-    df_aar = pd.read_csv(_PROCESSED / "mismatch_aar.csv")
-    df_nasjonal = pd.read_csv(_PROCESSED / "mismatch_nasjonal.csv")
+    df_yrke = require_nonempty(
+        pd.read_csv(_PROCESSED / "mismatch_yrke.csv"), source="mismatch_yrke.csv"
+    )
+    df_aar = require_columns(
+        pd.read_csv(_PROCESSED / "mismatch_aar.csv"),
+        ["aar"],
+        source="mismatch_aar.csv",
+    )
+    df_nasjonal = require_columns(
+        pd.read_csv(_PROCESSED / "mismatch_nasjonal.csv"),
+        ["beholdningsmaaned", "utfall"],
+        source="mismatch_nasjonal.csv",
+    )
 
     # ── A. Deskriptiv ──────────────────────────────────────────────────────
     print("\nA. Deskriptiv: yrkesvis stramhet")

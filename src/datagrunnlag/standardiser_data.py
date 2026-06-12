@@ -22,52 +22,10 @@ from typing import Any
 
 import pandas as pd
 
+from src.common.config import FYLKE_TIL_NAV, REFERANSEMAANED, REGION_TIL_NAV
+
 _PROCESSED = Path("data/processed")
 _RAW = Path("data/raw")
-
-# Referansemåned i indikatordata for hvert bedriftsundersøkelse-år
-_REFERANSEMAANED: dict[int, int] = {
-    2021: 2,  # februar
-    2022: 4,  # april
-    2023: 4,  # april
-    2024: 3,  # mars
-    2025: 3,  # mars
-}
-
-# Direkte navnmapping: bedriftsundersøkelse-regioner (2021–2023) → Nav-region
-_REGION_TIL_NAV: dict[str, str] = {
-    "Øst-Viken": "Nav Øst-Viken",
-    "Vest-Viken": "Nav Vest-Viken",
-    "Oslo": "Nav Oslo",
-    "Innlandet": "Nav Innlandet",
-    "Vestfold og Telemark": "Nav Vestfold og Telemark",
-    "Agder": "Nav Agder",
-    "Rogaland": "Nav Rogaland",
-    "Vestland": "Nav Vestland",
-    "Møre og Romsdal": "Nav Møre og Romsdal",
-    "Trøndelag": "Nav Trøndelag",
-    "Nordland": "Nav Nordland",
-    "Troms og Finnmark": "Nav Troms og Finnmark",
-}
-
-# Fylke → Nav-region (2024–2025 bruker individuelle fylker)
-_FYLKE_TIL_NAV: dict[str, str] = {
-    "Østfold": "Nav Øst-Viken",
-    "Akershus": "Nav Øst-Viken",
-    "Oslo": "Nav Oslo",
-    "Innlandet": "Nav Innlandet",
-    "Buskerud": "Nav Vest-Viken",
-    "Vestfold": "Nav Vestfold og Telemark",
-    "Telemark": "Nav Vestfold og Telemark",
-    "Agder": "Nav Agder",
-    "Rogaland": "Nav Rogaland",
-    "Vestland": "Nav Vestland",
-    "Møre og Romsdal": "Nav Møre og Romsdal",
-    "Trøndelag": "Nav Trøndelag",
-    "Nordland": "Nav Nordland",
-    "Troms": "Nav Troms og Finnmark",
-    "Finnmark": "Nav Troms og Finnmark",
-}
 
 _RATE_COLS = ["stramhetsindikator", "andel_alvorlige_rekrutteringsproblemer_pst"]
 _SUM_COLS = ["mangel_antall", "ki_nedre", "ki_ovre"]
@@ -88,7 +46,7 @@ def _standardiser_bedrifts_geografi(df: pd.DataFrame) -> pd.DataFrame:
     for aar, grp in df.groupby("aar"):
         if aar <= 2023:
             grp = grp.copy()
-            grp["nav_region"] = grp["region"].map(_REGION_TIL_NAV)
+            grp["nav_region"] = grp["region"].map(REGION_TIL_NAV)
             ukjente = grp[grp["nav_region"].isna()]["region"].unique()
             if len(ukjente):
                 print(f"  Advarsel {aar}: ukjente regioner: {ukjente}")
@@ -96,7 +54,7 @@ def _standardiser_bedrifts_geografi(df: pd.DataFrame) -> pd.DataFrame:
         else:
             # 2024+: aggreger fylker til Nav-regioner
             grp = grp.copy()
-            grp["nav_region"] = grp["region"].map(_FYLKE_TIL_NAV)
+            grp["nav_region"] = grp["region"].map(FYLKE_TIL_NAV)
             ukjente = grp[grp["nav_region"].isna()]["region"].unique()
             if len(ukjente):
                 print(f"  Advarsel {aar}: ukjente fylker: {ukjente}")
@@ -128,7 +86,7 @@ def _hent_indikator_per_referansemaaned(df_ind: pd.DataFrame) -> pd.DataFrame:
     df_ind["maaned"] = df_ind["beholdningsmaaned"].dt.month
 
     rows = []
-    for aar, ref_mnd in _REFERANSEMAANED.items():
+    for aar, ref_mnd in REFERANSEMAANED.items():
         utsnitt = df_ind[(df_ind["aar"] == aar) & (df_ind["maaned"] == ref_mnd)]
         if utsnitt.empty:
             print(f"  Advarsel: ingen indikatordata for {aar} måned {ref_mnd}")

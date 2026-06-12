@@ -6,6 +6,8 @@ from typing import Any
 import pandas as pd
 from google.cloud import bigquery
 
+from src.common.bigquery import query_rows
+
 _TABLE_URI = "arbeidsindikator-prod-51bc.arbeidsindikator.model_metrics_hist"
 _RESULTS_URI = "arbeidsindikator-prod-51bc.arbeidsindikator.AGG_INDIKATOR_HIST"
 
@@ -85,33 +87,17 @@ QUERIES = {
 }
 
 
-def _query_coefficients(query: str) -> list[dict[str, Any]]:
-    """Fetch all coefficients for the indicator models in a single query."""
-    client = bigquery.Client()
-    job_config = bigquery.QueryJobConfig(
-        query_parameters=[
-            bigquery.ArrayQueryParameter("result_id", "FLOAT64", _MODELS.values()),
-        ]
+def _query_models(query: str) -> list[dict[str, Any]]:
+    """Fetch coefficients or results for the indicator models in a single query."""
+    return query_rows(
+        query,
+        [bigquery.ArrayQueryParameter("result_id", "FLOAT64", _MODELS.values())],
     )
-    query_job = client.query(query, job_config=job_config)
-    return [dict(row) for row in query_job.result()]
-
-
-def _query_results(query: str) -> list[dict[str, Any]]:
-    """Fetch all results for the indicator models in a single query."""
-    client = bigquery.Client()
-    job_config = bigquery.QueryJobConfig(
-        query_parameters=[
-            bigquery.ArrayQueryParameter("result_id", "FLOAT64", _MODELS.values()),
-        ]
-    )
-    query_job = client.query(query, job_config=job_config)
-    return [dict(row) for row in query_job.result()]
 
 
 if __name__ == "__main__":
     print("Fetching coefficients for arb.markedsmodeller...")
-    rows = _query_coefficients(QUERIES["model"])
+    rows = _query_models(QUERIES["model"])
     df = pd.DataFrame(rows)
     target_path = Path("data/raw/koeffisienter/indikator_data_model.csv")
     print(f"Saving data to {target_path}...")
@@ -120,7 +106,7 @@ if __name__ == "__main__":
     print("Fetching results for arb.markedsmodeller...")
     for level in ["region", "nasjonalt"]:
         print(f"Fetching data for level = '{level}'...")
-        rows = _query_results(QUERIES[level])
+        rows = _query_models(QUERIES[level])
         df = pd.DataFrame(rows)
         target_path = Path(f"data/raw/koeffisienter/indikator_data_{level}.csv")
         print(f"Saving data to {target_path}...")

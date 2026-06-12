@@ -78,3 +78,7 @@ docstring-code-line-length = "dynamic"
 
 [lint.pydocstyle]
 convention = "google"
+
+# Tester trenger ikke docstring-konvensjoner (D) på hver testfunksjon.
+[lint.per-file-ignores]
+"tests/**" = ["D"]

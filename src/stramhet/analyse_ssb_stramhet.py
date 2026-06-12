@@ -21,7 +21,7 @@ Produserer:
   quarto/stramhet/tabeller/ssb_naering_regresjon.csv
 
 Kjøres:
-  uv run python src/stramhet/analyse_ssb_stramhet.py
+  uv run python -m src.stramhet.analyse_ssb_stramhet
 """
 
 from __future__ import annotations
@@ -577,6 +577,13 @@ def _kjor_panel_regresjon(df: pd.DataFrame) -> pd.DataFrame:
     - β: identifisert fra variasjon *innen* næring over tid
     - SE: HC1 (heteroskedastisitets-robust)
 
+    NB (pseudo-replikasjon): indikatoravviket er en nasjonal serie som varierer
+    kun over tid (kvartal) og er koblet på hver nærings-rad. Observasjoner innen
+    samme kvartal deler dermed utfallsverdi, slik at HC1-SE kan undervurdere
+    usikkerheten. Som robusthetssjekk rapporteres også SE/p klynget på kvartal
+    (``se_klynge_kvartal``/``p_klynge_kvartal``) sammen med antall klynger
+    (``n_kvartaler``); få klynger gjør den klyngede SE-en mindre pålitelig.
+
     Rapporterer: β, SE, t, p, adj. R², within-R² og mellom-R².
     """
     avvik_cols = [c for c in df.columns if c.startswith("indikator_")]
@@ -597,6 +604,15 @@ def _kjor_panel_regresjon(df: pd.DataFrame) -> pd.DataFrame:
         n_naeringer = sub["felles"].nunique()
         X_within = sm.add_constant(sub["x_dm"])
         within_res = sm.OLS(sub["y_dm"], X_within).fit(cov_type="HC1")
+
+        # Robusthet mot pseudo-replikasjon: klynge-robust SE på kvartal, siden
+        # utfallet er konstant innen hvert kvartal (nasjonal serie).
+        n_kvartaler = sub["kvartal"].nunique()
+        within_klynge = sm.OLS(sub["y_dm"], X_within).fit(
+            cov_type="cluster", cov_kwds={"groups": sub["kvartal"]}
+        )
+        se_klynge = within_klynge.bse["x_dm"]
+        p_klynge = within_klynge.pvalues["x_dm"]
 
         # Within-R²: R² fra det within-transformerte systemet (uten const)
         ss_res = (sub["y_dm"] - within_res.fittedvalues).var()
@@ -632,6 +648,9 @@ def _kjor_panel_regresjon(df: pd.DataFrame) -> pd.DataFrame:
                 "se": round(se, 4),
                 "t": round(tstat, 2),
                 "p": round(pval, 4),
+                "se_klynge_kvartal": round(se_klynge, 4),
+                "p_klynge_kvartal": round(p_klynge, 4),
+                "n_kvartaler": n_kvartaler,
                 "r2_within": round(r2_within, 3),
                 "r2_within_adj": round(adj_r2_within, 3),
                 "r2_full_adj": round(full_res.rsquared_adj, 3),

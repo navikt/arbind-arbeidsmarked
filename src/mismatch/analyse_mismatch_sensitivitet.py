@@ -11,7 +11,7 @@ Produserer:
   figurer/loo_regresjon.png        — visuelt sammendrag
 
 Kjøres:
-  uv run python src/mismatch/analyse_mismatch_sensitivitet.py
+  uv run python -m src.mismatch.analyse_mismatch_sensitivitet
 """
 
 from __future__ import annotations
@@ -22,6 +22,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 from scipy import stats
+
+from src.common.stats import adjust_pvalues, newey_west_se
 
 # ── Stier ──────────────────────────────────────────────────────────────────────
 _PROCESSED = Path("data/processed")
@@ -74,30 +76,6 @@ _MISMATCH_LABEL = "Jackman–Roper mismatch-indeks"
 # ═══════════════════════════════════════════════════════════════════════════════
 
 
-def _newey_west_se(
-    residuals: np.ndarray, X: np.ndarray, max_lag: int | None = None
-) -> np.ndarray:
-    """Beregn Newey–West standardfeil."""
-    n, k = X.shape
-    if max_lag is None:
-        max_lag = int(np.floor(4 * (n / 100) ** (2 / 9)))
-    e = residuals.reshape(-1, 1)
-    S = np.zeros((k, k))
-    for lag in range(max_lag + 1):
-        w = 1.0 if lag == 0 else 1 - lag / (max_lag + 1)
-        for t in range(lag, n):
-            xt = X[t : t + 1].T
-            xs = X[t - lag : t - lag + 1].T
-            contrib = (e[t] * e[t - lag]) * (xt @ xs.T)
-            if lag == 0:
-                S += w * contrib
-            else:
-                S += w * (contrib + contrib.T)
-    XtX_inv = np.linalg.inv(X.T @ X)
-    V = XtX_inv @ S @ XtX_inv
-    return np.sqrt(np.diag(V))
-
-
 def _beregn_aarssnitt(df_nasjonal: pd.DataFrame) -> pd.DataFrame:
     """Beregn årsgjennomsnitt av indikatorer per undersøkelsesår."""
     df = df_nasjonal.copy()
@@ -106,6 +84,19 @@ def _beregn_aarssnitt(df_nasjonal: pd.DataFrame) -> pd.DataFrame:
         df.groupby(["undersokelsesaar", "utfall"])[["faktisk", "indikator"]]
         .mean()
         .reset_index()
+    )
+
+
+def _fdr_per_gruppe(df: pd.DataFrame, p_kol: str) -> pd.Series:
+    """FDR-juster ``p_kol`` innen hvert ``utvalg`` (leave-one-out-familie).
+
+    Hvert leave-one-out-utvalg utgjør sin egen hypotesefamilie (utfall ×
+    indikatortype), så korreksjonen gjøres gruppevis og rundes til 4 desimaler.
+    """
+    return (
+        df.groupby("utvalg")[p_kol]
+        .transform(lambda s: adjust_pvalues(s.to_numpy()))
+        .round(4)
     )
 
 
@@ -149,6 +140,7 @@ def _loo_korrelasjon(df_aar: pd.DataFrame, aarssnitt: pd.DataFrame) -> pd.DataFr
                     {
                         "utvalg": utvalg_label,
                         "ekskludert_aar": ekskludert,
+                        "er_2021_ekskludert": ekskludert == 2021,
                         "utfall": utfall,
                         "utfall_label": _UTFALL_LABELS[utfall],
                         "indikator_type": ind_type,
@@ -158,10 +150,17 @@ def _loo_korrelasjon(df_aar: pd.DataFrame, aarssnitt: pd.DataFrame) -> pd.DataFr
                         "r_spearman": round(r_s, 3),
                         "p_spearman": round(p_s, 4),
                         "n": len(sub),
+                        "liten_utvalg": len(sub) < 6,
                     }
                 )
 
-    return pd.DataFrame(records)
+    resultat = pd.DataFrame(records)
+    if not resultat.empty:
+        # Korriger for multippel testing innen hvert utvalg (familien av
+        # utfall × indikatortype for det aktuelle leave-one-out-utvalget).
+        resultat["p_pearson_fdr"] = _fdr_per_gruppe(resultat, "p_pearson")
+        resultat["p_spearman_fdr"] = _fdr_per_gruppe(resultat, "p_spearman")
+    return resultat
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -206,7 +205,7 @@ def _loo_regresjon(df_nasjonal: pd.DataFrame) -> pd.DataFrame:
                 beta = np.linalg.lstsq(X, y, rcond=None)[0]
                 resid = y - X @ beta
                 n, k = X.shape
-                nw_se = _newey_west_se(resid, X)
+                nw_se = newey_west_se(resid, X)
 
                 ss_res = np.sum(resid**2)
                 ss_tot = np.sum((y - y.mean()) ** 2)
@@ -219,6 +218,7 @@ def _loo_regresjon(df_nasjonal: pd.DataFrame) -> pd.DataFrame:
                     {
                         "utvalg": utvalg_label,
                         "ekskludert_aar": ekskludert,
+                        "er_2021_ekskludert": ekskludert == 2021,
                         "utfall": utfall,
                         "utfall_label": _UTFALL_LABELS[utfall],
                         "indikator_type": ind_type,
@@ -232,7 +232,10 @@ def _loo_regresjon(df_nasjonal: pd.DataFrame) -> pd.DataFrame:
                     }
                 )
 
-    return pd.DataFrame(records)
+    resultat = pd.DataFrame(records)
+    if not resultat.empty:
+        resultat["p_verdi_fdr"] = _fdr_per_gruppe(resultat, "p_verdi")
+    return resultat
 
 
 # ═══════════════════════════════════════════════════════════════════════════════

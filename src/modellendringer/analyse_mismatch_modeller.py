@@ -11,7 +11,7 @@ Tilnærming:
      per modellvariant
 
 Kjøres:
-  uv run python src/modellendringer/analyse_mismatch_modeller.py
+  uv run python -m src.modellendringer.analyse_mismatch_modeller
 """
 
 from __future__ import annotations
@@ -22,6 +22,9 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 from scipy import stats
+
+from src.common.config import REFERANSEMAANED
+from src.common.stats import adjust_pvalues, newey_west_se
 
 # ── Stier ──────────────────────────────────────────────────────────────────────
 _PROCESSED = Path("data/processed")
@@ -64,9 +67,6 @@ plt.rcParams.update(
     }
 )
 FIG_DPI = 150
-
-# Referansemåneder for å tilknytte undersøkelsesår (identisk med standardiser_mismatch_data.py)
-_REFERANSEMAANED: dict[int, int] = {2021: 2, 2022: 4, 2023: 4, 2024: 3, 2025: 3}
 
 _UTFALL = ["jobb3", "jobb12", "atid3", "atid12"]
 _UTFALL_LABELS = {
@@ -127,7 +127,7 @@ def _last_og_konverter_nasjonalt(path: Path) -> pd.DataFrame:
 
 def _tilknytt_undersokelsesaar(df: pd.DataFrame) -> pd.DataFrame:
     """Tilknytt undersøkelsesår på samme måte som standardiser_mismatch_data.py."""
-    cutoffs = sorted(_REFERANSEMAANED.items())
+    cutoffs = sorted(REFERANSEMAANED.items())
 
     def _finn(row: pd.Series) -> int:
         y, m = int(row["aar"]), int(row["maaned"])
@@ -205,30 +205,6 @@ def _korrelasjon_per_modell(
 # ═══════════════════════════════════════════════════════════════════════════════
 
 
-def _newey_west_se(
-    residuals: np.ndarray, X: np.ndarray, max_lag: int | None = None
-) -> np.ndarray:
-    """Beregn Newey–West standardfeil (kopiert fra analyse_mismatch.py)."""
-    n, k = X.shape
-    if max_lag is None:
-        max_lag = int(np.floor(4 * (n / 100) ** (2 / 9)))
-    e = residuals.reshape(-1, 1)
-    S = np.zeros((k, k))
-    for lag in range(max_lag + 1):
-        w = 1.0 if lag == 0 else 1 - lag / (max_lag + 1)
-        for t in range(lag, n):
-            xt = X[t : t + 1].T
-            xs = X[t - lag : t - lag + 1].T
-            contrib = (e[t] * e[t - lag]) * (xt @ xs.T)
-            if lag == 0:
-                S += w * contrib
-            else:
-                S += w * (contrib + contrib.T)
-    XtX_inv = np.linalg.inv(X.T @ X)
-    V = XtX_inv @ S @ XtX_inv
-    return np.sqrt(np.diag(V))
-
-
 def _regresjon_per_modell(df_lang: pd.DataFrame, df_aar: pd.DataFrame) -> pd.DataFrame:
     """OLS: indikator ~ mismatch + måned-dummyer, med Newey–West SE, per modell."""
     df = df_lang.copy()
@@ -267,7 +243,7 @@ def _regresjon_per_modell(df_lang: pd.DataFrame, df_aar: pd.DataFrame) -> pd.Dat
                     y_hat = X @ beta
                     resid = y - y_hat
                     n, k = X.shape
-                    nw_se = _newey_west_se(resid, X)
+                    nw_se = newey_west_se(resid, X)
 
                     ss_res = np.sum(resid**2)
                     ss_tot = np.sum((y - y.mean()) ** 2)
@@ -295,7 +271,14 @@ def _regresjon_per_modell(df_lang: pd.DataFrame, df_aar: pd.DataFrame) -> pd.Dat
                         }
                     )
 
-    return pd.DataFrame(records)
+    resultat = pd.DataFrame(records)
+    if not resultat.empty:
+        # Korriger p-verdiene for multippel testing innen hver modell-familie
+        # (modell × mismatch-variabel × utfall × indikatortype).
+        resultat["p_verdi_fdr"] = np.round(
+            adjust_pvalues(resultat["p_verdi"].to_numpy()), 4
+        )
+    return resultat
 
 
 # ═══════════════════════════════════════════════════════════════════════════════

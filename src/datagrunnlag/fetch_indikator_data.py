@@ -9,6 +9,8 @@ from typing import Any
 import pandas as pd
 from google.cloud import bigquery
 
+from src.common.bigquery import query_rows
+
 _TABLE_URI = "arbeidsindikator-prod-51bc.arbeidsindikator.agg_indikator_siste_pub"
 _TARGET_UTFALL = ["atid3", "jobb3", "atid12", "jobb12"]
 
@@ -51,14 +53,10 @@ QUERIES = {
 
 def _query_nedbrytning(query: str) -> list[dict[str, Any]]:
     """Fetch all indicator columns for one nedbrytning in a single query."""
-    client = bigquery.Client()
-    job_config = bigquery.QueryJobConfig(
-        query_parameters=[
-            bigquery.ArrayQueryParameter("utfall", "STRING", _TARGET_UTFALL),
-        ]
+    return query_rows(
+        query,
+        [bigquery.ArrayQueryParameter("utfall", "STRING", _TARGET_UTFALL)],
     )
-    query_job = client.query(query, job_config=job_config)
-    return [dict(row) for row in query_job.result()]
 
 
 if __name__ == "__main__":

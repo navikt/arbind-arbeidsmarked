@@ -1,49 +1,49 @@
-utvalg,ekskludert_aar,utfall,utfall_label,indikator_type,indikator_type_label,beta_mismatch,se_newey_west,t_stat,p_verdi,r2_adj,n
-Alle,,jobb3,Jobb 3 mnd,faktisk,Faktisk,21.7466,2.8802,7.55,0.0,0.7639,60
-Alle,,jobb3,Jobb 3 mnd,indikator,Indikator (avvik),5.2216,1.2158,4.295,0.0001,0.3861,60
-Alle,,jobb12,Jobb 12 mnd,faktisk,Faktisk,35.6074,5.2329,6.804,0.0,0.7444,51
-Alle,,jobb12,Jobb 12 mnd,indikator,Indikator (avvik),10.6047,1.3806,7.681,0.0,0.738,51
-Alle,,atid3,Arbeidstid 3 mnd,faktisk,Faktisk,7.0999,0.8193,8.666,0.0,0.8021,60
-Alle,,atid3,Arbeidstid 3 mnd,indikator,Indikator (avvik),1.6672,0.3461,4.818,0.0,0.4526,60
-Alle,,atid12,Arbeidstid 12 mnd,faktisk,Faktisk,10.3644,1.2814,8.089,0.0,0.7984,51
-Alle,,atid12,Arbeidstid 12 mnd,indikator,Indikator (avvik),2.6712,0.3652,7.315,0.0,0.7026,51
-Uten 2021,2021.0,jobb3,Jobb 3 mnd,faktisk,Faktisk,4.7549,6.2556,0.76,0.4533,-0.2553,42
-Uten 2021,2021.0,jobb3,Jobb 3 mnd,indikator,Indikator (avvik),-6.8744,5.9302,-1.159,0.2558,-0.3075,42
-Uten 2021,2021.0,jobb12,Jobb 12 mnd,faktisk,Faktisk,13.8979,10.2918,1.35,0.192,-0.2475,33
-Uten 2021,2021.0,jobb12,Jobb 12 mnd,indikator,Indikator (avvik),-5.308,6.3642,-0.834,0.4141,-0.5075,33
-Uten 2021,2021.0,atid3,Arbeidstid 3 mnd,faktisk,Faktisk,2.915,2.0949,1.391,0.1747,-0.2279,42
-Uten 2021,2021.0,atid3,Arbeidstid 3 mnd,indikator,Indikator (avvik),-1.5285,1.639,-0.933,0.3587,-0.3335,42
-Uten 2021,2021.0,atid12,Arbeidstid 12 mnd,faktisk,Faktisk,6.8714,3.7561,1.829,0.0823,-0.1586,33
-Uten 2021,2021.0,atid12,Arbeidstid 12 mnd,indikator,Indikator (avvik),0.0685,1.5599,0.044,0.9654,-0.453,33
-Uten 2022,2022.0,jobb3,Jobb 3 mnd,faktisk,Faktisk,22.7277,2.9835,7.618,0.0,0.7592,48
-Uten 2022,2022.0,jobb3,Jobb 3 mnd,indikator,Indikator (avvik),5.4729,1.2098,4.524,0.0001,0.4069,48
-Uten 2022,2022.0,jobb12,Jobb 12 mnd,faktisk,Faktisk,35.7759,4.9336,7.252,0.0,0.6775,39
-Uten 2022,2022.0,jobb12,Jobb 12 mnd,indikator,Indikator (avvik),10.8042,1.3114,8.238,0.0,0.7018,39
-Uten 2022,2022.0,atid3,Arbeidstid 3 mnd,faktisk,Faktisk,7.4268,0.8541,8.696,0.0,0.8057,48
-Uten 2022,2022.0,atid3,Arbeidstid 3 mnd,indikator,Indikator (avvik),1.7216,0.358,4.81,0.0,0.4444,48
-Uten 2022,2022.0,atid12,Arbeidstid 12 mnd,faktisk,Faktisk,10.5607,1.2266,8.61,0.0,0.7569,39
-Uten 2022,2022.0,atid12,Arbeidstid 12 mnd,indikator,Indikator (avvik),2.6876,0.3568,7.533,0.0,0.6968,39
-Uten 2023,2023.0,jobb3,Jobb 3 mnd,faktisk,Faktisk,22.2056,3.0331,7.321,0.0,0.734,49
-Uten 2023,2023.0,jobb3,Jobb 3 mnd,indikator,Indikator (avvik),5.3029,1.279,4.146,0.0002,0.3467,49
-Uten 2023,2023.0,jobb12,Jobb 12 mnd,faktisk,Faktisk,36.6767,5.1198,7.164,0.0,0.6916,40
-Uten 2023,2023.0,jobb12,Jobb 12 mnd,indikator,Indikator (avvik),11.1792,1.3554,8.248,0.0,0.7174,40
-Uten 2023,2023.0,atid3,Arbeidstid 3 mnd,faktisk,Faktisk,7.1711,0.8589,8.349,0.0,0.7707,49
-Uten 2023,2023.0,atid3,Arbeidstid 3 mnd,indikator,Indikator (avvik),1.7003,0.353,4.816,0.0,0.4265,49
-Uten 2023,2023.0,atid12,Arbeidstid 12 mnd,faktisk,Faktisk,10.5379,1.2866,8.19,0.0,0.7542,40
-Uten 2023,2023.0,atid12,Arbeidstid 12 mnd,indikator,Indikator (avvik),2.7664,0.3729,7.42,0.0,0.6738,40
-Uten 2024,2024.0,jobb3,Jobb 3 mnd,faktisk,Faktisk,21.7925,2.7604,7.895,0.0,0.75,48
-Uten 2024,2024.0,jobb3,Jobb 3 mnd,indikator,Indikator (avvik),5.4895,1.2279,4.471,0.0001,0.3863,48
-Uten 2024,2024.0,jobb12,Jobb 12 mnd,faktisk,Faktisk,35.1302,4.9573,7.087,0.0,0.6995,41
-Uten 2024,2024.0,jobb12,Jobb 12 mnd,indikator,Indikator (avvik),10.1146,1.3024,7.766,0.0,0.7004,41
-Uten 2024,2024.0,atid3,Arbeidstid 3 mnd,faktisk,Faktisk,7.0918,0.7783,9.112,0.0,0.7913,48
-Uten 2024,2024.0,atid3,Arbeidstid 3 mnd,indikator,Indikator (avvik),1.7677,0.3464,5.104,0.0,0.4725,48
-Uten 2024,2024.0,atid12,Arbeidstid 12 mnd,faktisk,Faktisk,10.1912,1.1774,8.655,0.0,0.7752,41
-Uten 2024,2024.0,atid12,Arbeidstid 12 mnd,indikator,Indikator (avvik),2.6016,0.3459,7.522,0.0,0.6653,41
-Uten 2025,2025.0,jobb3,Jobb 3 mnd,faktisk,Faktisk,21.4061,2.5966,8.244,0.0,0.7821,53
-Uten 2025,2025.0,jobb3,Jobb 3 mnd,indikator,Indikator (avvik),5.0034,1.1305,4.426,0.0001,0.4445,53
-Uten 2025,2025.0,jobb12,Jobb 12 mnd,faktisk,Faktisk,35.6074,5.2329,6.804,0.0,0.7444,51
-Uten 2025,2025.0,jobb12,Jobb 12 mnd,indikator,Indikator (avvik),10.6047,1.3806,7.681,0.0,0.738,51
-Uten 2025,2025.0,atid3,Arbeidstid 3 mnd,faktisk,Faktisk,7.0132,0.7497,9.354,0.0,0.8143,53
-Uten 2025,2025.0,atid3,Arbeidstid 3 mnd,indikator,Indikator (avvik),1.6063,0.3196,5.026,0.0,0.5128,53
-Uten 2025,2025.0,atid12,Arbeidstid 12 mnd,faktisk,Faktisk,10.3644,1.2814,8.089,0.0,0.7984,51
-Uten 2025,2025.0,atid12,Arbeidstid 12 mnd,indikator,Indikator (avvik),2.6712,0.3652,7.315,0.0,0.7026,51
+utvalg,ekskludert_aar,er_2021_ekskludert,utfall,utfall_label,indikator_type,indikator_type_label,beta_mismatch,se_newey_west,t_stat,p_verdi,r2_adj,n,p_verdi_fdr
+Alle,,False,jobb3,Jobb 3 mnd,faktisk,Faktisk,21.7466,2.8802,7.55,0.0,0.7639,60,0.0
+Alle,,False,jobb3,Jobb 3 mnd,indikator,Indikator (avvik),5.2216,1.2158,4.295,0.0001,0.3861,60,0.0001
+Alle,,False,jobb12,Jobb 12 mnd,faktisk,Faktisk,35.6074,5.2329,6.804,0.0,0.7444,51,0.0
+Alle,,False,jobb12,Jobb 12 mnd,indikator,Indikator (avvik),10.6047,1.3806,7.681,0.0,0.738,51,0.0
+Alle,,False,atid3,Arbeidstid 3 mnd,faktisk,Faktisk,7.0999,0.8193,8.666,0.0,0.8021,60,0.0
+Alle,,False,atid3,Arbeidstid 3 mnd,indikator,Indikator (avvik),1.6672,0.3461,4.818,0.0,0.4526,60,0.0
+Alle,,False,atid12,Arbeidstid 12 mnd,faktisk,Faktisk,10.3644,1.2814,8.089,0.0,0.7984,51,0.0
+Alle,,False,atid12,Arbeidstid 12 mnd,indikator,Indikator (avvik),2.6712,0.3652,7.315,0.0,0.7026,51,0.0
+Uten 2021,2021.0,True,jobb3,Jobb 3 mnd,faktisk,Faktisk,4.7549,6.2556,0.76,0.4533,-0.2553,42,0.5181
+Uten 2021,2021.0,True,jobb3,Jobb 3 mnd,indikator,Indikator (avvik),-6.8744,5.9302,-1.159,0.2558,-0.3075,42,0.5116
+Uten 2021,2021.0,True,jobb12,Jobb 12 mnd,faktisk,Faktisk,13.8979,10.2918,1.35,0.192,-0.2475,33,0.5116
+Uten 2021,2021.0,True,jobb12,Jobb 12 mnd,indikator,Indikator (avvik),-5.308,6.3642,-0.834,0.4141,-0.5075,33,0.5181
+Uten 2021,2021.0,True,atid3,Arbeidstid 3 mnd,faktisk,Faktisk,2.915,2.0949,1.391,0.1747,-0.2279,42,0.5116
+Uten 2021,2021.0,True,atid3,Arbeidstid 3 mnd,indikator,Indikator (avvik),-1.5285,1.639,-0.933,0.3587,-0.3335,42,0.5181
+Uten 2021,2021.0,True,atid12,Arbeidstid 12 mnd,faktisk,Faktisk,6.8714,3.7561,1.829,0.0823,-0.1586,33,0.5116
+Uten 2021,2021.0,True,atid12,Arbeidstid 12 mnd,indikator,Indikator (avvik),0.0685,1.5599,0.044,0.9654,-0.453,33,0.9654
+Uten 2022,2022.0,False,jobb3,Jobb 3 mnd,faktisk,Faktisk,22.7277,2.9835,7.618,0.0,0.7592,48,0.0
+Uten 2022,2022.0,False,jobb3,Jobb 3 mnd,indikator,Indikator (avvik),5.4729,1.2098,4.524,0.0001,0.4069,48,0.0001
+Uten 2022,2022.0,False,jobb12,Jobb 12 mnd,faktisk,Faktisk,35.7759,4.9336,7.252,0.0,0.6775,39,0.0
+Uten 2022,2022.0,False,jobb12,Jobb 12 mnd,indikator,Indikator (avvik),10.8042,1.3114,8.238,0.0,0.7018,39,0.0
+Uten 2022,2022.0,False,atid3,Arbeidstid 3 mnd,faktisk,Faktisk,7.4268,0.8541,8.696,0.0,0.8057,48,0.0
+Uten 2022,2022.0,False,atid3,Arbeidstid 3 mnd,indikator,Indikator (avvik),1.7216,0.358,4.81,0.0,0.4444,48,0.0
+Uten 2022,2022.0,False,atid12,Arbeidstid 12 mnd,faktisk,Faktisk,10.5607,1.2266,8.61,0.0,0.7569,39,0.0
+Uten 2022,2022.0,False,atid12,Arbeidstid 12 mnd,indikator,Indikator (avvik),2.6876,0.3568,7.533,0.0,0.6968,39,0.0
+Uten 2023,2023.0,False,jobb3,Jobb 3 mnd,faktisk,Faktisk,22.2056,3.0331,7.321,0.0,0.734,49,0.0
+Uten 2023,2023.0,False,jobb3,Jobb 3 mnd,indikator,Indikator (avvik),5.3029,1.279,4.146,0.0002,0.3467,49,0.0002
+Uten 2023,2023.0,False,jobb12,Jobb 12 mnd,faktisk,Faktisk,36.6767,5.1198,7.164,0.0,0.6916,40,0.0
+Uten 2023,2023.0,False,jobb12,Jobb 12 mnd,indikator,Indikator (avvik),11.1792,1.3554,8.248,0.0,0.7174,40,0.0
+Uten 2023,2023.0,False,atid3,Arbeidstid 3 mnd,faktisk,Faktisk,7.1711,0.8589,8.349,0.0,0.7707,49,0.0
+Uten 2023,2023.0,False,atid3,Arbeidstid 3 mnd,indikator,Indikator (avvik),1.7003,0.353,4.816,0.0,0.4265,49,0.0
+Uten 2023,2023.0,False,atid12,Arbeidstid 12 mnd,faktisk,Faktisk,10.5379,1.2866,8.19,0.0,0.7542,40,0.0
+Uten 2023,2023.0,False,atid12,Arbeidstid 12 mnd,indikator,Indikator (avvik),2.7664,0.3729,7.42,0.0,0.6738,40,0.0
+Uten 2024,2024.0,False,jobb3,Jobb 3 mnd,faktisk,Faktisk,21.7925,2.7604,7.895,0.0,0.75,48,0.0
+Uten 2024,2024.0,False,jobb3,Jobb 3 mnd,indikator,Indikator (avvik),5.4895,1.2279,4.471,0.0001,0.3863,48,0.0001
+Uten 2024,2024.0,False,jobb12,Jobb 12 mnd,faktisk,Faktisk,35.1302,4.9573,7.087,0.0,0.6995,41,0.0
+Uten 2024,2024.0,False,jobb12,Jobb 12 mnd,indikator,Indikator (avvik),10.1146,1.3024,7.766,0.0,0.7004,41,0.0
+Uten 2024,2024.0,False,atid3,Arbeidstid 3 mnd,faktisk,Faktisk,7.0918,0.7783,9.112,0.0,0.7913,48,0.0
+Uten 2024,2024.0,False,atid3,Arbeidstid 3 mnd,indikator,Indikator (avvik),1.7677,0.3464,5.104,0.0,0.4725,48,0.0
+Uten 2024,2024.0,False,atid12,Arbeidstid 12 mnd,faktisk,Faktisk,10.1912,1.1774,8.655,0.0,0.7752,41,0.0
+Uten 2024,2024.0,False,atid12,Arbeidstid 12 mnd,indikator,Indikator (avvik),2.6016,0.3459,7.522,0.0,0.6653,41,0.0
+Uten 2025,2025.0,False,jobb3,Jobb 3 mnd,faktisk,Faktisk,21.4061,2.5966,8.244,0.0,0.7821,53,0.0
+Uten 2025,2025.0,False,jobb3,Jobb 3 mnd,indikator,Indikator (avvik),5.0034,1.1305,4.426,0.0001,0.4445,53,0.0001
+Uten 2025,2025.0,False,jobb12,Jobb 12 mnd,faktisk,Faktisk,35.6074,5.2329,6.804,0.0,0.7444,51,0.0
+Uten 2025,2025.0,False,jobb12,Jobb 12 mnd,indikator,Indikator (avvik),10.6047,1.3806,7.681,0.0,0.738,51,0.0
+Uten 2025,2025.0,False,atid3,Arbeidstid 3 mnd,faktisk,Faktisk,7.0132,0.7497,9.354,0.0,0.8143,53,0.0
+Uten 2025,2025.0,False,atid3,Arbeidstid 3 mnd,indikator,Indikator (avvik),1.6063,0.3196,5.026,0.0,0.5128,53,0.0
+Uten 2025,2025.0,False,atid12,Arbeidstid 12 mnd,faktisk,Faktisk,10.3644,1.2814,8.089,0.0,0.7984,51,0.0
+Uten 2025,2025.0,False,atid12,Arbeidstid 12 mnd,indikator,Indikator (avvik),2.6712,0.3652,7.315,0.0,0.7026,51,0.0

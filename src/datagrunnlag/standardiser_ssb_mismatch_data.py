@@ -15,7 +15,7 @@ Lagrer:
   data/processed/ssb_stramhet_naering.csv   — stramhetsindikator per næring per kvartal
 
 Kjøres:
-  uv run python src/standardiser_ssb_mismatch_data.py
+  uv run python -m src.datagrunnlag.standardiser_ssb_mismatch_data
 """
 
 from __future__ import annotations

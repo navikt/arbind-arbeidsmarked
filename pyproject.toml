@@ -1,7 +1,7 @@
 [project]
 name = "arbind-arbeidsmarked"
 version = "0.1.0"
-description = "Mal for Python-prosjekt med 'best-practice' i 2025"
+description = "Analyse av om Navs arbeidsindikatorer kontrollerer tilstrekkelig for arbeidsmarkedet"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
@@ -19,6 +19,7 @@ dependencies = [
 [dependency-groups]
 dev = [
     "prek>=0.3.1",
+    "pytest>=8.3.0",
     "ruff>=0.15.0",
 ]
 notebooks = [
@@ -27,6 +28,10 @@ notebooks = [
 quarto = [
     "quarto-cli>=1.8.26",
 ]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
 
 [tool.uv]
 exclude-newer = "1 week"

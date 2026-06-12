@@ -8,7 +8,7 @@ Lagrer:
   data/raw/ssb_sysselsatte.csv        — sysselsatte per næring per kvartal
 
 Kjøres:
-  uv run python src/fetch_ssb_data.py
+  uv run python -m src.datagrunnlag.fetch_ssb_data
 """
 
 from __future__ import annotations

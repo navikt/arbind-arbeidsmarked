@@ -1,5 +1,5 @@
-utfall,utfall_label,beta,se,t,p,r2_within,r2_within_adj,r2_full_adj,n,n_naeringer
-indikator_atid12,Indikatoravvik atid 12 mnd,-10.6389,2.9438,-3.61,0.0003,0.064,0.005,0.005,255,15
-indikator_atid3,Indikatoravvik atid 3 mnd,-2.1199,1.5667,-1.35,0.176,0.006,-0.047,-0.047,300,15
-indikator_jobb12,Indikatoravvik jobb 12 mnd,-55.1404,11.1027,-4.97,0.0,0.118,0.063,0.063,255,15
-indikator_jobb3,Indikatoravvik jobb 3 mnd,-5.9648,5.449,-1.09,0.2737,0.004,-0.049,-0.049,300,15
+utfall,utfall_label,beta,se,t,p,se_klynge_kvartal,p_klynge_kvartal,n_kvartaler,r2_within,r2_within_adj,r2_full_adj,n,n_naeringer
+indikator_atid12,Indikatoravvik atid 12 mnd,-10.6389,2.9438,-3.61,0.0003,5.8539,0.0692,17,0.064,0.005,0.005,255,15
+indikator_atid3,Indikatoravvik atid 3 mnd,-2.1199,1.5667,-1.35,0.176,2.672,0.4276,20,0.006,-0.047,-0.047,300,15
+indikator_jobb12,Indikatoravvik jobb 12 mnd,-55.1404,11.1027,-4.97,0.0,21.0766,0.0089,17,0.118,0.063,0.063,255,15
+indikator_jobb3,Indikatoravvik jobb 3 mnd,-5.9648,5.449,-1.09,0.2737,11.4256,0.6016,20,0.004,-0.049,-0.049,300,15

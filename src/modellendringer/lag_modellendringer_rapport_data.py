@@ -5,7 +5,7 @@ Lagrer filer til:
   quarto/modellendringer/tabeller/ – CSV-tabeller
 
 Kjøres før quarto render:
-  uv run python src/modellendringer/lag_rapport_data.py
+  uv run python -m src.modellendringer.lag_modellendringer_rapport_data
 """
 
 from __future__ import annotations
