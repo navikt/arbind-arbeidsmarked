@@ -63,5 +63,17 @@ inn- og utdata i toppdocstringen.
 ```sh
 just lint           # ruff + mypy via pre-commit
 just fix            # auto-fiks og formatering med ruff
-uv run --group dev pytest   # kjør testene
+just test           # kjør testene
+```
+
+Pipeline-snarveier:
+
+```sh
+just fetch          # hent rådata (BigQuery + SSB)
+just standardise    # standardiser rådata
+just stramhet       # stramhetsanalyser
+just mismatch       # mismatch-analyser
+just modellendringer # modellendringer
+just analyse        # alle analyser (fase 3)
+just pipeline       # hele pipelinen (fetch → standardise → analyse → render)
 ```
