@@ -16,6 +16,8 @@ book:
   - part: datagrunnlag/intro.qmd
     chapters:
     - datagrunnlag/rapport.qmd
+    - datagrunnlag/arbeidsmarkedsmaal.qmd
+    - datagrunnlag/konkurser.qmd
   - part: stramhet/intro.qmd
     chapters:
     - stramhet/jobb/rapport.qmd

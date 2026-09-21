@@ -1,0 +1,33 @@
+---
+title: "Konkurser"
+execute:
+  echo: false
+  warning: false
+---
+
+SSB [tabell 08551](https://www.ssb.no/statbank/table/08551/) gir **månedlige**
+tal for opna konkursar. Datagrunnlaget bruker føretakskonkursar, ekskludert
+einskildpersonføretak, for alle næringar. Serien er tilgjengelig på fylkesnivå,
+som er den fineste tilgjengelige geografien i tabellen.
+
+Fylka er koblet til NAV-regionene med den samme geografi-mappingen som resten
+av datagrunnlaget. Fylkesverdiene beholdes, mens NAV-regionens verdi er summen
+av fylkene i regionen. For 2021--2023 publiseres Viken bare samlet; den kan
+ikke fordeles valid mellom Nav Øst-Viken og Nav Vest-Viken og beholdes derfor
+bare i fylkespanelet. Serien brukes foreløpig bare som beskrivende
+datagrunnlag, ikke som forklaringsvariabel i rapportens analyser.
+
+```{python}
+import pandas as pd
+pd.read_csv("tabeller/konkurser_dekning.csv").style.hide(axis="index")
+```
+
+![Månedlig utvikling i opna føretakskonkursar](figurer/konkurser_maaned.png)
+
+## Regional utvikling
+
+![Månedlig utvikling i opna føretakskonkursar per Nav-region](figurer/konkurser_regioner_maaned.png)
+
+## Årlig regional variasjon
+
+![Årssum av opna føretakskonkursar per Nav-region](figurer/konkurser_regioner_aar.png)
