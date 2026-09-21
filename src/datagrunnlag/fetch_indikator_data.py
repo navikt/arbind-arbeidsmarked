@@ -15,6 +15,23 @@ _TABLE_URI = "arbeidsindikator-prod-51bc.arbeidsindikator.agg_indikator_siste_pu
 _TARGET_UTFALL = ["atid3", "jobb3", "atid12", "jobb12"]
 
 QUERIES = {
+    "enhet": f"""
+        SELECT
+            BEHOLDNINGSMAANED AS beholdningsmaaned,
+            org_sted AS org_sted,
+            UTFALL AS utfall,
+            INDIKATOR AS indikator,
+            forventet AS forventet,
+            faktisk AS faktisk,
+            ANTALL_PERSONER AS antall_personer,
+            NEDBRYTNING AS nedbrytning
+        FROM `{_TABLE_URI}`
+        WHERE ORG_NIVAA = 3
+          AND NEDBRYTNING = 'Alle'
+          AND org_sted != 'Nasjonal oppfølgingsenhet'
+          AND UTFALL IN UNNEST(@utfall)
+        ORDER BY BEHOLDNINGSMAANED
+    """,
     "region": f"""
         SELECT
             BEHOLDNINGSMAANED AS beholdningsmaaned,
@@ -63,9 +80,9 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Fetch indicator data")
     parser.add_argument(
         "--level",
-        choices=["region", "nasjonalt"],
-        default="region",
-        help="Data level to fetch (default: region)",
+        choices=["enhet", "region", "nasjonalt"],
+        default="enhet",
+        help="Data level to fetch (default: enhet)",
     )
     args = parser.parse_args()
 

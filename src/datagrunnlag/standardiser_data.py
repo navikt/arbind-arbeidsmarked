@@ -124,7 +124,7 @@ def main() -> None:
     print(f"  {len(df_bedrifts_std)} rader etter aggregering")
 
     print("Leser indikatordata...")
-    df_ind = pd.read_csv(_RAW / "indikator_data.csv")
+    df_ind = pd.read_csv(_RAW / "indikator_data_region.csv")
     print(f"  {len(df_ind)} rader")
 
     print("Filtrerer indikator til referansemåneder...")
