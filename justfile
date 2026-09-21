@@ -28,16 +28,28 @@ test:
 fetch:
     uv run python -m src.datagrunnlag.fetch_bedrifts_data
     uv run python -m src.datagrunnlag.fetch_indikator_data
+    uv run python -m src.datagrunnlag.fetch_indikator_data --level region
     uv run python -m src.datagrunnlag.fetch_indikator_data --level nasjonalt
     uv run python -m src.datagrunnlag.fetch_coefficients_data
     uv run python -m src.datagrunnlag.fetch_ssb_data
+    uv run python -m src.datagrunnlag.fetch_distriktsindeks_data
+    uv run python -m src.datagrunnlag.fetch_arbeidsmarkedsdata
+    uv run python -m src.datagrunnlag.fetch_konkurser
 
 # Fase 2: Standardiser rådata til felles geografi/tidsperiode → data/processed/
 standardise:
+    uv run python -m src.datagrunnlag.standardiser_indikator_enhet
     uv run python -m src.datagrunnlag.standardiser_data
     uv run python -m src.datagrunnlag.standardiser_mismatch_data
     uv run python -m src.datagrunnlag.standardiser_ssb_mismatch_data
+    uv run python -m src.datagrunnlag.standardiser_distriktsindeks
+    uv run python -m src.datagrunnlag.standardiser_arbeidsmarkedsdata
+    uv run python -m src.datagrunnlag.standardiser_konkurser
     uv run python -m src.modellendringer.standardize_data
+
+# Datagrunnlagstabeller og -figurer → quarto/datagrunnlag/
+datagrunnlag:
+    uv run python -m src.datagrunnlag.lag_rapport_data
 
 # Fase 3a: Stramhetsanalyser → quarto/stramhet/
 stramhet:
@@ -63,7 +75,7 @@ modellendringer:
 analyse: stramhet mismatch modellendringer
 
 # Hele pipelinen: hent → standardiser → analyser → bygg rapport
-pipeline: fetch standardise analyse render
+pipeline: fetch standardise datagrunnlag analyse render
 
 # ─── Rapport ───────────────────────────────────────────────────────────────────
 
