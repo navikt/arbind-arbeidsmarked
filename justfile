@@ -100,3 +100,8 @@ audit:
 update:
     uv lock --upgrade
     uv run prek auto-update
+
+# Oppdater Python-avhengigheter i uv.lock og synk miljøet
+oppdater:
+    uv lock --upgrade
+    uv sync
